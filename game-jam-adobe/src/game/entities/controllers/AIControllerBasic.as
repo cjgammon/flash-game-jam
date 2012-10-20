@@ -3,6 +3,7 @@
 */
 package game.entities.controllers
 {	
+	import game.debug.ScreenPrint;
 	import game.entities.LivingEntity;
 	import starling.display.Sprite;
 	
@@ -30,11 +31,6 @@ package game.entities.controllers
 				var targetSprite:Sprite = entity.target.sprite;
 				var speed:Number = entity.movementSpeed;
 
-				// just move around randomly for now :)
-				//sprite.x += Math.random() * 2 - 1;
-				//sprite.y += Math.random() * 2 - 1;
-				//trace(speed);
-				
 				if (entity.x < targetSprite.x) {
 					entity.x += speed;
 				} else if (entity.x > targetSprite.x) {

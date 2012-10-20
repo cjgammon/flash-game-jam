@@ -205,7 +205,7 @@ package game.states.mainStates
 			}
 		}
 
-		public function bulletHitEnemy(bullet:Bullet, enemy:Enemy):void
+		public function bulletHitEnemy(bullet:Bullet, enemy:Enemy):Boolean
 		{
 			removeBullet(bullet);
 
@@ -231,9 +231,11 @@ package game.states.mainStates
 				//enemy.invincible = true;// make invulnerable for a bit so they dont' take spam damage
 				//setTimeout(turnOffPlayerDamageInvincibility, GlobalData.PLAYER_DAMAGED_INVINCIBILITY_DURATION, player);
 			}
+
+			return true;
 		}
 
-		private function removeBullet(bullet:Bullet):void
+		public function removeBullet(bullet:Bullet):void
 		{
 			if(_bullets[bullet])
 			{

@@ -22,8 +22,9 @@ package game.entities
 		{
 			super();
 
-			_walkSpeed = .2 + Math.random() * .8;
+			_walkSpeed = Math.random() * .3 + .2;
 			_runSpeed = _walkSpeed * 1.5;
+			_movementSpeed = _walkSpeed;
 
 			rect.width = 11;
 			rect.height = 16;
