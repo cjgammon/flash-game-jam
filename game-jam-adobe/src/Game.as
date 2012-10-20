@@ -2,6 +2,7 @@ package
 {	
 	import starling.events.Event;
 	import game.states.StateMachine;
+	import game.states.IState;
 	import game.states.mainStates.*;
 	import game.ui.Hud;
 	import game.utils.FrameTime;
@@ -35,6 +36,7 @@ package
 		// game states for managing flow from frontend -> game -> game over, etc
 		//========================================================
 		private var _stateMachine:StateMachine = new StateMachine();
+		public function changeState(newState:IState):void{ _stateMachine.changeState(newState); }
 
 		/**
 		* the front end state is the main menu stuff
@@ -68,7 +70,7 @@ package
 			_frontEndState = new FrontEndState(this);
 			_gameplayState = new GameplayState(this);
 			_gameOverState = new GameOverState(this);
-			_stateMachine.changeState(_gameplayState);
+			_stateMachine.changeState(_frontEndState);
 
 			this.addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 		}
