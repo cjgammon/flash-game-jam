@@ -44,12 +44,7 @@ package game.entities
 			// just hit the first hero.
 			if (touchingHeroes.length > 0)
 			{
-				ScreenPrint.show("touching");
 				_gameState.attackPlayer(this, touchingHeroes[0]);
-			}
-			else
-			{
-				ScreenPrint.show("not touching");
 			}
 		}
 		

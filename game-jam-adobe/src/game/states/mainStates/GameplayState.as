@@ -6,6 +6,7 @@ package game.states.mainStates
 	import Game.*;
 	
 	import flash.utils.Dictionary;
+	import flash.utils.setTimeout;
 	
 	import game.data.GameData;
 	import game.data.GlobalData;
@@ -220,10 +221,17 @@ package game.states.mainStates
 				ScreenPrint.show("attack!");
 
 				player.avatar.health -= attacker.meleeDamage;
+				player.avatar.invincible = true;// make invulnerable for a bit so they dont' take spam damage
+				setTimeout(turnOffPlayerDamageInvincibility, GlobalData.PLAYER_DAMAGED_INVINCIBILITY_DURATION, player);
 
 				// update hud!
 				_hud.setPlayerHealth(player.playerIndex, player.avatar.health);
 			}
+		}
+
+		private function turnOffPlayerDamageInvincibility(player:Player):void
+		{
+			player.avatar.invincible = false;
 		}
 
 		//========================================================
