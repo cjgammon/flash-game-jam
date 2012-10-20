@@ -3,9 +3,9 @@
 */
 package game.ui
 {	
+	import game.utils.InputManager;
 	import starling.display.Sprite;
 	import starling.events.Event;
-	import starling.events.TouchEvent;
 	import starling.text.TextField;
 
 	/**
@@ -29,7 +29,7 @@ package game.ui
 		{
 			this.removeEventListener(Event.ADDED_TO_STAGE, handleAddedToStage);
 			this.addEventListener(Event.REMOVED_FROM_STAGE, handleRemovedFromStage);
-			this.stage.addEventListener(TouchEvent.TOUCH, handleStageTouch)
+			this.addEventListener(Event.ENTER_FRAME, handleEnterFrame)
 
 			// set up our stuff
 			_startText = new TextField(300, 100, "Click to Start!");
@@ -41,15 +41,18 @@ package game.ui
 		private function handleRemovedFromStage():void
 		{
 			this.removeEventListener(Event.REMOVED_FROM_STAGE, handleRemovedFromStage);	
-			this.stage.removeEventListener(TouchEvent.TOUCH, handleStageTouch)
+			this.removeEventListener(Event.ENTER_FRAME, handleEnterFrame)
 
 			if (_startText.parent) _startText.parent.removeChild(_startText);
 		}	
 
-		private function handleStageTouch(evt:TouchEvent):void
+		private function handleEnterFrame(evt:Event):void
 		{
 			// don't really care, just let someone know that we want to start.
-			dispatchEvent(new Event(MainMenu.START_GAME));
+			if (InputManager.mouseReleased())
+			{
+				dispatchEvent(new Event(MainMenu.START_GAME));
+			}
 		}
 	}
 }

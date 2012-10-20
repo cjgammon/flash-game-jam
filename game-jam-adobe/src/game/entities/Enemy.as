@@ -37,7 +37,7 @@ package game.entities
 				// just move around randomly for now :)
 				//_sprite.x += Math.random() * 2 - 1;
 				//_sprite.y += Math.random() * 2 - 1;
-				trace(speed);
+				//trace(speed);
 				
 				if (_sprite.x < target.sprite.x) {
 					_sprite.x += speed;

@@ -37,10 +37,9 @@ package game.states.mainStates
 		{
 			super.enter();
 
-			// init game.
+			// make the hero, but don't add him to the stage til after we've placed all the enemies so he appears on top
 			_hero = new Hero();
 			_hero.sprite.x = 100;
-			_game.gameLayer.addChild(_hero.sprite);
 
 			// enemy test.  
 			// TODO :: refactor this so there's an add enemy function somewhere that's easy to access.
@@ -53,6 +52,7 @@ package game.states.mainStates
 				_game.gameLayer.addChild(enemy.sprite);
 				_enemies.push(enemy);
 			}
+			_game.gameLayer.addChild(_hero.sprite);
 
 			// bullet test.
 			var bullet:Bullet = new Bullet();

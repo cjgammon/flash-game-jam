@@ -1,6 +1,7 @@
 package
 {	
 	import starling.events.Event;
+	import game.data.GameData;
 	import game.states.StateMachine;
 	import game.states.IState;
 	import game.states.mainStates.*;
@@ -10,6 +11,12 @@ package
 	
 	public class Game extends Sprite
 	{
+		/**
+		* GameData holds onto all our necessary shit, like player scores/stats, game mode, etc.
+		* it's meant to persist from state-to-state
+		*/
+		public var gameData:GameData = new GameData();
+
 		//========================================================
 		// display layers to render content to.
 		//========================================================

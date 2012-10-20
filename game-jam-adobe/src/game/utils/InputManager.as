@@ -113,7 +113,7 @@ package game.utils
 		
 		public static var stageRef:Stage;
 		
-		public static var mouse:Object = new Object();
+		private static var _mouse:Object = new Object();
 
 		public static var _manageKeyboardInput:Boolean;
 		public static var _manageMouseInput:Boolean;
@@ -148,11 +148,11 @@ package game.utils
 			
 			if (_manageMouseInput)
 			{
-				mouse.down = false;
-				mouse.x = -1;
-				mouse.y = -1;
-				mouse.prevx = mouse.x;
-				mouse.prevy = mouse.y;
+				_mouse.down = 0;
+				_mouse.x = -1;
+				_mouse.y = -1;
+				_mouse.prevx = _mouse.x;
+				_mouse.prevy = _mouse.y;
 				stageRef.addEventListener( MouseEvent.MOUSE_MOVE, InputManager.handleMouseMove );
 				stageRef.addEventListener( MouseEvent.MOUSE_DOWN, InputManager.handleMouseDown );
 				stageRef.addEventListener( MouseEvent.MOUSE_UP, InputManager.handleMouseUp );
@@ -173,6 +173,9 @@ package game.utils
 					_keyPressed[_keysToWatchForPress[i]]++;
 				}
 			}
+
+			// update mouse
+			if (_mouse.down != 0) _mouse.down++;
 		}
 		
 		public static function keyPressed(key:int):Boolean
@@ -194,6 +197,21 @@ package game.utils
 		{
 			return (_keyPressed[key] == 0);
 		}
+
+		public static function mouseDown():Boolean
+		{
+			return _mouse.down > 0;
+		}
+
+		public static function mousePressed():Boolean
+		{
+			return _mouse.down == 1;
+		}
+
+		public static function mouseReleased():Boolean
+		{
+			return _mouse.down == -1;
+		}
 		
 		//============================================
 		//	events
@@ -213,30 +231,29 @@ package game.utils
 		
 		private static function handleMouseMove(evt:MouseEvent):void
 		{
-			mouse.prevx = mouse.x;
-			mouse.prevy = mouse.y;
-			mouse.x = stageRef.mouseX;
-			mouse.y = stageRef.mouseY;
+			_mouse.prevx = _mouse.x;
+			_mouse.prevy = _mouse.y;
+			_mouse.x = stageRef.mouseX;
+			_mouse.y = stageRef.mouseY;
 		}
 		
 		private static function handleMouseDown(evt:MouseEvent):void
 		{
-			mouse.down = true;
-			
-			mouse.x = stageRef.mouseX;
-			mouse.y = stageRef.mouseY;
-			mouse.prevx = mouse.x;
-			mouse.prevy = mouse.y;
+			_mouse.down = 1;
+			_mouse.x = stageRef.mouseX;
+			_mouse.y = stageRef.mouseY;
+			_mouse.prevx = _mouse.x;
+			_mouse.prevy = _mouse.y;
 		}
 		
 		private static function handleMouseUp(evt:MouseEvent):void
 		{
-			mouse.down = false;
+			_mouse.down = -1;
 			
-			mouse.x = stageRef.mouseX;
-			mouse.y = stageRef.mouseY;
-			mouse.prevx = mouse.x;
-			mouse.prevy = mouse.y;
+			_mouse.x = stageRef.mouseX;
+			_mouse.y = stageRef.mouseY;
+			_mouse.prevx = _mouse.x;
+			_mouse.prevy = _mouse.y;
 		}
 		
 	}

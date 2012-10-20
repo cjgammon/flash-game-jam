@@ -4,6 +4,8 @@
 package game.states.mainStates
 {	
 	import Game;
+	import game.data.GameData;
+	import game.data.PlayerData;
 	import game.states.IState;
 	import game.states.mainStates.*;
 	import game.ui.MainMenu;
@@ -52,6 +54,14 @@ package game.states.mainStates
 
 		private function handleStartGame(evt:Event):void
 		{
+			// set up the game data for the current game mode!
+			var gameData:GameData = _game.gameData;
+			gameData.setPlayerType(0, PlayerData.TYPE_HUMAN_LOCAL);
+			gameData.setPlayerType(1, PlayerData.TYPE_INVALID);
+			gameData.setPlayerType(2, PlayerData.TYPE_INVALID);
+			gameData.setPlayerType(3, PlayerData.TYPE_INVALID);
+
+			// gtfo
 			_game.changeState(_game.gameplayState);
 		}
 	}
