@@ -37,7 +37,7 @@ package
 
 			// set up some system utility stuff that should check keys, make debugging easier, etc
 			ScreenPrint.init(_debugLayer);
-			InputManager.init(this.stage, InputManager.MANAGE_KEYBOARD, false);// 2nd param false == don't manage mouse
+			InputManager.init(this.stage, InputManager.MANAGE_KEYBOARD, true);// 2nd param ==  manage mouse t/f
 			this.addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 		}
 
