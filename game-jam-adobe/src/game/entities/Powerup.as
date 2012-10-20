@@ -34,15 +34,12 @@ package game.entities
 		override public function takeTurn():void
 		{
 			// if we're overlapping any heroes, have the hero pick me up.
-			var activeHeroes:Vector.<Player> = _gameState.activePlayers;
-			var activeHeroTotal:int = activeHeroes.length;
-			for (var playerIndex:int = 0; playerIndex < activeHeroTotal; playerIndex++)
+			var touchingHeroes:Array = getTouchingPlayers();
+
+			// just give it to the first hero.
+			if (touchingHeroes.length > 0)
 			{
-				var activePlayer:Player = activeHeroes[playerIndex];
-				if (GeomUtils.rectanglesOverlap(rect, activePlayer.avatar.rect))
-				{
-					_gameState.acquirePowerup(activePlayer.avatar, this);
-				}
+				_gameState.acquirePowerup(touchingHeroes[0].avatar, this);
 			}
 		}
 		
