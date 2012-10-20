@@ -16,7 +16,7 @@ package game.utils.sound
 		// must be negative
 		public static const LOOP_ENDLESSLY:int = -1;
 		
-		private static const VOLUME_SCALER_MUSIC:Number = 0.5;
+		private static const VOLUME_SCALER_MUSIC:Number = 1.0;
 		private static const VOLUME_SCALER_SFX:Number = 1.0;
 		
 		//============================================

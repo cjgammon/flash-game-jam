@@ -7,6 +7,7 @@ package game.entities
 	import game.utils.AssetLibrary;
 	import game.utils.InputManager;
 	import game.entities.MoneyEmitter;
+	import game.utils.sound.SoundManager;
 
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -18,6 +19,7 @@ package game.entities
 	public class Hero extends LivingEntity
 	{
 		private var moneyEmitter:MoneyEmitter;
+		private var _hit:Boolean = false;
 		
 		/**
 		*	@constructor
@@ -26,7 +28,7 @@ package game.entities
 		{
 			super();
 
-			_invincible = true;
+			//_invincible = true;
 
 			rect.width = 11;
 			rect.height = 16;
@@ -45,6 +47,10 @@ package game.entities
 		
 		public function hit():void
 		{
+			if (_hit == false) {
+				SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerHit)());
+			}
+			_hit = true;
 			moneyEmitter.start();	
 		}
 		
@@ -96,12 +102,14 @@ package game.entities
 			angle = Math.atan2(dy, dx);
 			
 			if (bulletcount == 1) {
-				
+				SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerShoot)());
+
 				bullet.angle = angle;
 				_gameState.spawnBullet(bullet);
 				
 			} else if (bulletcount == 3) {
-				
+				SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerShoot2)());
+
 				bullet = new Bullet(this, startX, startY);
 				bullet.angle = angle + .2;
 				_gameState.spawnBullet(bullet);
@@ -115,7 +123,8 @@ package game.entities
 				_gameState.spawnBullet(bullet);
 				
 			} else if (bulletcount == 8) {
-				
+				SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerShoot3)());
+
 				for (var j:int = 0; j < 8; j++) {
 					bullet = new Bullet(this, startX, startY);
 					bullet.angle = j * .8;

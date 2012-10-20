@@ -15,6 +15,30 @@ package game.utils
 	public class AssetLibrary
 	{
 		//========================================================
+		// start screen
+		//========================================================
+		[Embed(source="./assets/screen_title.png")]
+		private static var TitleSprite:Class;
+		public static var titleSpriteBmp:Bitmap = new TitleSprite();		
+		public static var titleTexture:Texture = Texture.fromBitmap(titleSpriteBmp);
+		
+		//========================================================
+		// cloudtop texture
+		//========================================================
+		[Embed(source="./assets/bg/clouds.png")]
+		private static var CloudSprite:Class;
+		public static var cloudSpriteBmp:Bitmap = new CloudSprite();		
+		public static var cloudTexture:Texture = Texture.fromBitmap(cloudSpriteBmp);
+		
+		//========================================================
+		// rooftop texture
+		//========================================================
+		[Embed(source="./assets/bg/movingcloud.png")]
+		private static var MovingCloudSprite:Class;
+		public static var movingCloudSpriteBmp:Bitmap = new MovingCloudSprite();		
+		public static var movingCloudTexture:Texture = Texture.fromBitmap(movingCloudSpriteBmp);
+		
+		//========================================================
 		// rooftop texture
 		//========================================================
 		[Embed(source="./assets/bg/rooftop.png")]
@@ -46,7 +70,6 @@ package game.utils
 		public static var heroSpriteBmp:Bitmap = new HeroSprite();		
 		public static var heroTextureIdle:Texture = Texture.fromBitmap(heroSpriteBmp);
 
-
 		//========================================================
 		// enemy texture
 		//========================================================
@@ -54,6 +77,14 @@ package game.utils
 		private static var EnemySprite:Class;
 		public static var enemySpriteBmp:Bitmap = new EnemySprite();		
 		public static var enemyTextureIdle:Texture = Texture.fromBitmap(enemySpriteBmp);
+		
+		//========================================================
+		// enemy2 texture
+		//========================================================
+		[Embed(source="./assets/enemy2.png")]
+		private static var Enemy2Sprite:Class;
+		public static var enemy2SpriteBmp:Bitmap = new Enemy2Sprite();		
+		public static var enemy2TextureIdle:Texture = Texture.fromBitmap(enemy2SpriteBmp);
 
 		//========================================================
 		// bullet texture
@@ -106,5 +137,20 @@ package game.utils
 		//========================================================
 		[Embed(source="./assets/audio/BG_loop.mp3")]
 		public static var BGLoop:Class;
+		
+		[Embed(source="./assets/audio/You lose.mp3")]
+		public static var PlayerHit:Class;
+		
+		[Embed(source="./assets/audio/LASER 1.mp3")]
+		public static var PlayerShoot:Class;
+		
+		[Embed(source="./assets/audio/LASER 2.mp3")]
+		public static var PlayerShoot2:Class;
+		
+		[Embed(source="./assets/audio/LASER 3.mp3")]
+		public static var PlayerShoot3:Class;
+		
+		[Embed(source="./assets/audio/LASER 4.mp3")]
+		public static var PlayerShoot4:Class;
 	}
 }

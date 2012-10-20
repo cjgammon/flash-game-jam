@@ -198,6 +198,8 @@ package game.states.mainStates
 		{
 			if (show != _gameOver)
 			{
+				SoundManager.instance.vSetMusic(	null	);// kill music
+				
 				_gameOver = show;
 				if (show)
 				{
