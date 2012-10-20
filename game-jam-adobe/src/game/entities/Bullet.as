@@ -28,6 +28,7 @@ package game.entities
 		public var goalY:Number;
 		public var startX:Number;
 		public var startY:Number;
+		public var silver:Boolean = false;
 		
 		public function get shooter():Entity { return _shooter; }
 		public var damage:int = 100;
@@ -51,7 +52,6 @@ package game.entities
 			_bodyImage = new Image(AssetLibrary.bulletTexture);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
-			
 		}
 		
 		public function set angle(newAngle:Number):void 

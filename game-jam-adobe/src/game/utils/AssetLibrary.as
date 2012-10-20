@@ -15,6 +15,14 @@ package game.utils
 	public class AssetLibrary
 	{
 		//========================================================
+		// rooftop texture
+		//========================================================
+		[Embed(source="./assets/bg/rooftop.png")]
+		private static var RoopSprite:Class;
+		public static var roofSpriteBmp:Bitmap = new RoopSprite();		
+		public static var roofTexture:Texture = Texture.fromBitmap(roofSpriteBmp);
+		
+		//========================================================
 		// hero texture
 		//========================================================
 		[Embed(source="./assets/hero.png")]

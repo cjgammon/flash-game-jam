@@ -139,6 +139,9 @@ package game.states.mainStates
 			_game.gameLayer.addChild(bullet.sprite);
 			*/
 			
+			//_bg:Background = new Background();
+			//_game.gameLayer.addChild(_bg);
+			
 			// init ui layer.
 			_hud = new Hud();
 			_game.uiLayer.addChild(_hud);
