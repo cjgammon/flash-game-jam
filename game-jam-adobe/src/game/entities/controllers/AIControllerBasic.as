@@ -25,7 +25,10 @@ package game.entities.controllers
 			// if they have a target, do something!
 			if (entity.target != null)
 			{
+				entity.lookAtEntity(entity.target);
+
 				var sprite:Sprite = entity.sprite;
+				var targetSprite:Sprite = entity.target.sprite;
 				var speed:Number = entity.movementSpeed;
 
 				// just move around randomly for now :)
@@ -33,15 +36,15 @@ package game.entities.controllers
 				//sprite.y += Math.random() * 2 - 1;
 				//trace(speed);
 				
-				if (sprite.x < entity.target.sprite.x) {
+				if (sprite.x < targetSprite.x) {
 					sprite.x += speed;
-				} else if (sprite.x > entity.target.sprite.x) {
+				} else if (sprite.x > targetSprite.x) {
 					sprite.x -= speed;
 				}
 				
-				if (sprite.y < entity.target.sprite.y) {
+				if (sprite.y < targetSprite.y) {
 					sprite.y += speed;
-				} else if(sprite.y > entity.target.sprite.y) {
+				} else if(sprite.y > targetSprite.y) {
 					sprite.y -= speed;
 				}
 			}

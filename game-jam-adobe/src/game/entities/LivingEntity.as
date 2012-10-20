@@ -5,6 +5,7 @@ package game.entities
 {	
 	import starling.display.Sprite;
 	import game.entities.controllers.IEntityController;
+	import game.utils.DebugDraw;
 	
 	/**
 	*	things that need to live.  they can be controlled by an IEntityController as well.
@@ -68,5 +69,33 @@ package game.entities
 		{
 			controller.takeTurn(this);
 		}
+
+		//========================================================
+		// aim/shooting
+		//========================================================
+		private var _aimRadians:Number = 0.0;
+		public function lookAt(x:int, y:int):void
+		{
+			_aimRadians = Math.atan2(y - _sprite.y, x - _sprite.y);
+			//_sprite.rotation = _aimRadians;
+
+			/*
+			DebugDraw.canvas.graphics.clear();
+			DebugDraw.canvas.graphics.lineStyle(1, 0xff0000);
+			DebugDraw.canvas.graphics.moveTo(_sprite.x, _sprite.y);
+			DebugDraw.canvas.graphics.lineTo(x, y);
+			*/
+		}
+
+		public function lookAtEntity(targetEntity:Entity):void
+		{
+			
+		}
+
+		public function shoot():void
+		{
+			
+		}
+
 	}
 }

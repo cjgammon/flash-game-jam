@@ -105,9 +105,6 @@ package game.utils
 		//============================================
 		//	instance methods
 		//============================================
-		public static var keyDown:Array = new Array(255);
-		public static var keyDoubleTap:Array = new Array(255);
-		
 		private static var _keyPressed:Array = new Array(255);
 		private static var _keysToWatchForPress:Array = new Array(); 
 		
@@ -135,10 +132,8 @@ package game.utils
 				_keysToWatchForPress.push(InputManager.INPUT_MOVE_DOWN);
 			
 				// key init
-				for (var i:int = 0; i < keyDown.length; i++) 
+				for (var i:int = 0; i < _keyPressed.length; i++) 
 				{
-					keyDown[i] = false;
-					keyDoubleTap[i] = false;
 					_keyPressed[i] = 0;
 				}
 			
@@ -165,12 +160,14 @@ package game.utils
 		
 		public static function update():void
 		{
-			for (var i:int = 0; i < _keysToWatchForPress.length; i++)
+			var keyTotal:int = _keysToWatchForPress.lenth;
+			for (var i:int = 0; i < keyTotal; i++)
 			{
 				//ScreenPrint.show("key :: " + _keysToWatchForPress[i] + ", _keyPressed[key] :: " + _keyPressed[_keysToWatchForPress[i]]);
-				if (_keyPressed[_keysToWatchForPress[i]] != 0)
+				var key:int = _keysToWatchForPress[i];
+				if (_keyPressed[key] != 0)
 				{
-					_keyPressed[_keysToWatchForPress[i]]++;
+					_keyPressed[key]++;
 				}
 			}
 
@@ -212,20 +209,21 @@ package game.utils
 		{
 			return _mouse.down == -1;
 		}
+
+		public static function get mouseX():int{ return _mouse.x; }
+		public static function get mouseY():int{ return _mouse.y; }
 		
 		//============================================
 		//	events
 		//============================================
 		private static function handleKeyDown(evt:KeyboardEvent):void
 		{
-			keyDown[evt.keyCode] = true;
 			_keyPressed[evt.keyCode] = Math.max(_keyPressed[evt.keyCode], 1);
 		}
 		
 		private static function handleKeyUp(evt:KeyboardEvent):void
 		{
 			//trace( evt.keyCode );
-			keyDown[evt.keyCode] = false;
 			_keyPressed[evt.keyCode] = -1;
 		}
 		

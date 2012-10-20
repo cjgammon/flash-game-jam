@@ -29,36 +29,5 @@ package game.entities
 		}
 		
 		override public function get movementSpeed():Number { return enemySpeed; }
-
-		/**
-		* todo :: hook up a controller class that handles the turn for this thing.  we shouldn't actually care about how controls this thing, whether it's an enemy or whatever.  we really only care about it's stats and what whoever is controlling it thinks it should do.
-		*/
-		override public function takeTurn():void
-		{
-			// if they have a target, do something!
-			if (target != null)
-			{
-				// just move around randomly for now :)
-				//_sprite.x += Math.random() * 2 - 1;
-				//_sprite.y += Math.random() * 2 - 1;
-				
-				if (_sprite.x < target.sprite.x) {
-					_sprite.x += movementSpeed;
-				} else if (_sprite.x > target.sprite.x) {
-					_sprite.x -= movementSpeed;
-				}
-				
-				if (_sprite.y < target.sprite.y) {
-					_sprite.y += movementSpeed;
-				} else if(_sprite.y > target.sprite.y) {
-					_sprite.y -= movementSpeed;
-				}
-			}
-			// if we don't have a target, figure out what to do.  
-			else
-			{
-				// pick a new target? get bored?
-			}
-		}
 	}
 }
