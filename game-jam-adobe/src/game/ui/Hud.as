@@ -18,6 +18,7 @@ package game.ui
 		private var _gameState:GameplayState;
 		private var _score:TextField;
 		private var _healthIndicators:Array;
+		private var _gameOver:Sprite;
 
 
 		/**
@@ -54,6 +55,17 @@ package game.ui
 				addChild(tf);
 				_healthIndicators[player.playerIndex] = tf
 			}
+			/*
+			_gameOver = new Sprite();
+			var gameOverText:TextField = new TextField(300, 40, "GAME OVER!");
+
+			var scoreText:TextField = new TextField(200, 20, "Final Score:");
+			scoreText.y = gameOverText.y + gameOverText.height;
+
+			var continueText:TextField = new TextField(300, 40, "Click to Retry");
+			continueText.y = scoreText.y + scoreText.height + 20;
+			*/
+
 		}
 
 		private function handleRemovedFromStage():void
@@ -72,6 +84,11 @@ package game.ui
 		{
 			var health:TextField = _healthIndicators[playerIndex];
 			if (health) health.text = "Health: " + healthValue;
+		}
+
+		public function gameOver():void
+		{
+			//addChild(_gameOver);
 		}
 	}
 }

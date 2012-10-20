@@ -21,6 +21,7 @@ package game.states.mainStates
 	import game.utils.AssetLibrary;
 	import game.utils.FrameTime;
 	import game.utils.InputManager;
+	import game.utils.sound.SoundManager;
 	
 	import starling.core.Starling;
 	import starling.extensions.ParticleDesignerPS;
@@ -36,19 +37,19 @@ package game.states.mainStates
 
 		override public function get name():String{ return "GameState"; }
 
-		private var _hud:Hud;
+
+
+		
+		private var _hud:Hud;		
 		private var _bg:Background;
 
-		private var _activePlayerTotal:int = 0;
-		private var _activePlayers:Vector.<Player> = new Vector.<Player>();
-		public function get activePlayers():Vector.<Player> { return _activePlayers; }
-		/**
-		* this hash uses an entity as a key, and contains a reference to the corresponding Player object if it exists
-		*/
-		private var _playerDataForEntity:Dictionary = new Dictionary();
-		
 		private var _powerups:Dictionary = new Dictionary();
 		private var _bullets:Dictionary = new Dictionary();
+
+		/**
+		* track whether the game is over
+		*/
+		private var _gameOver:Boolean = false;
 
 		/**
 		*	@constructor
@@ -64,6 +65,9 @@ package game.states.mainStates
 		override public function enter():void
 		{
 			super.enter();
+			_gameOver = false;
+
+			SoundManager.instance.vSetMusic(	new (AssetLibrary.BGLoop)()	); // start up the music
 
 			// build up a list of active players so we know who is playing the game.
 			var heroTotal:int = _game.gameData.players.length;
@@ -158,11 +162,11 @@ package game.states.mainStates
 				_hud = null;
 			}
 			
-			// clean up hero
-			for (var activePlayerIndex:int = 0; activePlayerIndex < _activePlayerTotal; activePlayerIndex++)
-			while(_activePlayers.length > 0)
+			// clean up players
+			while (_activePlayers.length > 0)
 			{
 				var player:Player = _activePlayers.pop();
+				player.avatar.cleanupForRemoval();
 				if (player && player.avatar.sprite.parent)
 				{
 					player.avatar.sprite.removeChild(player.avatar.sprite);
@@ -170,23 +174,55 @@ package game.states.mainStates
 			}
 			
 			// cleanup enemies
-			while(_enemies.length > 0)
+			for each (var enemy:Enemy in _enemies)
 			{
-				var enemy:Enemy = _enemies.pop();
-				if (enemy && enemy.sprite.parent)
-				{
-					enemy.sprite.removeChild(enemy.sprite);
-				}
+				enemy.cleanupForRemoval();
+				removeEnemy(enemy);
 			}
+
+			// cleanup bullets
+			for each (var bullet:Bullet in _bullets)
+			{
+				bullet.cleanupForRemoval();
+				removeBullet(bullet);
+			}			
+
+
+			SoundManager.instance.vSetMusic(	null	);// kill music
 		}
 
 		override public function update(dt:Number):void
 		{
+			// only let the heroes go if the game isn't over.
 			heroTurn();
 			enemyTurn();
 			bulletTurn();
 			powerupTurn();
 			enemyRespawnHandler();
+
+			if (_gameOver)
+			{
+				if (InputManager.mousePressed())
+				{
+					_game.changeState(_game.gameplayState);
+				}
+			}
+
+		}
+
+		//========================================================
+		// game over/restarting/etc
+		//========================================================
+		private function activateGameOver(show:Boolean):void
+		{
+			if (show != _gameOver)
+			{
+				_gameOver = show;
+				if (show)
+				{
+					_hud.gameOver();
+				}
+			}
 		}
 		
 		//========================================================
@@ -250,6 +286,17 @@ package game.states.mainStates
 		//========================================================
 		// hero
 		//========================================================
+		private var _activePlayerTotal:int = 0;
+		private var _activePlayers:Vector.<Player> = new Vector.<Player>();
+		public function get activePlayers():Vector.<Player> { return _activePlayers; }
+		/**
+		* this hash uses an entity as a key, and contains a reference to the corresponding Player object if it exists
+		*/
+		private var _playerDataForEntity:Dictionary = new Dictionary();
+
+		/**
+		* 
+		*/
 		private function heroTurn():void
 		{
 			for (var activePlayerIndex:int = 0; activePlayerIndex < _activePlayerTotal; activePlayerIndex++)
@@ -335,7 +382,7 @@ package game.states.mainStates
 			{
 				var hero:Hero = Hero(player.avatar);
 				hero.hit();
-				player.avatar.health -= attacker.meleeDamage;
+				player.avatar.health = Math.max(player.avatar.health - attacker.meleeDamage, 0);
 
 				// invuln period
 				player.avatar.invincible = true;// make invulnerable for a bit so they dont' take spam damage
@@ -343,6 +390,11 @@ package game.states.mainStates
 
 				// update hud!
 				_hud.setPlayerHealth(player.playerIndex, player.avatar.health);
+
+				if (player.avatar.health <= 0)
+				{
+					activateGameOver(true);
+				}
 			}
 		}
 

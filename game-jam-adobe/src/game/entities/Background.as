@@ -13,7 +13,7 @@ package game.entities
 		{
 			_ground = new Image(AssetLibrary.roofTexture);
 			_ground.smoothing = TextureSmoothing.NONE;
-			_sprite.addChild(_ground);
+			//_sprite.addChild(_ground);
 		}
 	}
 }
