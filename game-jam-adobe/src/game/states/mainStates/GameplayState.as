@@ -195,6 +195,15 @@ package game.states.mainStates
 			bulletTurn();
 			powerupTurn();
 			enemyRespawnHandler();
+
+			if (_gameOver)
+			{
+				if (InputManager.mousePressed())
+				{
+					_game.changeState(_game.gameplayState);
+				}
+			}
+
 		}
 
 		//========================================================
@@ -208,11 +217,6 @@ package game.states.mainStates
 				if (show)
 				{
 					_hud.gameOver();
-				}
-				// all you can do is restart now.
-				else
-				{
-					_game.changeState(_game.gameplayState);
 				}
 			}
 		}
