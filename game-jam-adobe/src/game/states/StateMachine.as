@@ -1,6 +1,6 @@
 package game.states
 {
-	import debug.ScreenPrint;
+	import game.debug.ScreenPrint;
 	import game.states.IState;
 	
 	public class StateMachine 

@@ -14,13 +14,17 @@ package
 	public class Main extends Sprite
 	{
 		private var _starling:Starling;
+		public function get starling():Starling { return _starling; }
+
+		private var _gameClass:Class = Game;
+		public function get gameClass():Class { return _gameClass; }
 
 		private var _debugLayer:Sprite;
 		private var _stats:Stats;
 
 		public function Main()
 		{
-			_starling = new Starling(Game, stage);
+			_starling = new Starling(_gameClass, stage);
 			_starling.start();
 
 			_debugLayer = new Sprite();
@@ -29,9 +33,9 @@ package
 			//_stats = new Stats();
 			//_debugLayer.addChild(_stats);
 
+			// set up some system utility stuff that should check keys, make debugging easier, etc
 			ScreenPrint.init(_debugLayer);
 			InputManager.init(this.stage, InputManager.MANAGE_KEYBOARD, false);// 2nd param false == don't manage mouse
-
 			this.addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 		}
 
@@ -46,6 +50,7 @@ package
 			// update various utils
 			ScreenPrint.update();
 
+			//
 			InputManager.update();
 		}
 	}
