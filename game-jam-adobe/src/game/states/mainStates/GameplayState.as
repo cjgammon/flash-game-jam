@@ -34,7 +34,10 @@ package game.states.mainStates
 
 		private var _activePlayerTotal:int = 0;
 		private var _activePlayers:Vector.<Player> = new Vector.<Player>();
+		public function get activePlayers():Vector.<Player> { return _activePlayers; }
+		
 		private var _enemies:Vector.<Enemy> = new Vector.<Enemy>();
+		private var _powerups:Vector.<Powerup> = new Vector.<Powerup>();
 
 		/**
 		*	@constructor
@@ -111,6 +114,7 @@ package game.states.mainStates
 				powerup.x = int(Math.random() * GlobalData.SCENE_WIDTH);
 				powerup.y = int(Math.random() * GlobalData.SCENE_HEIGHT);
 				_game.gameLayer.addChild(powerup.sprite);
+				_powerups.push(powerup);
 			}
 
 			/*
@@ -163,6 +167,7 @@ package game.states.mainStates
 		{
 			heroTurn();
 			enemyTurn();
+			powerupTurn();
 		}
 
 		private function heroTurn():void
@@ -181,6 +186,16 @@ package game.states.mainStates
 			{
 				var enemy:Enemy = _enemies[enemyIndex];
 				enemy.takeTurn();
+			}
+		}
+
+		private function powerupTurn():void
+		{
+			var powerupTotal:int = _powerups.length;
+			for (var powerupIndex:int = 0; powerupIndex < powerupTotal; powerupIndex++)
+			{
+				var powerup:Powerup = _powerups[powerupIndex];
+				powerup.takeTurn();
 			}
 		}
 	}
