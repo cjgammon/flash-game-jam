@@ -42,9 +42,9 @@ package game.entities
 			var dx:Number = goalX - x;
 			var angle:Number = Math.abs(Math.atan2(dy, dx)) * (180 / Math.PI);
 			
+			trace("update");
 			_vx = 1 * Math.cos(angle);
 			_vy = 1 * Math.sin(angle);
-			
 			_sprite.x += _vx;
 			_sprite.y += _vy;
 		}

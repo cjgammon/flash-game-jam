@@ -41,7 +41,7 @@ package game.entities
 		
 		override public function shoot():void
 		{
-			_gameState.spawnBullet(_sprite.x, _sprite.y, InputManager.mouseX, InputManager.mouseY);
+			_gameState.spawnBullet(x, y, InputManager.mouseX, InputManager.mouseY);
 		}
 		
 	}

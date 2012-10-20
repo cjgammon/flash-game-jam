@@ -67,5 +67,16 @@ package game.entities
 		{
 			
 		}
+
+		/**
+		* place to cleanup any junk before this thing is removed from the game forever
+		*/
+		public function cleanupForRemoval():void
+		{
+			if (_sprite.parent)
+			{
+				_sprite.parent.removeChild(_sprite);
+			}
+		}
 	}
 }
