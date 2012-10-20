@@ -25,6 +25,8 @@ package
 		public function Main()
 		{
 			_starling = new Starling(_gameClass, stage);
+			_starling.stage.stageWidth = 200;
+			_starling.stage.stageHeight = 150;  //set to half of screen size
 			_starling.start();
 
 			_debugLayer = new Sprite();

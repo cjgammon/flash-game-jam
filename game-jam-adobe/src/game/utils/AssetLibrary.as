@@ -4,6 +4,8 @@
 package game.utils
 {	
 	import flash.display.Bitmap;
+	
+	import starling.display.Image;
 	import starling.textures.Texture;
 
 	/**
@@ -28,5 +30,10 @@ package game.utils
 		public static var enemySpriteBmp:Bitmap = new EnemySprite();		
 		public static var enemyTextureIdle:Texture = Texture.fromBitmap(enemySpriteBmp);
 
+		public function getImage(imgname:String):Image{
+			var img:Image;
+			
+			return img;
+		}
 	}
 }

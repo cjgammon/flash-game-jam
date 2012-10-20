@@ -6,7 +6,8 @@ package game.entities
 	import game.utils.AssetLibrary;
 	import starling.display.Image;
 	import starling.display.Sprite;
-	
+	import starling.textures.TextureSmoothing;
+
 	/**
 	*	base class for enemies.  if you want to make a new enemy, make a new class type for it.  we'll keep basic functionality in here for common AI and stuff
 	*/
@@ -21,6 +22,7 @@ package game.entities
 		{
 			// init game layer.
 			_bodyImage = new Image(AssetLibrary.enemyTextureIdle);
+			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
 		}
 		
