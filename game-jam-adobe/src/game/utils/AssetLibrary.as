@@ -18,9 +18,17 @@ package game.utils
 		// rooftop texture
 		//========================================================
 		[Embed(source="./assets/bg/rooftop.png")]
-		private static var RoopSprite:Class;
-		public static var roofSpriteBmp:Bitmap = new RoopSprite();		
+		private static var RoofSprite:Class;
+		public static var roofSpriteBmp:Bitmap = new RoofSprite();		
 		public static var roofTexture:Texture = Texture.fromBitmap(roofSpriteBmp);
+		
+		//========================================================
+		// scenery texture
+		//========================================================
+		[Embed(source="./assets/bg/scenery.png")]
+		private static var ScenerySprite:Class;
+		public static var scenerySpriteBmp:Bitmap = new ScenerySprite();		
+		public static var sceneryTexture:Texture = Texture.fromBitmap(scenerySpriteBmp);
 		
 		//========================================================
 		// hero texture

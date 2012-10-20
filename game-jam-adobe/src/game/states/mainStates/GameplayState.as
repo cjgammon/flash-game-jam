@@ -36,9 +36,6 @@ package game.states.mainStates
 		public static var instance:GameplayState;
 
 		override public function get name():String{ return "GameState"; }
-
-
-
 		
 		private var _hud:Hud;		
 		private var _bg:Background;
@@ -69,6 +66,9 @@ package game.states.mainStates
 
 			SoundManager.instance.vSetMusic(	new (AssetLibrary.BGLoop)()	); // start up the music
 
+			_bg = new Background();
+			_game.gameLayer.addChild(_bg.sprite);
+			
 			// build up a list of active players so we know who is playing the game.
 			var heroTotal:int = _game.gameData.players.length;
 			for (var heroIndex:int = 0; heroIndex < heroTotal; heroIndex++)
@@ -130,7 +130,7 @@ package game.states.mainStates
 				var powerup:Powerup = new Powerup();
 				powerup.x = int(Math.random() * GlobalData.SCENE_WIDTH);
 				powerup.y = int(Math.random() * GlobalData.SCENE_HEIGHT);
-				powerup.id = "quickbullet";
+				powerup.id = "spread";
 				_game.gameLayer.addChild(powerup.sprite);
 				_powerups[powerup] = powerup; 	// it's a dictionary so we can pluck things out in constant time
 			}
@@ -142,9 +142,6 @@ package game.states.mainStates
 			bullet.sprite.y = 50;
 			_game.gameLayer.addChild(bullet.sprite);
 			*/
-			
-			//_bg = new Background();
-			//_game.gameLayer.addChild(_bg);
 			
 			// init ui layer.
 			_hud = new Hud();

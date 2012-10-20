@@ -6,14 +6,28 @@ package game.entities
 		import starling.textures.TextureSmoothing;
 		import starling.textures.Texture;
 		import starling.display.Image;
+		import starling.display.Sprite;
 
-		private var _ground:Image;
-		
+		private var _groundImage:Image;
+		private var _sceneryImage:Image;
+
+		public var sprite:Sprite;
+
 		public function Background()
 		{
-			_ground = new Image(AssetLibrary.roofTexture);
-			_ground.smoothing = TextureSmoothing.NONE;
-			//_sprite.addChild(_ground);
+			sprite = new Sprite();
+			
+			_sceneryImage = new Image(AssetLibrary.sceneryTexture);
+			_sceneryImage.smoothing = TextureSmoothing.NONE;
+			_sceneryImage.x = 0;
+			_sceneryImage.y = 0;
+			sprite.addChild(_sceneryImage);
+			
+			_groundImage = new Image(AssetLibrary.roofTexture);
+			_groundImage.smoothing = TextureSmoothing.NONE;
+			_groundImage.x = 0;
+			_groundImage.y = 85;
+			sprite.addChild(_groundImage);
 		}
 	}
 }
