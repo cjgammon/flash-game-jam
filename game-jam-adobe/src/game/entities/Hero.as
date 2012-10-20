@@ -5,6 +5,7 @@ package game.entities
 {	
 	import game.utils.AssetLibrary;
 	import game.utils.InputManager;
+	import game.data.GlobalData;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -41,7 +42,7 @@ package game.entities
 		
 		override public function shoot():void
 		{
-			_gameState.spawnBullet(x, y, InputManager.mouseX, InputManager.mouseY);
+			_gameState.spawnBullet(x, y, InputManager.mouseX / GlobalData.SCENE_SCALE, InputManager.mouseY / GlobalData.SCENE_SCALE);
 		}
 		
 	}

@@ -10,6 +10,7 @@ package game.utils
 	*/
 	public class GeomUtils 
 	{
+		
 		public static function coordinatesInRect(x:Number, y:Number, rect:Rectangle):Boolean
 		{
 			if (x >= rect.x && x <= rect.x + rect.width && y >= rect.y && y <= rect.y + rect.height) return true;

@@ -25,8 +25,8 @@ package
 		public function Main()
 		{
 			_starling = new Starling(_gameClass, stage);
-			_starling.stage.stageWidth = GlobalData.SCENE_WIDTH;//450;
-			_starling.stage.stageHeight = GlobalData.SCENE_HEIGHT;//400;
+			_starling.stage.stageWidth = GlobalData.SCENE_WIDTH;
+			_starling.stage.stageHeight = GlobalData.SCENE_HEIGHT;
 			_starling.start();
 
 			if (GlobalData.DEBUG)

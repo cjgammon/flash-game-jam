@@ -16,8 +16,9 @@ package game.data
 
 		public static const SCENE_WIDTH:int = 450;
 		public static const SCENE_HEIGHT:int = 400;
-		public static const HALF_SCENE_WIDTH:int = SCENE_WIDTH*0.5;
-		public static const HALF_SCENE_HEIGHT:int = SCENE_HEIGHT*0.5;
+		public static const SCENE_SCALE:Number = 2;
+		public static const HALF_SCENE_WIDTH:int = SCENE_WIDTH / SCENE_SCALE;
+		public static const HALF_SCENE_HEIGHT:int = SCENE_HEIGHT / SCENE_SCALE;
 
 		public static const PLAYER_DAMAGED_INVINCIBILITY_DURATION:int = 1000;// milliseconds
 	}
