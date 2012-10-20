@@ -14,7 +14,7 @@ package game.entities
 	*/
 	public class Enemy extends LivingEntity
 	{
-		public var enemySpeed:Number = .2 + Math.random() * .8;
+		public var enemySpeed:Number = 1;//.2 + Math.random() * .8;
 		
 		/**
 		*	@constructor
@@ -28,12 +28,12 @@ package game.entities
 			
 		}
 		
-		override public function get movementSpeed():Number { return enemySpeed; }
+		override public function get movementSpeed():Number { return Math.round(enemySpeed); }
 
 		/**
-		* 
+		* todo :: hook up a controller class that handles the turn for this thing.  we shouldn't actually care about how controls this thing, whether it's an enemy or whatever.  we really only care about it's stats and what whoever is controlling it thinks it should do.
 		*/
-		public function takeTurn():void
+		override public function takeTurn():void
 		{
 			// if they have a target, do something!
 			if (target != null)

@@ -3,7 +3,7 @@
 */
 package game.data
 {	
-	import game.data.PlayerData;
+	import game.data.Player;
 	
 	/**
 	*	
@@ -11,7 +11,7 @@ package game.data
 	public class GameData 
 	{
 		public static const MAX_PLAYERS:int = 4;
-		public var players:Vector.<PlayerData> = new Vector.<PlayerData>(MAX_PLAYERS);
+		public var players:Vector.<Player> = new Vector.<Player>(MAX_PLAYERS);
 
 		/**
 		*	@constructor
@@ -21,11 +21,11 @@ package game.data
 			
 		}
 		
-		public function setPlayerType(playerIndex:int, playerType:int):void
+		public function setPlayerType(playerIndex:int, playerType:int, characterType:int):void
 		{
 			if (0 <= playerIndex && playerIndex < MAX_PLAYERS)
 			{
-				players[playerIndex] = new PlayerData(playerType);
+				players[playerIndex] = new Player(playerType, characterType);
 			}
 		}		
 	}

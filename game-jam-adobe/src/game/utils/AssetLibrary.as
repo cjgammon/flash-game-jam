@@ -32,7 +32,31 @@ package game.utils
 		public static var enemyTextureIdle:Texture = Texture.fromBitmap(enemySpriteBmp);
 
 		//========================================================
-		// particle texture
+		// bullet texture
+		//========================================================
+		[Embed(source="./assets/bullet.png")]
+		public static var BulletTexture:Class;
+		
+		//========================================================
+		// coin texture
+		//========================================================
+		[Embed(source="./assets/money_particle/change.png")]
+		public static var CoinParticleTexture:Class;
+		
+		//========================================================
+		// coin texture2
+		//========================================================
+		[Embed(source="./assets/money_particle/change2.png")]
+		public static var Coin2ParticleTexture:Class;
+		
+		//========================================================
+		// coin xml
+		//========================================================
+		[Embed(source="./assets/money_particle/coin.pex", mimeType="application/octet-stream")]
+		public static var CoinParticleXML:Class;
+		
+		//========================================================
+		// dollar texture
 		//========================================================
 		[Embed(source="./assets/money_particle/texture.png")]
 		public static var MoneyParticleTexture:Class;

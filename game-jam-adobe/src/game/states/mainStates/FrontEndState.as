@@ -5,7 +5,7 @@ package game.states.mainStates
 {	
 	import Game;
 	import game.data.GameData;
-	import game.data.PlayerData;
+	import game.data.Player;
 	import game.states.IState;
 	import game.states.mainStates.*;
 	import game.ui.MainMenu;
@@ -56,10 +56,10 @@ package game.states.mainStates
 		{
 			// set up the game data for the current game mode!
 			var gameData:GameData = _game.gameData;
-			gameData.setPlayerType(0, PlayerData.TYPE_HUMAN_LOCAL);
-			gameData.setPlayerType(1, PlayerData.TYPE_INVALID);
-			gameData.setPlayerType(2, PlayerData.TYPE_INVALID);
-			gameData.setPlayerType(3, PlayerData.TYPE_INVALID);
+			gameData.setPlayerType(0, Player.TYPE_HUMAN_LOCAL,	Player.CHARACTER_TYPE_DEFAULT);
+			gameData.setPlayerType(1, Player.TYPE_INVALID,		Player.CHARACTER_TYPE_DEFAULT);
+			gameData.setPlayerType(2, Player.TYPE_INVALID,		Player.CHARACTER_TYPE_DEFAULT);
+			gameData.setPlayerType(3, Player.TYPE_INVALID,		Player.CHARACTER_TYPE_DEFAULT);
 
 			// gtfo
 			_game.changeState(_game.gameplayState);
