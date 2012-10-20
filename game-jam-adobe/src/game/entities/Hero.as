@@ -59,7 +59,7 @@ package game.entities
 				powerup = powerups[i];
 				
 				if (powerup.id == "stream"){
-					cooldown = 1;
+					cooldown = 10;
 				}
 				
 				if (powerup.id == "spread"){

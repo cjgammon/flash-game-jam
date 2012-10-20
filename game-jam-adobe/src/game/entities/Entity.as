@@ -43,7 +43,7 @@ package game.entities
 		public var rect:Rectangle = new Rectangle();
 
 		public var cooldown:int = 0;
-		public var default_cooldown:int = 10;
+		public var default_cooldown:int = 30;
 		
 		//========================================================
 		// rendering
