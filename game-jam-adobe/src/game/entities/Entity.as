@@ -3,6 +3,8 @@
 */
 package game.entities
 {	
+	import flash.geom.Rectangle;
+
 	import game.states.mainStates.GameplayState;
 	
 	import starling.display.Image;
@@ -20,10 +22,23 @@ package game.entities
 		// position
 		//========================================================
 		public function get x():Number { return _sprite.x; }
-		public function set x(value:Number):void { _sprite.x = value; }
+		public function set x(value:Number):void 
+		{ 
+			rect.x = value;
+			_sprite.x = value; 
+		}
 
 		public function get y():Number { return _sprite.y; }
-		public function set y(value:Number):void { _sprite.y = value; }
+		public function set y(value:Number):void 
+		{ 
+			rect.y = value;
+			_sprite.y = value; 
+		}
+
+		/**
+		* bounding rect, for collisions.
+		*/
+		public var rect:Rectangle = new Rectangle();
 
 		//========================================================
 		// rendering

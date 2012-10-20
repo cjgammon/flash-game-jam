@@ -20,7 +20,10 @@ package game.entities
 		public function Bullet():void
 		{
 			super();
-			
+
+			rect.width = 2;
+			rect.height = 2;
+
 			// init game layer.
 			_bodyImage = new Image(AssetLibrary.bulletTexture);
 			_bodyImage.smoothing = TextureSmoothing.NONE;

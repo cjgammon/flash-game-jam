@@ -19,7 +19,10 @@ package game.entities
 		public function Hero():void
 		{
 			super();
-			
+
+			rect.width = 11;
+			rect.height = 16;
+
 			// init game layer.
 			_bodyImage = new Image(AssetLibrary.heroTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;

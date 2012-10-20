@@ -15,14 +15,17 @@ package game.entities
 	public class Enemy extends LivingEntity
 	{
 		public var enemySpeed:Number = .2 + Math.random() * .8;
-		
+
 		/**
 		*	@constructor
 		*/
 		public function Enemy():void
 		{
 			super();
-			
+
+			rect.width = 11;
+			rect.height = 16;
+
 			// init game layer.
 			_bodyImage = new Image(AssetLibrary.enemyTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;

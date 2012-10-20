@@ -41,20 +41,20 @@ package game.entities.controllers
 
 			if (InputManager.isKeyDown(InputManager.INPUT_MOVE_LEFT))
 			{
-				entity.sprite.x -= entity.movementSpeed;
+				entity.x -= entity.movementSpeed;
 			}
 			else if (InputManager.isKeyDown(InputManager.INPUT_MOVE_RIGHT))
 			{
-				entity.sprite.x += entity.movementSpeed;
+				entity.x += entity.movementSpeed;
 			}
 			
 			if (InputManager.isKeyDown(InputManager.INPUT_MOVE_UP))
 			{
-				entity.sprite.y -= entity.movementSpeed;
+				entity.y -= entity.movementSpeed;
 			}
 			else if (InputManager.isKeyDown(InputManager.INPUT_MOVE_DOWN))
 			{
-				entity.sprite.y += entity.movementSpeed;
+				entity.y += entity.movementSpeed;
 			}
 			
 
