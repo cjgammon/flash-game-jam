@@ -14,14 +14,15 @@ package game.entities
 	*/
 	public class Enemy extends LivingEntity
 	{
-		public var enemySpeed:Number = .2 + Math.random() * .8;
-
 		/**
 		*	@constructor
 		*/
 		public function Enemy():void
 		{
 			super();
+
+			_walkSpeed = .2 + Math.random() * .8;
+			_runSpeed = _walkSpeed * 1.5;
 
 			rect.width = 11;
 			rect.height = 16;
@@ -32,6 +33,5 @@ package game.entities
 			_sprite.addChild(_bodyImage);	
 		}
 		
-		override public function get movementSpeed():Number { return enemySpeed; }
 	}
 }

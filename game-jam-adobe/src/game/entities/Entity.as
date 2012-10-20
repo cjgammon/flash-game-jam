@@ -5,7 +5,9 @@ package game.entities
 {	
 	import flash.geom.Rectangle;
 
+	import game.data.Player;
 	import game.states.mainStates.GameplayState;
+	import game.utils.GeomUtils;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -78,5 +80,40 @@ package game.entities
 				_sprite.parent.removeChild(_sprite);
 			}
 		}
+
+		/**
+		* reusable code for checking if two things are touching
+		*/
+		public function touchingEntity(entity:Entity):Boolean
+		{
+			return GeomUtils.rectanglesOverlap(rect, entity.rect);
+		}
+
+		/**
+		* returns a list of all Player objects touching this entity
+		* this is a pretty common thing to check, so let's make a handy function for it
+		*/
+		public function getTouchingPlayers():Array
+		{
+			var touchingPlayers:Array = [];
+
+			// if we're overlapping any heroes, have the hero pick me up.
+			var activeHeroes:Vector.<Player> = _gameState.activePlayers;
+			var activeHeroTotal:int = activeHeroes.length;
+			for (var playerIndex:int = 0; playerIndex < activeHeroTotal; playerIndex++)
+			{
+				var activePlayer:Player = activeHeroes[playerIndex];
+				if (activePlayer.avatar != this)// can't touch yrself duh
+				{
+					if (touchingEntity(activePlayer.avatar))
+					{
+						touchingPlayers.push(activePlayer);
+					}
+				}
+			}
+
+			return touchingPlayers;
+		}
+
 	}
 }
