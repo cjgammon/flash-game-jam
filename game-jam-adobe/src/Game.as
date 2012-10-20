@@ -4,6 +4,8 @@ package
 	import flash.display.BitmapData;
 	import flash.geom.Rectangle;
 	import game.debug.ScreenPrint;
+	import game.entities.Bullet;
+	import game.entities.Enemy;
 	import game.entities.Hero;
 	import game.utils.AssetLibrary;
 	import game.utils.FrameTime;
@@ -27,6 +29,15 @@ package
 			// init game layer.
 			var hero:Hero = new Hero();
 			_gameLayer.addChild(hero.sprite);
+
+			var enemy:Enemy = new Enemy();
+			enemy.sprite.y = 50;
+			_gameLayer.addChild(enemy.sprite);
+
+			var bullet:Bullet = new Bullet();
+			bullet.sprite.x = 50;
+			bullet.sprite.y = 50;
+			_gameLayer.addChild(bullet.sprite);
 
 			// init ui layer.
 			var textField:TextField = new TextField(300, 100, "Score: 0");

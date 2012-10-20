@@ -8,14 +8,14 @@ package game.entities
 	import starling.display.Sprite;
 	
 	/**
-	*	base class for enemies.  if you want to make a new enemy, make a new class type for it.  we'll keep basic functionality in here for common AI and stuff
+	*	base class for bullets.  I think right now we'll probably end up just having one bullet class to rule them all, but the powerups will be able to mutate their properties somehow.
 	*/
-	public class Enemy extends Entity
+	public class Bullet extends Entity
 	{
 		/**
 		*	@constructor
 		*/
-		public function Enemy():void
+		public function Bullet():void
 		{
 			// init game layer.
 			_bodyImage = new Image(AssetLibrary.heroTextureIdle);
