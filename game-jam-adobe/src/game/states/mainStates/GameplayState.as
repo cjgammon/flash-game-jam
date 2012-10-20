@@ -73,6 +73,7 @@ package game.states.mainStates
 			if (_hud && _hud.parent)
 			{
 				_hud.parent.removeChild(_hud);
+				_hud = null;
 			}
 			
 			// clean up hero
