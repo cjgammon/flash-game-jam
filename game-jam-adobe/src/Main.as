@@ -10,7 +10,7 @@ package
 
 	
 
-	[SWF(width="400", height="300", frameRate="60", backgroundColor="#ffffff")]
+	[SWF(width="900", height="800", frameRate="60", backgroundColor="#ffffff")]
 	public class Main extends Sprite
 	{
 		private var _starling:Starling;
@@ -25,8 +25,8 @@ package
 		public function Main()
 		{
 			_starling = new Starling(_gameClass, stage);
-			_starling.stage.stageWidth = 200;
-			_starling.stage.stageHeight = 150;  //set to half of screen size
+			_starling.stage.stageWidth = 450;//200;
+			_starling.stage.stageHeight = 400;//150;  //set to half of screen size
 			_starling.start();
 
 			_debugLayer = new Sprite();

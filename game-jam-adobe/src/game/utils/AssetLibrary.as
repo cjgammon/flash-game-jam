@@ -31,5 +31,17 @@ package game.utils
 		public static var enemySpriteBmp:Bitmap = new EnemySprite();		
 		public static var enemyTextureIdle:Texture = Texture.fromBitmap(enemySpriteBmp);
 
+		//========================================================
+		// particle texture
+		//========================================================
+		[Embed(source="./assets/money_particle/texture.png")]
+		public static var MoneyParticleTexture:Class;
+		
+		//========================================================
+		// particle xml
+		//========================================================
+		[Embed(source="./assets/money_particle/particle.pex", mimeType="application/octet-stream")]
+		public static var MoneyParticleXML:Class;
+		
 	}
 }

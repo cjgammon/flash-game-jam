@@ -11,7 +11,12 @@ package game.states.mainStates
 	import game.states.mainStates.*;
 	import game.ui.Hud;
 	import game.utils.InputManager;
+	import game.utils.AssetLibrary;
+
+	import starling.core.Starling;
 	import starling.text.TextField;
+	import starling.extensions.ParticleDesignerPS;
+	import starling.textures.Texture;
 
 	/**
 	*	this is the state the app is in while the player is mid-game
@@ -60,6 +65,13 @@ package game.states.mainStates
 			bullet.sprite.y = 50;
 			_game.gameLayer.addChild(bullet.sprite);
 
+			var money:ParticleDesignerPS = new ParticleDesignerPS(XML(new AssetLibrary.MoneyParticleXML()), Texture.fromBitmap(new AssetLibrary.MoneyParticleTexture()));
+			money.x = _hero.sprite.x;
+			money.y = 100;
+			money.start();			
+			Starling.juggler.add(money);
+			_game.gameLayer.addChild(money);
+			
 			// init ui layer.
 			_hud = new Hud();
 			_game.uiLayer.addChild(_hud);
