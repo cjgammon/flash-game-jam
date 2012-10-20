@@ -21,6 +21,8 @@ package game.entities
 		*/
 		public function Enemy():void
 		{
+			super();
+			
 			// init game layer.
 			_bodyImage = new Image(AssetLibrary.enemyTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;

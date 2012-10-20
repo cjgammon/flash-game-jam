@@ -64,7 +64,7 @@ package game.entities
 		*/
 		public function LivingEntity():void
 		{
-			
+			super();
 		}
 		
 		override public function takeTurn():void

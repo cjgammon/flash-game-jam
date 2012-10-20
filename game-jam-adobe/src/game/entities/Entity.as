@@ -14,7 +14,7 @@ package game.entities
 	public class Entity
 	{
 		protected var _gameState:GameplayState;
-		public function get gameState():GameplayState { return GameplayState.instance; }
+		public function get gameState():GameplayState { return _gameState; }
 
 		//========================================================
 		// position
@@ -44,6 +44,7 @@ package game.entities
 		*/
 		public function Entity():void
 		{
+			_gameState = GameplayState.instance;
 			_sprite = new Sprite();
 		}
 		
