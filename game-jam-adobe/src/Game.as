@@ -1,10 +1,16 @@
 package
 {	
 	import starling.events.Event;
+	import flash.display.BitmapData;
+	import flash.geom.Rectangle;
 	import game.debug.ScreenPrint;
+	import game.entities.Hero;
+	import game.utils.AssetLibrary;
 	import game.utils.FrameTime;
+	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.text.TextField;
+	import starling.textures.Texture;
 	
 	public class Game extends Sprite
 	{
@@ -19,12 +25,13 @@ package
 			addChild(_debugLayer);
 
 			// init game layer.
-
+			var hero:Hero = new Hero();
+			_gameLayer.addChild(hero.sprite);
 
 			// init ui layer.
-			var textField:TextField = new TextField(400, 300, "Welcome to Starling!");
+			var textField:TextField = new TextField(300, 100, "Score: 0");
 			_uiLayer.addChild(textField);
-			
+
 			// init debug layer.
 			ScreenPrint.init(_debugLayer);
 

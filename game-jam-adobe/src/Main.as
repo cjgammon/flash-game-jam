@@ -17,7 +17,7 @@ package
 			_starling = new Starling(Game, stage);
 			_starling.start();
 
-			addChild(_stats);
+			//addChild(_stats);
 		}
 	}
 }
