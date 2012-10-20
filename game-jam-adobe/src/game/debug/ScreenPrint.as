@@ -1,8 +1,10 @@
 package game.debug
 {
-	import starling.display.Sprite;
-	import starling.text.TextField;
-		
+	import flash.display.Sprite;
+	import flash.events.Event;
+	import flash.text.TextField;
+	
+	
 	public class ScreenPrint extends Object
 	{
 		public static const ALIGN_NONE:int 				= 0;
@@ -18,7 +20,7 @@ package game.debug
 		public static var printContainer:Sprite;
 		
 		public static var render:Boolean = true;
-		public static var alignment:int = ALIGN_UPPER_LEFT;
+		public static var alignment:int = ALIGN_LOWER_RIGHT;
 		
 		public static function init(parent:Sprite):void
 		{
@@ -94,10 +96,13 @@ package game.debug
 			var printsToUse:Array = prints;
 			for (var i:int = 0; i < printsToUse.length; i++)
 			{
-				tf = new TextField(200, 17, printsToUse[i], "Verdana", 12, 0x000000);
-				
-				//tf.autoSize = "left";
-				alignment = ALIGN_UPPER_LEFT;
+				tf = new TextField();
+				tf.height = 17;
+				tf.textColor = 0xffffff;
+				tf.background = true;
+				tf.backgroundColor = 0x000000;
+				tf.text = printsToUse[i];
+				tf.autoSize = "left";
 				
 				switch(alignment)
 				{

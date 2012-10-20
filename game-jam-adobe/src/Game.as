@@ -43,9 +43,6 @@ package
 			var textField:TextField = new TextField(300, 100, "Score: 0");
 			_uiLayer.addChild(textField);
 
-			// init debug layer.
-			ScreenPrint.init(_debugLayer);
-
 			addEventListener(Event.ADDED_TO_STAGE, handleAddedToStage);
 		}
 
@@ -64,14 +61,8 @@ package
 
 		private function handleEnterFrame(evt:Event):void
 		{
-			// get how much time has passed
-			FrameTime.update();
-
 			// update the game
 			updateGame();
-
-			// update various utils
-			ScreenPrint.update();
 		}
 
 		private function updateGame():void
