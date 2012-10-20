@@ -26,6 +26,8 @@ package game.entities
 		{
 			super();
 
+			_invincible = true;
+
 			rect.width = 11;
 			rect.height = 16;
 
@@ -68,23 +70,23 @@ package game.entities
 			for (var i:int = 0; i < powerups.length; i++) {
 				powerup = powerups[i];
 				
-				if (powerup.id == "stream"){
+				if (powerup.id == Powerup.TYPE_STREAM){
 					cooldown = 10;
 				}
 				
-				if (powerup.id == "spread"){
+				if (powerup.id == Powerup.TYPE_SPREAD){
 					bulletcount = 3;
 				}
 				
-				if (powerup.id == "sphere"){
+				if (powerup.id == Powerup.TYPE_SPHERE){
 					bulletcount = 8;
 				}
 				
-				if (powerup.id == "quickbullet") {
+				if (powerup.id == Powerup.TYPE_QUICKBULLET) {
 					bullet.speed = 4;
 				}
 				
-				if (powerup.id == "silverbullet") {
+				if (powerup.id == Powerup.TYPE_SILVERBULLET) {
 					bullet.silver = true;
 				}
 			}

@@ -125,23 +125,7 @@ package game.states.mainStates
 			//========================================================
 			// add some powerups
 			//========================================================
-			for (var powerupIndex:int = 0; powerupIndex < 2; powerupIndex++)
-			{
-				var powerup:Powerup = new Powerup();
-				powerup.x = int(Math.random() * GlobalData.SCENE_WIDTH);
-				powerup.y = int(Math.random() * GlobalData.SCENE_HEIGHT);
-				powerup.id = "spread";
-				_game.gameLayer.addChild(powerup.sprite);
-				_powerups[powerup] = powerup; 	// it's a dictionary so we can pluck things out in constant time
-			}
-
-			/*
-			// bullet test.
-			var bullet:Bullet = new Bullet();
-			bullet.sprite.x = 50;
-			bullet.sprite.y = 50;
-			_game.gameLayer.addChild(bullet.sprite);
-			*/
+			spawnPowerup(getRandomPowerup());
 			
 			// init ui layer.
 			_hud = new Hud();
@@ -243,7 +227,7 @@ package game.states.mainStates
 
 		public function bulletHitEnemy(bullet:Bullet, enemy:Enemy):Boolean
 		{
-			removeBullet(bullet);
+			if (!bullet.silver) removeBullet(bullet);
 
 			if (!enemy.invincible)
 			{
@@ -301,7 +285,7 @@ package game.states.mainStates
 				var activePlayer:Player = _activePlayers[activePlayerIndex];
 				activePlayer.avatar.takeTurn();
 
-				ScreenPrint.show("Kills: " + activePlayer.kills);
+				//ScreenPrint.show("Kills: " + activePlayer.kills);
 			}
 		}
 
@@ -365,6 +349,7 @@ package game.states.mainStates
 			}
 			return null;
 		}
+
 		private function enemyTurn():void
 		{
 			for each (var enemy:Enemy in _enemies)
@@ -415,6 +400,17 @@ package game.states.mainStates
 		//========================================================
 		// powerups
 		//========================================================
+		private function spawnPowerup(type:String):Powerup
+		{
+			var powerup:Powerup = new Powerup();
+			powerup.x = int(Math.random() * (GlobalData.SCENE_WIDTH - 50)) + 25;
+			powerup.y = int(Math.random() * (GlobalData.SCENE_HEIGHT-50)) + 25;
+			powerup.id = type;
+			_game.gameLayer.addChild(powerup.sprite);
+			_powerups[powerup] = powerup; 	// it's a dictionary so we can pluck things out in constant time
+			return powerup;
+		}
+
 		private function powerupTurn():void
 		{
 			for each (var powerup:Powerup in _powerups)
@@ -430,6 +426,44 @@ package game.states.mainStates
 			removePowerup(powerup);
 
 			// play cool effect
+
+			var player:Player = _playerDataForEntity[livingEntity]
+			if (player)
+			{
+				player.score++;
+				_hud.setScore(player.score);
+			}
+
+			// spawn a new powerup
+			spawnPowerup(getRandomPowerup());
+		}
+
+		private function getRandomPowerup():String
+		{
+			// find a new random powerup to spawn.
+			var player:LivingEntity = _activePlayers[0].avatar;
+			var startIndex:int = int(Math.random() * Powerup.TYPES.length);
+			var typeIndex:int = startIndex;
+
+			while (true)
+			{
+				var type:String = Powerup.TYPES[typeIndex];
+				if (!player.hasPowerupType(type))
+				{
+					return type;
+				}
+				else
+				{
+					typeIndex = (typeIndex + 1) % Powerup.TYPES.length;
+					if (typeIndex == startIndex)
+					{
+						// no unique powerup found..shoot, dont' get into an infinite loop
+						return Powerup.TYPES[int(Math.random() * Powerup.TYPES.length)];
+					}
+				}
+			}
+
+			return Powerup.TYPE_QUICKBULLET;
 		}
 
 		public function removePowerup(powerup:Powerup):void

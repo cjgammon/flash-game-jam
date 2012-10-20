@@ -22,7 +22,7 @@ package game.entities
 		/**
 		* no health should be logged if they're invincible.
 		*/
-		private var _invincible:Boolean = false;
+		protected var _invincible:Boolean = false;
 		public function get invincible():Boolean { return _invincible; }
 		public function set invincible(value:Boolean):void
 		{
@@ -57,6 +57,14 @@ package game.entities
 			// todo : setup powerup here.
 			
 			powerups.push(powerup);
+		}
+		public function hasPowerupType(type:String):Boolean
+		{
+			for (var powerupIndex:int = 0; powerupIndex < powerups.length; powerupIndex++)
+			{
+				if (powerups[powerupIndex].id == type) return true;
+			}
+			return false;
 		}
 
 		//========================================================
