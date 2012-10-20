@@ -18,18 +18,22 @@ package game.entities
 	{
 		private var _vx:Number;
 		private var _vy:Number;
+		private var _shooter:Entity;
+		private var _angle:Number;
 
+		public var speed:Number = 1;
 		public var goalX:Number;
 		public var goalY:Number;
-
-		private var _shooter:Entity;
+		public var startX:Number;
+		public var startY:Number;
+		
 		public function get shooter():Entity { return _shooter; }
 		public var damage:int = 100;
 		
 		/**
 		*	@constructor
 		*/
-		public function Bullet(shooter:Entity, startX:Number, startY:Number, angle:Number):void
+		public function Bullet(shooter:Entity, startX:Number = 0, startY:Number = 0):void
 		{
 			super();
 
@@ -46,14 +50,19 @@ package game.entities
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
 			
-			_vx = Math.cos(angle);
-			_vy = Math.sin(angle);
+		}
+		
+		public function set angle(newAngle:Number):void 
+		{
+			_angle = newAngle;
+			_vx = Math.cos(_angle);
+			_vy = Math.sin(_angle);
 		}
 		
 		public function update():void
 		{
-			x += _vx;
-			y += _vy;
+			x += _vx * speed;
+			y += _vy * speed;
 
 			// see if the bullet is hitting any enemies.  
 			// this is probably going to be pretty cpu intensive if we have lots of enemies, we may want to put bullets & enemies in a grid, so we only need to check against enemies in our current tile

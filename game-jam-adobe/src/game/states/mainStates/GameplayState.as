@@ -126,7 +126,7 @@ package game.states.mainStates
 				var powerup:Powerup = new Powerup();
 				powerup.x = int(Math.random() * GlobalData.SCENE_WIDTH);
 				powerup.y = int(Math.random() * GlobalData.SCENE_HEIGHT);
-				powerup.id = "spread";
+				powerup.id = "quickbullet";
 				_game.gameLayer.addChild(powerup.sprite);
 				_powerups[powerup] = powerup; 	// it's a dictionary so we can pluck things out in constant time
 			}
@@ -189,9 +189,9 @@ package game.states.mainStates
 		//========================================================
 		// bullets
 		//========================================================
-		public function spawnBullet(shooter:Entity, x:Number, y:Number, angle:Number):void
+		public function spawnBullet(bullet:Bullet):void
 		{			
-			var bullet:Bullet = new Bullet(shooter, x, y, angle);
+			//var bullet:Bullet = new Bullet(shooter, x, y, angle);
 			_bullets[bullet] = bullet;
 			_game.gameLayer.addChild(bullet.sprite);	
 		}

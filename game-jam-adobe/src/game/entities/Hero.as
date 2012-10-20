@@ -44,7 +44,7 @@ package game.entities
 		{
 			var powerup:Powerup;
 			var spreadsize:Number;
-			var multiplebullets:Boolean = false;
+			var bulletcount:int = 1;
 			var startX:Number = x + 10;
 			var startY:Number = y + 10;
 			var targetX:Number = InputManager.mouseX / GlobalData.SCENE_SCALE;
@@ -52,10 +52,14 @@ package game.entities
 			var dx:Number;
 			var dy:Number;
 			var angle:Number;
+			var bullet:Bullet;
+			var speed:Number;
 			
 			cooldown = default_cooldown; //default cooldown
 
-			for (var i:int; i < powerups.length; i++) {
+			bullet = new Bullet(this);
+			
+			for (var i:int = 0; i < powerups.length; i++) {
 				powerup = powerups[i];
 				
 				if (powerup.id == "stream"){
@@ -63,28 +67,52 @@ package game.entities
 				}
 				
 				if (powerup.id == "spread"){
-					multiplebullets = true;
-					spreadsize = 100;
+					bulletcount = 3;
+				}
+				
+				if (powerup.id == "sphere"){
+					bulletcount = 8;
+				}
+				
+				if (powerup.id == "quickbullet") {
+					bullet.speed = 2;
 				}
 			}
 
-			if (!multiplebullets) {
-				dx = targetX - startX;
-				dy = targetY - startY;
-				angle = Math.atan2(dy, dx);
+			dx = targetX - startX;
+			dy = targetY - startY;
+			angle = Math.atan2(dy, dx);
+			
+			if (bulletcount == 1) {
 				
-				_gameState.spawnBullet(this, startX, startY, angle);
-			} else {
-				dx = targetX - startX;
-				dy = targetY - startY;
-				angle = Math.atan2(dy, dx);
-				_gameState.spawnBullet(this, startX, startY, angle + .2);
-				_gameState.spawnBullet(this, startX, startY, angle - .2);
-				_gameState.spawnBullet(this, startX, startY, angle);
-
+				bullet.x = startX;
+				bullet.y = startY;
+				bullet.angle = angle;
+				_gameState.spawnBullet(bullet);
+				
+			} else if (bulletcount == 3) {
+				
+				bullet = new Bullet(this, startX, startY);
+				bullet.angle = angle + .2;
+				_gameState.spawnBullet(bullet);
+				
+				bullet = new Bullet(this, startX, startY);
+				bullet.angle = angle - .2;
+				_gameState.spawnBullet(bullet);
+				
+				bullet = new Bullet(this, startX, startY);
+				bullet.angle = angle;
+				_gameState.spawnBullet(bullet);
+				
+			} else if (bulletcount == 8) {
+				
+				for (var j:int = 0; j < 8; j++) {
+					bullet = new Bullet(this, startX, startY);
+					bullet.angle = j * .8;
+					_gameState.spawnBullet(bullet);
+				}
+				
 			}
 		}
-		
-		
 	}
 }
