@@ -108,8 +108,12 @@ package game.entities
 		
 		override public function takeTurn():void
 		{
-			cooldown = cooldown < 0 ? 0 : cooldown - 1;
-			controller.takeTurn(this);
+			// only let them go if their still alive.
+			if (health > 0)
+			{
+				cooldown = cooldown < 0 ? 0 : cooldown - 1;
+				controller.takeTurn(this);
+			}
 		}
 
 		//========================================================
