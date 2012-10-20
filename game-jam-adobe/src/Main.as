@@ -36,8 +36,8 @@ package
 
 				_debugLayer.addChild(DebugDraw.canvas);
 
-				_stats = new Stats();
-				_debugLayer.addChild(_stats);
+				//_stats = new Stats();
+				//_debugLayer.addChild(_stats);
 
 				ScreenPrint.init(_debugLayer);
 			}

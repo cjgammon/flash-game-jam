@@ -32,6 +32,10 @@ package game.entities
 			_sprite.addChild(moneyEmitter.sprite);
 		}
 		
+		override public function shoot():void
+		{
+			gameState.spawnBullet(_sprite.x, _sprite.y);
+		}
 		
 	}
 }

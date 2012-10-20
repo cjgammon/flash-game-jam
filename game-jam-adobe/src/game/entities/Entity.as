@@ -3,6 +3,8 @@
 */
 package game.entities
 {	
+	import game.states.mainStates.GameplayState;
+	
 	import starling.display.Image;
 	import starling.display.Sprite;
 
@@ -11,6 +13,9 @@ package game.entities
 	*/
 	public class Entity
 	{
+		protected var _gameState:GameplayState;
+		public function get gameState():GameplayState { return GameplayState.instance; }
+
 		//========================================================
 		// position
 		//========================================================
