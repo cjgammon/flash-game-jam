@@ -16,6 +16,21 @@ package game.entities
 	*/
 	public class Powerup extends Entity
 	{
+		public static const TYPE_STREAM:String = "stream";
+		public static const TYPE_SPREAD:String = "spread";
+		public static const TYPE_SPHERE:String = "sphere";
+		public static const TYPE_QUICKBULLET:String = "quickbullet";
+		public static const TYPE_SILVERBULLET:String = "silverbullet";
+
+		public static const TYPES:Array = 
+		[
+			TYPE_STREAM,
+			TYPE_SPREAD,
+			TYPE_SPHERE,
+			TYPE_QUICKBULLET,
+			TYPE_SILVERBULLET
+		];
+
 		public var id:String;
 		
 		/**
