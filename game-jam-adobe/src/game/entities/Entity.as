@@ -42,6 +42,8 @@ package game.entities
 		*/
 		public var rect:Rectangle = new Rectangle();
 
+		public var cooldown:int = 0;
+		
 		//========================================================
 		// rendering
 		//========================================================
@@ -55,7 +57,6 @@ package game.entities
 		*/
 		protected var _bodyImage:Image;
 
-
 		/**
 		*	@constructor
 		*/
@@ -67,7 +68,7 @@ package game.entities
 		
 		public function takeTurn():void
 		{
-			
+
 		}
 
 		/**

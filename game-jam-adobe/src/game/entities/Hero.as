@@ -42,8 +42,10 @@ package game.entities
 		
 		override public function shoot():void
 		{
-			_gameState.spawnBullet(x, y, InputManager.mouseX / GlobalData.SCENE_SCALE, InputManager.mouseY / GlobalData.SCENE_SCALE);
+			cooldown = 5;
+			_gameState.spawnBullet(x + 10, y + 10, InputManager.mouseX / GlobalData.SCENE_SCALE, InputManager.mouseY / GlobalData.SCENE_SCALE);
 		}
+		
 		
 	}
 }

@@ -41,7 +41,6 @@ package game.entities
 			var dx:Number = goalX - startX;
 			var dy:Number = goalY - startY;
 			var angle:Number = Math.atan2(dy, dx);
-			trace(startX, goalX, angle);
 			_vx = Math.cos(angle);
 			_vy = Math.sin(angle);
 		}

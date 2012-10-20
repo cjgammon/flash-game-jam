@@ -56,14 +56,18 @@ package game.entities.controllers
 			{
 				entity.y += entity.movementSpeed;
 			}
-			
 
 			//========================================================
 			// aim
 			//========================================================
 			entity.lookAt(InputManager.mouseX, InputManager.mouseY);
+			/*
 			if (InputManager.mousePressed())
 			{
+				entity.shoot();
+			}
+			*/
+			if (InputManager.mouseDown() && entity.cooldown == 0) {
 				entity.shoot();
 			}
 		}

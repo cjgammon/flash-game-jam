@@ -108,6 +108,7 @@ package game.entities
 		
 		override public function takeTurn():void
 		{
+			cooldown = cooldown < 0 ? 0 : cooldown - 1;
 			controller.takeTurn(this);
 		}
 
