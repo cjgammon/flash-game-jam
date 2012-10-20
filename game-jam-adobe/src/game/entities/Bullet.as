@@ -83,8 +83,8 @@ package game.entities
 				{
 					if (_gameState.bulletHitEnemy(this, enemy))
 					{
-						// get out of here.
-						return;
+						// get out of here. if it's not silver.
+						if (!silver) return;
 					}
 				}
 			}

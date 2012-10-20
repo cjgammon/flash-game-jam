@@ -243,7 +243,7 @@ package game.states.mainStates
 
 		public function bulletHitEnemy(bullet:Bullet, enemy:Enemy):Boolean
 		{
-			removeBullet(bullet);
+			if (!bullet.silver) removeBullet(bullet);
 
 			if (!enemy.invincible)
 			{
