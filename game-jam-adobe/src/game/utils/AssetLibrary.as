@@ -84,5 +84,11 @@ package game.utils
 		public static var PlaceholderPowerup:Class;
 		public static var placeholderPowerupBmp:Bitmap = new PlaceholderPowerup();		
 		public static var placeholderPowerupTexture:Texture = Texture.fromBitmap(placeholderPowerupBmp);
+
+		//========================================================
+		// 
+		//========================================================
+		[Embed(source="./assets/audio/BG_loop.mp3")]
+		public static var BGLoop:Class;
 	}
 }

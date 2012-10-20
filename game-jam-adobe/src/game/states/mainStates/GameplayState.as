@@ -21,6 +21,7 @@ package game.states.mainStates
 	import game.utils.AssetLibrary;
 	import game.utils.FrameTime;
 	import game.utils.InputManager;
+	import game.utils.sound.SoundManager;
 	
 	import starling.core.Starling;
 	import starling.extensions.ParticleDesignerPS;
@@ -64,6 +65,8 @@ package game.states.mainStates
 		override public function enter():void
 		{
 			super.enter();
+
+			SoundManager.instance.vPlaySound(new (AssetLibrary.BGLoop)());
 
 			// build up a list of active players so we know who is playing the game.
 			var heroTotal:int = _game.gameData.players.length;
