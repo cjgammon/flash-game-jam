@@ -75,7 +75,7 @@ package game.entities
 				}
 				
 				if (powerup.id == "quickbullet") {
-					bullet.speed = 2;
+					bullet.speed = 4;
 				}
 			}
 
