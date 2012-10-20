@@ -14,8 +14,9 @@ package game.entities
 	*/
 	public class Bullet extends Entity
 	{
-		private var _velocity:Number = 1;
-		
+		private var _vx:Number = 1;
+		private var _vy:Number = 1;
+
 		/**
 		*	@constructor
 		*/
@@ -29,7 +30,8 @@ package game.entities
 		
 		public function update():void
 		{
-			_sprite.x += _velocity;
+			_sprite.x += _vx;
+			_sprite.y += _vy;
 		}
 	}
 }
