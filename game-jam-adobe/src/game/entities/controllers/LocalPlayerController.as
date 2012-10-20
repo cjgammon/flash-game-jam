@@ -47,6 +47,7 @@ package game.entities.controllers
 			{
 				entity.sprite.x += entity.movementSpeed;
 			}
+			
 			if (InputManager.isKeyDown(InputManager.INPUT_MOVE_UP))
 			{
 				entity.sprite.y -= entity.movementSpeed;
@@ -63,6 +64,7 @@ package game.entities.controllers
 			entity.lookAt(InputManager.mouseX, InputManager.mouseY);
 			if (InputManager.mousePressed())
 			{
+				trace('yes');
 				entity.shoot();
 			}
 		}

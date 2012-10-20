@@ -10,8 +10,6 @@ package
 	import game.utils.InputManager;
 	import starling.core.Starling;
 
-	
-
 	[SWF(width="900", height="800", frameRate="60", backgroundColor="#ffffff")]
 	public class Main extends Sprite
 	{
@@ -27,8 +25,8 @@ package
 		public function Main()
 		{
 			_starling = new Starling(_gameClass, stage);
-			_starling.stage.stageWidth = 450;//200;
-			_starling.stage.stageHeight = 400;//150;  //set to half of screen size
+			_starling.stage.stageWidth = GlobalData.SCENE_WIDTH;//450;
+			_starling.stage.stageHeight = GlobalData.SCENE_HEIGHT;//400;
 			_starling.start();
 
 			if (GlobalData.DEBUG)
@@ -38,8 +36,8 @@ package
 
 				_debugLayer.addChild(DebugDraw.canvas);
 
-				_stats = new Stats();
-				_debugLayer.addChild(_stats);
+				//_stats = new Stats();
+				//_debugLayer.addChild(_stats);
 
 				ScreenPrint.init(_debugLayer);
 			}

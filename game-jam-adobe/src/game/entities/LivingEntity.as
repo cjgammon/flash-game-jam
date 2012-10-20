@@ -5,6 +5,7 @@ package game.entities
 {	
 	import starling.display.Sprite;
 	import game.entities.controllers.IEntityController;
+	import game.entities.Powerup;
 	import game.utils.DebugDraw;
 	
 	/**
@@ -13,10 +14,11 @@ package game.entities
 	public class LivingEntity extends Entity
 	{
 		//========================================================
-		// health vars
+		// stat vars
 		//========================================================
 		public var health:int = 100;
 		public var maxHealth:int = 100;
+		public var powerups:Vector.<Powerup> = new Vector.<Powerup>();
 
 		//========================================================
 		// ai/controller stuff
