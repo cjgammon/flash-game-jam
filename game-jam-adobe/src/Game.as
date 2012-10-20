@@ -25,6 +25,7 @@ package
 		* should try to keep things more organized, but let's hit the gas for now.
 		*/
 		private var _hero:Hero;
+		private var _enemies:Vector.<Enemy> = new Vector.<Enemy>();
 
 		public function Game()
 		{
@@ -36,10 +37,19 @@ package
 			_hero = new Hero();
 			_gameLayer.addChild(_hero.sprite);
 
-			var enemy:Enemy = new Enemy();
-			enemy.sprite.y = 50;
-			_gameLayer.addChild(enemy.sprite);
+			// enemy test.  
+			// TODO :: refactor this so there's an add enemy function somewhere that's easy to access.
+			for (var enemyIndex:int = 0; enemyIndex < 500; enemyIndex++)
+			{
+				var enemy:Enemy = new Enemy();
+				enemy.target = _hero;
+				enemy.sprite.x = 100;
+				enemy.sprite.y = 100;
+				_gameLayer.addChild(enemy.sprite);
+				_enemies.push(enemy);
+			}
 
+			// bullet test.
 			var bullet:Bullet = new Bullet();
 			bullet.sprite.x = 50;
 			bullet.sprite.y = 50;
@@ -67,6 +77,12 @@ package
 
 		private function handleEnterFrame(evt:Event):void
 		{
+			heroTurn();
+			enemyTurn();
+		}
+
+		private function heroTurn():void
+		{
 			// check if they're running
 			if (InputManager.keyPressed(InputManager.INPUT_RUN))
 			{
@@ -93,13 +109,16 @@ package
 			{
 				_hero.sprite.y += _hero.movementSpeed;
 			}
-			updateGame();
 		}
 
-		private function updateGame():void
+		private function enemyTurn():void
 		{
-			ScreenPrint.show("ms: " + FrameTime.dt);
+			var enemyTotal:int = _enemies.length;
+			for (var enemyIndex:int = 0; enemyIndex < enemyTotal; enemyIndex++)
+			{
+				var enemy:Enemy = _enemies[enemyIndex];
+				enemy.takeTurn();
+			}
 		}
-
 	}
 }

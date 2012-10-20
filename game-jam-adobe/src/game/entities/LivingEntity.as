@@ -12,6 +12,10 @@ package game.entities
 	{
 		public var health:int = 100;
 		public var maxHealth:int = 100;
+		/**
+		* target/focus.  in enemy's case, this is usually a hero, but maybe we want enemies that try to steal powerups..
+		*/
+		public var target:Entity;
 
 		/**
 		* walk speed. set in your specific classes as needed

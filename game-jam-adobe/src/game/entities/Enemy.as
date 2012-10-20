@@ -22,6 +22,23 @@ package game.entities
 			_sprite.addChild(_bodyImage);
 		}
 		
-		
+		/**
+		* 
+		*/
+		public function takeTurn():void
+		{
+			// if they have a target, do something!
+			if (target != null)
+			{
+				// just move around randomly for now :)
+				_sprite.x += Math.random() * 2 - 1;
+				_sprite.y += Math.random() * 2 - 1;
+			}
+			// if we don't have a target, figure out what to do.  
+			else
+			{
+				// pick a new target? get bored?
+			}
+		}
 	}
 }
