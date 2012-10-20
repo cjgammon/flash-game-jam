@@ -3,8 +3,9 @@
 */
 package game.states.mainStates
 {	
+	import flash.utils.Dictionary;
+
 	import Game.*;
-	
 	import game.data.GameData;
 	import game.data.GlobalData;
 	import game.data.Player;
@@ -37,9 +38,9 @@ package game.states.mainStates
 		private var _activePlayers:Vector.<Player> = new Vector.<Player>();
 		public function get activePlayers():Vector.<Player> { return _activePlayers; }
 		
-		private var _enemies:Vector.<Enemy> = new Vector.<Enemy>();
-		private var _powerups:Vector.<Powerup> = new Vector.<Powerup>();
-		private var _bullets:Vector.<Bullet> = new Vector.<Bullet>();
+		private var _enemies:Dictionary = new Dictionary();
+		private var _powerups:Dictionary = new Dictionary();
+		private var _bullets:Dictionary = new Dictionary();
 
 		/**
 		*	@constructor
@@ -96,7 +97,7 @@ package game.states.mainStates
 				enemy.x = enemyIndex % 2 == 0 ? GlobalData.SCENE_WIDTH : 0;  //left side or right side
 				enemy.y = Math.random() * GlobalData.HALF_SCENE_HEIGHT;
 				_game.gameLayer.addChild(enemy.sprite);
-				_enemies.push(enemy);
+				_enemies[enemy] = enemy;// it's a dictionary so we can pluck things out in constant time
 			}
 
 			//========================================================
@@ -116,7 +117,7 @@ package game.states.mainStates
 				powerup.x = int(Math.random() * GlobalData.SCENE_WIDTH);
 				powerup.y = int(Math.random() * GlobalData.SCENE_HEIGHT);
 				_game.gameLayer.addChild(powerup.sprite);
-				_powerups.push(powerup);
+				_powerups[powerup] = powerup;// it's a dictionary so we can pluck things out in constant time
 			}
 
 			/*
@@ -177,7 +178,7 @@ package game.states.mainStates
 			var bullet:Bullet = new Bullet();
 			bullet.x = x;
 			bullet.y = y;
-			_bullets.push(bullet);
+			_bullets[bullet] = bullet
 		}
 
 		private function heroTurn():void
@@ -194,10 +195,8 @@ package game.states.mainStates
 		//========================================================
 		private function enemyTurn():void
 		{
-			var enemyTotal:int = _enemies.length;
-			for (var enemyIndex:int = 0; enemyIndex < enemyTotal; enemyIndex++)
+			for each (var enemy:Enemy in _enemies)
 			{
-				var enemy:Enemy = _enemies[enemyIndex];
 				enemy.takeTurn();
 			}
 		}
@@ -207,10 +206,8 @@ package game.states.mainStates
 		//========================================================
 		private function powerupTurn():void
 		{
-			var powerupTotal:int = _powerups.length;
-			for (var powerupIndex:int = 0; powerupIndex < powerupTotal; powerupIndex++)
+			for each (var powerup:Powerup in _powerups)
 			{
-				var powerup:Powerup = _powerups[powerupIndex];
 				powerup.takeTurn();
 			}
 		}
@@ -219,6 +216,18 @@ package game.states.mainStates
 		{
 			trace("acquire powerup!");
 			livingEntity.addPowerup(powerup);
+			removePowerup(powerup);
+
+			// play cool effect
+		}
+
+		public function removePowerup(powerup:Powerup):void
+		{
+			if (_powerups[powerup])
+			{
+				powerup.cleanupForRemoval();
+				delete _powerups[powerup];
+			}
 		}
 	}
 }
