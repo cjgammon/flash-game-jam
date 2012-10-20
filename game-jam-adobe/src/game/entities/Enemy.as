@@ -4,6 +4,7 @@
 package game.entities
 {	
 	import game.utils.AssetLibrary;
+	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.TextureSmoothing;
@@ -13,7 +14,7 @@ package game.entities
 	*/
 	public class Enemy extends LivingEntity
 	{
-		public var speed:Number = 0.2 + Math.random() * 0.6;
+		public var enemySpeed:Number = .2 + Math.random() * .8;
 		
 		/**
 		*	@constructor
@@ -24,8 +25,11 @@ package game.entities
 			_bodyImage = new Image(AssetLibrary.enemyTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
+			
 		}
 		
+		override public function get movementSpeed():Number { return enemySpeed; }
+
 		/**
 		* 
 		*/
@@ -37,18 +41,17 @@ package game.entities
 				// just move around randomly for now :)
 				//_sprite.x += Math.random() * 2 - 1;
 				//_sprite.y += Math.random() * 2 - 1;
-				trace(speed);
 				
 				if (_sprite.x < target.sprite.x) {
-					_sprite.x += speed;
+					_sprite.x += movementSpeed;
 				} else if (_sprite.x > target.sprite.x) {
-					_sprite.x -= speed;
+					_sprite.x -= movementSpeed;
 				}
 				
 				if (_sprite.y < target.sprite.y) {
-					_sprite.y += speed;
+					_sprite.y += movementSpeed;
 				} else if(_sprite.y > target.sprite.y) {
-					_sprite.y -= speed;
+					_sprite.y -= movementSpeed;
 				}
 			}
 			// if we don't have a target, figure out what to do.  

@@ -32,8 +32,8 @@ package
 			_debugLayer = new Sprite();
 			addChild(_debugLayer);
 
-			//_stats = new Stats();
-			//_debugLayer.addChild(_stats);
+			_stats = new Stats();
+			_debugLayer.addChild(_stats);
 
 			// set up some system utility stuff that should check keys, make debugging easier, etc
 			ScreenPrint.init(_debugLayer);
