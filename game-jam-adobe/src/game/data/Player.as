@@ -26,6 +26,7 @@ package game.data
 		//========================================================
 		// 
 		//========================================================
+		public var playerIndex:int = -1;// p1, p2, etc
 		public var playerType:int = TYPE_INVALID;
 		public var characterType:int = CHARACTER_TYPE_DEFAULT;
 		public var avatar:LivingEntity;
@@ -40,8 +41,9 @@ package game.data
 		/**
 		*	@constructor
 		*/
-		public function Player(playerType:int, characterType:int):void
+		public function Player(playerIndex:int, playerType:int, characterType:int):void
 		{
+			this.playerIndex = playerIndex;
 			this.playerType = playerType;
 			this.characterType = characterType;
 		}

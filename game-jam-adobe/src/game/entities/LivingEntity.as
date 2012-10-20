@@ -19,6 +19,34 @@ package game.entities
 		public var health:int = 100;
 		public var maxHealth:int = 100;
 
+		/**
+		* no health should be logged if they're invincible.
+		*/
+		private var _invincible:Boolean = false;
+		public function get invincible():Boolean { return _invincible; }
+		public function set invincible(value:Boolean):void
+		{
+			if (_invincible != value)
+			{
+				_invincible = value;
+
+				if (_invincible)
+				{
+					// todo :: activate invincible effect
+				}
+				else
+				{
+					// todo :: deactive invincible effect
+				}
+			}
+		}
+
+
+		/**
+		* how much damage something does when it touches it's target
+		*/
+		public var meleeDamage:int = 100;
+
 
 		//========================================================
 		// powerups

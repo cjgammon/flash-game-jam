@@ -3,6 +3,7 @@
 */
 package game.entities
 {	
+	import game.debug.ScreenPrint;
 	import game.utils.AssetLibrary;
 	
 	import starling.display.Image;
@@ -31,6 +32,25 @@ package game.entities
 			_bodyImage = new Image(AssetLibrary.enemyTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);	
+		}
+
+		override public function takeTurn():void
+		{
+			super.takeTurn();
+			
+			// after the enemy moves, let's see if it's touching any players.
+			var touchingHeroes:Array = getTouchingPlayers();
+
+			// just hit the first hero.
+			if (touchingHeroes.length > 0)
+			{
+				ScreenPrint.show("touching");
+				_gameState.attackPlayer(this, touchingHeroes[0]);
+			}
+			else
+			{
+				ScreenPrint.show("not touching");
+			}
 		}
 		
 	}
