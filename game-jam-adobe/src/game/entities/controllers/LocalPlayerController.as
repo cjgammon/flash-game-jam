@@ -22,6 +22,9 @@ package game.entities.controllers
 
 		override public function takeTurn(entity:LivingEntity):void
 		{
+			//========================================================
+			// movement
+			//========================================================
 			// check if they're running
 			if (InputManager.keyPressed(InputManager.INPUT_RUN))
 			{
@@ -47,6 +50,15 @@ package game.entities.controllers
 			else if (InputManager.isKeyDown(InputManager.INPUT_MOVE_DOWN))
 			{
 				entity.sprite.y += entity.movementSpeed;
+			}
+
+			//========================================================
+			// aim
+			//========================================================
+			entity.lookAt(InputManager.mouseX, InputManager.mouseY);
+			if (InputManager.mousePressed())
+			{
+				
 			}
 		}
 	}

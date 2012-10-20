@@ -2,8 +2,10 @@ package
 {
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import game.data.GlobalData;
 	import game.debug.Stats;
 	import game.debug.ScreenPrint;
+	import game.utils.DebugDraw;
 	import game.utils.FrameTime;
 	import game.utils.InputManager;
 	import starling.core.Starling;
@@ -29,14 +31,19 @@ package
 			_starling.stage.stageHeight = 400;//150;  //set to half of screen size
 			_starling.start();
 
-			_debugLayer = new Sprite();
-			addChild(_debugLayer);
+			if (GlobalData.DEBUG)
+			{
+				_debugLayer = new Sprite();
+				addChild(_debugLayer);
 
-			_stats = new Stats();
-			_debugLayer.addChild(_stats);
+				_debugLayer.addChild(DebugDraw.canvas);
 
-			// set up some system utility stuff that should check keys, make debugging easier, etc
-			ScreenPrint.init(_debugLayer);
+				_stats = new Stats();
+				_debugLayer.addChild(_stats);
+
+				ScreenPrint.init(_debugLayer);
+			}
+						
 			InputManager.init(this.stage, InputManager.MANAGE_KEYBOARD, true);// 2nd param ==  manage mouse t/f
 			this.addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 		}
@@ -50,7 +57,7 @@ package
 			FrameTime.update();
 
 			// update various utils
-			ScreenPrint.update();
+			if (GlobalData.DEBUG) ScreenPrint.update();
 
 			//
 			InputManager.update();

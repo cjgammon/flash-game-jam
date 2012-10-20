@@ -3,6 +3,7 @@ package game.debug
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
+	import game.data.GlobalData;
 	
 	
 	public class ScreenPrint extends Object
@@ -73,7 +74,7 @@ package game.debug
 		*/
 		public static function show(message:String):void
 		{
-			if (render) 
+			if (render && GlobalData.DEBUG) 
 			{
 				ScreenPrint.prints.push(message);
 			}
