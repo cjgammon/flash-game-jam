@@ -70,6 +70,13 @@ package game.states.mainStates
 				activePlayer.avatar.sprite.x = 100;
 				activePlayer.avatar.sprite.y = 100;
 
+				// big money, big prizes.
+				var money:ParticleDesignerPS = new ParticleDesignerPS(XML(new AssetLibrary.MoneyParticleXML()), Texture.fromBitmap(new AssetLibrary.MoneyParticleTexture()));
+				money.x = activePlayer.avatar.sprite.x;
+				money.y = 100;
+				money.start();			
+				Starling.juggler.add(money);
+				_game.gameLayer.addChild(money);
 			}
 			
 			//========================================================
@@ -102,13 +109,6 @@ package game.states.mainStates
 			bullet.sprite.y = 50;
 			_game.gameLayer.addChild(bullet.sprite);
 			*/
-
-			var money:ParticleDesignerPS = new ParticleDesignerPS(XML(new AssetLibrary.MoneyParticleXML()), Texture.fromBitmap(new AssetLibrary.MoneyParticleTexture()));
-			money.x = _hero.sprite.x;
-			money.y = 100;
-			money.start();			
-			Starling.juggler.add(money);
-			_game.gameLayer.addChild(money);
 			
 			// init ui layer.
 			_hud = new Hud();
