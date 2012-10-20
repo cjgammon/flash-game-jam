@@ -55,8 +55,8 @@ package game.entities
 		
 		public function update():void
 		{
-			_sprite.x += _vx;
-			_sprite.y += _vy;
+			x += _vx;
+			y += _vy;
 
 			// see if the bullet is hitting any enemies.  
 			// this is probably going to be pretty cpu intensive if we have lots of enemies, we may want to put bullets & enemies in a grid, so we only need to check against enemies in our current tile
