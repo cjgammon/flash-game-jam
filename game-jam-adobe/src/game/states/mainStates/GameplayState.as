@@ -19,6 +19,7 @@ package game.states.mainStates
 	import game.states.mainStates.*;
 	import game.ui.Hud;
 	import game.utils.AssetLibrary;
+	import game.utils.FrameTime;
 	import game.utils.InputManager;
 	
 	import starling.core.Starling;
@@ -45,8 +46,6 @@ package game.states.mainStates
 		*/
 		private var _playerDataForEntity:Dictionary = new Dictionary();
 		
-		private var _enemies:Dictionary = new Dictionary();
-		public function get enemies():Dictionary { return _enemies; }
 
 		private var _powerups:Dictionary = new Dictionary();
 		private var _bullets:Dictionary = new Dictionary();
@@ -99,17 +98,17 @@ package game.states.mainStates
 			// enemy test.  
 			// TODO :: refactor this so there's an add enemy function somewhere that's easy to access.
 			//========================================================
-			for (var enemyIndex:int = 0; enemyIndex < 1; enemyIndex++)
-			{
-				var enemy:Enemy = new Enemy();
-
-				enemy.target = _activePlayers[0].avatar;
-				enemy.controller = EntityController.getControllerType(AIControllerBasic);
-				enemy.x = enemyIndex % 2 == 0 ? GlobalData.SCENE_WIDTH : 0;  //left side or right side
-				enemy.y = Math.random() * GlobalData.HALF_SCENE_HEIGHT;
-				_game.gameLayer.addChild(enemy.sprite);
-				_enemies[enemy] = enemy;// it's a dictionary so we can pluck things out in constant time
-			}
+			//for (var enemyIndex:int = 0; enemyIndex < 1; enemyIndex++)
+			//{
+			//	var enemy:Enemy = new Enemy();
+//
+			//	enemy.target = _activePlayers[0].avatar;
+			//	enemy.controller = EntityController.getControllerType(AIControllerBasic);
+			//	enemy.x = enemyIndex % 2 == 0 ? GlobalData.SCENE_WIDTH : 0;  //left side or right side
+			//	enemy.y = Math.random() * GlobalData.HALF_SCENE_HEIGHT;
+			//	_game.gameLayer.addChild(enemy.sprite);
+			//	_enemies[enemy] = enemy;// it's a dictionary so we can pluck things out in constant time
+			//}
 
 			//========================================================
 			// add the heroes to the stage, on top of the enemies for now.
@@ -183,7 +182,7 @@ package game.states.mainStates
 			enemyTurn();
 			bulletTurn();
 			powerupTurn();
-
+			enemyRespawnHandler();
 		}
 		
 		//========================================================
@@ -259,6 +258,63 @@ package game.states.mainStates
 		//========================================================
 		// enemies
 		//========================================================
+		private var _enemies:Dictionary = new Dictionary();
+		public function get enemies():Dictionary { return _enemies; }
+		private var _onScreenEnemyCount:int = 0;
+		private var _enemyRespawnCooldownInSeconds:Number = 0.0;
+
+		/**
+		* tries to figure out if we should spawn a new enemy in.
+		*/
+		private function enemyRespawnHandler():void
+		{
+			_enemyRespawnCooldownInSeconds -= FrameTime.timeDiffInSeconds;
+			if (_enemyRespawnCooldownInSeconds <= 0)
+			{
+				var enemyCountThatCanSpawn:int = GlobalData.MAX_ENEMIES_ON_SCREEN - _onScreenEnemyCount;
+				if (enemyCountThatCanSpawn > 0)
+				{
+					_enemyRespawnCooldownInSeconds = Math.random() * 2 + 0.2;
+
+					// most to spawn at once right now is 3.
+					// probably want to scale that based on the intensity of the action right now.
+					var enemiesToSpawn:int = Math.min(enemyCountThatCanSpawn, 3);
+					for (var enemyIndex:int = 0; enemyIndex < enemiesToSpawn; enemyIndex++)
+					{
+						// just spawn a basic enemy for now.
+						spawnEnemy(Enemy);
+					}
+				}
+			}
+		}
+
+		private function spawnEnemy(klass:Class):Enemy
+		{
+			var enemy:* = new klass() as Enemy;
+
+			if (enemy)
+			{	
+				// should leave targeting up to the AI, but that's a stretch feature
+				enemy.target = _activePlayers[0].avatar;
+	
+				// pick a random AI maybe?
+				enemy.controller = EntityController.getControllerType(AIControllerBasic);
+	
+				// put them at the edge of the screen
+				enemy.x = Math.random() > 0.5 ? GlobalData.SCENE_WIDTH : 0;  //left side or right side
+				enemy.y = Math.random() * GlobalData.HALF_SCENE_HEIGHT;
+	
+				// add em!
+				_game.gameLayer.addChild(enemy.sprite);
+				_enemies[enemy] = enemy;// it's a dictionary so we can pluck things out in constant time
+	
+				// update how many enemies we have onscreen
+				_onScreenEnemyCount++;
+	
+				return enemy;
+			}
+			return null;
+		}
 		private function enemyTurn():void
 		{
 			for each (var enemy:Enemy in _enemies)
@@ -291,6 +347,9 @@ package game.states.mainStates
 		{
 			if(_enemies[enemy])
 			{
+				// update how many enemies are on screen
+				_onScreenEnemyCount--;
+
 				enemy.cleanupForRemoval();
 				delete _enemies[enemy];
 			}

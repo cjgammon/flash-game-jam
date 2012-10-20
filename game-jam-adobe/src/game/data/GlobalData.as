@@ -20,6 +20,10 @@ package game.data
 		public static const HALF_SCENE_WIDTH:int = SCENE_WIDTH / SCENE_SCALE;
 		public static const HALF_SCENE_HEIGHT:int = SCENE_HEIGHT / SCENE_SCALE;
 
+		//========================================================
+		// game tweaks
+		//========================================================
 		public static const PLAYER_DAMAGED_INVINCIBILITY_DURATION:int = 1000;// milliseconds
+		public static const MAX_ENEMIES_ON_SCREEN:int = 100;
 	}
 }
