@@ -43,18 +43,33 @@ package game.entities
 		override public function shoot():void
 		{
 			var powerup:Powerup;
+			var spreadsize:Number;
+			var multiplebullets:Boolean = false;
+			var targetX:Number = InputManager.mouseX / GlobalData.SCENE_SCALE;
+			var targetY:Number = InputManager.mouseY / GlobalData.SCENE_SCALE;
+			
 			cooldown = default_cooldown; //default cooldown
 
 			for (var i:int; i < powerups.length; i++) {
 				powerup = powerups[i];
+				
 				if (powerup.id == "stream"){
 					cooldown = 0;
 				}
+				
 				if (powerup.id == "spread"){
-					cooldown = 0;
+					multiplebullets = true;
+					spreadsize = 100;
 				}
 			}
-			_gameState.spawnBullet(x + 10, y + 10, InputManager.mouseX / GlobalData.SCENE_SCALE, InputManager.mouseY / GlobalData.SCENE_SCALE);
+
+			if (!multiplebullets) {
+				_gameState.spawnBullet(this, x + 10, y + 10, targetX, targetY);
+			} else {
+				_gameState.spawnBullet(this, x + 10, y + 10, targetX, targetY);
+				_gameState.spawnBullet(this, x + 10, y + 10, targetX + spreadsize, targetY + spreadsize);
+				_gameState.spawnBullet(this, x + 10, y + 10, targetX - spreadsize, targetY - spreadsize);
+			}
 		}
 		
 		
