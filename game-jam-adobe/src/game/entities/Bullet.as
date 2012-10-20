@@ -5,6 +5,8 @@ package game.entities
 {	
 	import flash.utils.Dictionary;
 	
+	import game.data.GlobalData;
+	import game.debug.ScreenPrint;
 	import game.utils.AssetLibrary;
 	
 	import starling.display.Image;
@@ -55,6 +57,13 @@ package game.entities
 			x += _vx;
 			y += _vy;
 
+			// if we're offscreen, remove us.
+			if (x < 0 - rect.width || x > GlobalData.SCENE_WIDTH || y < 0 - rect.height || y > GlobalData.SCENE_HEIGHT)
+			{
+				_gameState.removeBullet(this);
+				return;
+			}
+
 			// see if the bullet is hitting any enemies.  
 			// this is probably going to be pretty cpu intensive if we have lots of enemies, we may want to put bullets & enemies in a grid, so we only need to check against enemies in our current tile
 			// & if we want enemies to shoot things, we should also have some way of making that happen
@@ -65,7 +74,8 @@ package game.entities
 				{
 					if (_gameState.bulletHitEnemy(this, enemy))
 					{
-						break; 
+						// get out of here.
+						return;
 					}
 				}
 			}

@@ -86,7 +86,7 @@ package game.entities
 		/**
 		* private, it's deduced based on whether the character is running or not.
 		*/
-		private var _movementSpeed:Number = _walkSpeed;
+		protected var _movementSpeed:Number = _walkSpeed;
 		public function get movementSpeed():Number { return _movementSpeed; }
 		/**
 		* set whether they're running or not. updates movement speed
