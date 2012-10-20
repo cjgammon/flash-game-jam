@@ -8,6 +8,7 @@ package game.states.mainStates
 	import game.data.GameData;
 	import game.data.Player;
 	import game.entities.*;
+	import game.entities.Bullet;
 	import game.entities.controllers.*;
 	import game.states.IState;
 	import game.states.mainStates.*;
@@ -32,6 +33,7 @@ package game.states.mainStates
 		private var _activePlayerTotal:int = 0;
 		private var _activePlayers:Vector.<Player> = new Vector.<Player>();
 		private var _enemies:Vector.<Enemy> = new Vector.<Enemy>();
+		private var _bullets:Vector.<Bullet> = new Vector.<Bullet>();
 
 		/**
 		*	@constructor
@@ -146,6 +148,14 @@ package game.states.mainStates
 		{
 			heroTurn();
 			enemyTurn();
+		}
+		
+		public function spawnBullet(x:Number, y:Number):void
+		{
+			var bullet:Bullet = new Bullet();
+			bullet.sprite.x = x;
+			bullet.sprite.y = y;
+			_bullets.push(bullet);
 		}
 
 		private function heroTurn():void

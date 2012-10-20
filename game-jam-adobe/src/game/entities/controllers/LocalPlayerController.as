@@ -3,6 +3,7 @@
 */
 package game.entities.controllers
 {	
+	import game.entities.Bullet;
 	import game.entities.LivingEntity;
 	import game.utils.InputManager;
 	
@@ -11,6 +12,8 @@ package game.entities.controllers
 	*/
 	public class LocalPlayerController extends EntityController implements IEntityController
 	{
+		private var _bullets:Vector.<Bullet> = new Vector.<Bullet>();
+
 		
 		/**
 		*	@constructor
@@ -26,6 +29,7 @@ package game.entities.controllers
 			// movement
 			//========================================================
 			// check if they're running
+			
 			if (InputManager.keyPressed(InputManager.INPUT_RUN))
 			{
 				entity.isRunning = true;
@@ -51,6 +55,7 @@ package game.entities.controllers
 			{
 				entity.sprite.y += entity.movementSpeed;
 			}
+			
 
 			//========================================================
 			// aim
@@ -58,8 +63,9 @@ package game.entities.controllers
 			entity.lookAt(InputManager.mouseX, InputManager.mouseY);
 			if (InputManager.mousePressed())
 			{
-				
+				entity.shoot();
 			}
 		}
+		
 	}
 }
