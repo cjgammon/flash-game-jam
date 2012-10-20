@@ -13,17 +13,17 @@ package game.entities
 	*/
 	public class Bullet extends Entity
 	{
+		
 		/**
 		*	@constructor
 		*/
 		public function Bullet():void
 		{
 			// init game layer.
-			_bodyImage = new Image(AssetLibrary.heroTextureIdle);
+			_bodyImage = new Image(AssetLibrary.bulletTexture);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
 		}
-		
 		
 	}
 }

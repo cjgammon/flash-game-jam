@@ -35,7 +35,9 @@ package game.utils
 		// bullet texture
 		//========================================================
 		[Embed(source="./assets/bullet.png")]
-		public static var BulletTexture:Class;
+		private static var BulletSprite:Class;
+		public static var bulletSpriteBmp:Bitmap = new EnemySprite();		
+		public static var bulletTexture:Texture = Texture.fromBitmap(bulletSpriteBmp);
 		
 		//========================================================
 		// coin texture

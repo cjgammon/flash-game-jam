@@ -1,5 +1,8 @@
 package game.entities
 {
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
+	
 	import game.utils.AssetLibrary;
 	
 	import starling.core.Starling;
@@ -37,19 +40,28 @@ package game.entities
 		}
 		
 		/*
-		*
+		* start emitting
 		*/
 		public function start():void
 		{
 			money.start();			
 			money2.start();			
-			money3.start();			
+			money3.start();
+			
+			var timer:Timer = new Timer(1000, 1);
+			timer.addEventListener(TimerEvent.TIMER, handle_TIMER);
+			timer.start();
 		}
 		
 		public function stop():void{
 			money.stop();			
 			money2.stop();			
 			money3.stop();				
+		}
+		
+		private function handle_TIMER(e:TimerEvent):void
+		{
+			stop();
 		}
 		
 		/**

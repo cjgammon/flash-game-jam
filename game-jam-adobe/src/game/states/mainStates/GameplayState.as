@@ -68,17 +68,8 @@ package game.states.mainStates
 				//if (activePlayer.characterType == ANGRY_GORILLA) activePlayer.avatar = new Gorilla();
 				activePlayer.avatar = new Hero() as LivingEntity;
 				activePlayer.avatar.controller = EntityController.getControllerType(LocalPlayerController);
-				activePlayer.avatar.sprite.x = 100;
-				activePlayer.avatar.sprite.y = 100;
-
-				/*
-				// big money, big prizes.
-				var moneyEmitter:MoneyEmitter = new MoneyEmitter();
-				moneyEmitter.sprite.x = 100;
-				moneyEmitter.sprite.y = 100;
-				moneyEmitter.start();
-				_game.addChild(moneyEmitter.sprite);
-				*/
+				activePlayer.avatar.sprite.x = 200;
+				activePlayer.avatar.sprite.y = 200;
 			}
 			
 			//========================================================
@@ -91,7 +82,7 @@ package game.states.mainStates
 
 				enemy.target = _activePlayers[0].avatar;
 				enemy.controller = EntityController.getControllerType(AIControllerBasic);
-				enemy.sprite.x = enemyIndex % 2 == 0 ? 200 : 0;  //left side or right side
+				enemy.sprite.x = enemyIndex % 2 == 0 ? 400 : 0;  //left side or right side
 				enemy.sprite.y = Math.random() * 200;
 				_game.gameLayer.addChild(enemy.sprite);
 				_enemies.push(enemy);

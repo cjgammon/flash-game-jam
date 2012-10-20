@@ -22,6 +22,14 @@ package game.entities
 			_bodyImage = new Image(AssetLibrary.heroTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
+			
+			//TODO :: follow character
+			// big money, big prizes.
+			var moneyEmitter:MoneyEmitter = new MoneyEmitter();
+			moneyEmitter.sprite.x = 10;
+			moneyEmitter.sprite.y = 10;
+			moneyEmitter.start();
+			_sprite.addChild(moneyEmitter.sprite);
 		}
 		
 		
