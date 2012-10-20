@@ -37,6 +37,7 @@ package game.states.mainStates
 		override public function get name():String{ return "GameState"; }
 
 		private var _hud:Hud;
+		private var _bg:Background;
 
 		private var _activePlayerTotal:int = 0;
 		private var _activePlayers:Vector.<Player> = new Vector.<Player>();
@@ -46,7 +47,6 @@ package game.states.mainStates
 		*/
 		private var _playerDataForEntity:Dictionary = new Dictionary();
 		
-
 		private var _powerups:Dictionary = new Dictionary();
 		private var _bullets:Dictionary = new Dictionary();
 
@@ -139,7 +139,7 @@ package game.states.mainStates
 			_game.gameLayer.addChild(bullet.sprite);
 			*/
 			
-			//_bg:Background = new Background();
+			//_bg = new Background();
 			//_game.gameLayer.addChild(_bg);
 			
 			// init ui layer.

@@ -17,7 +17,7 @@ package game.entities
 	*/
 	public class Hero extends LivingEntity
 	{
-		private var moneyEmitter:MoneyEmitter
+		private var moneyEmitter:MoneyEmitter;
 		
 		/**
 		*	@constructor
@@ -82,6 +82,10 @@ package game.entities
 				
 				if (powerup.id == "quickbullet") {
 					bullet.speed = 4;
+				}
+				
+				if (powerup.id == "silverbullet") {
+					bullet.silver = true;
 				}
 			}
 
