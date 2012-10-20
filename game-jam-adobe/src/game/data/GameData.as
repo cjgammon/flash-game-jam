@@ -25,7 +25,7 @@ package game.data
 		{
 			if (0 <= playerIndex && playerIndex < MAX_PLAYERS)
 			{
-				players[playerIndex] = new Player(playerType, characterType);
+				players[playerIndex] = new Player(playerIndex, playerType, characterType);
 			}
 		}		
 	}

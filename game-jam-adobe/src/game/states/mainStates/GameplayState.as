@@ -10,6 +10,7 @@ package game.states.mainStates
 	import game.data.GameData;
 	import game.data.GlobalData;
 	import game.data.Player;
+	import game.debug.ScreenPrint;
 	import game.entities.*;
 	import game.entities.Bullet;
 	import game.entities.controllers.*;
@@ -89,7 +90,7 @@ package game.states.mainStates
 			// enemy test.  
 			// TODO :: refactor this so there's an add enemy function somewhere that's easy to access.
 			//========================================================
-			for (var enemyIndex:int = 0; enemyIndex < 10; enemyIndex++)
+			for (var enemyIndex:int = 0; enemyIndex < 1; enemyIndex++)
 			{
 				var enemy:Enemy = new Enemy();
 
@@ -208,6 +209,20 @@ package game.states.mainStates
 			for each (var enemy:Enemy in _enemies)
 			{
 				enemy.takeTurn();
+			}
+		}
+
+		public function attackPlayer(attacker:LivingEntity, player:Player):void
+		{
+
+			if (!player.avatar.invincible)
+			{
+				ScreenPrint.show("attack!");
+
+				player.avatar.health -= attacker.meleeDamage;
+
+				// update hud!
+				_hud.setPlayerHealth(player.playerIndex, player.avatar.health);
 			}
 		}
 

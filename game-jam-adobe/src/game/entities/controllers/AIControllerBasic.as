@@ -27,7 +27,6 @@ package game.entities.controllers
 			{
 				entity.lookAtEntity(entity.target);
 
-				var sprite:Sprite = entity.sprite;
 				var targetSprite:Sprite = entity.target.sprite;
 				var speed:Number = entity.movementSpeed;
 
@@ -36,16 +35,16 @@ package game.entities.controllers
 				//sprite.y += Math.random() * 2 - 1;
 				//trace(speed);
 				
-				if (sprite.x < targetSprite.x) {
-					sprite.x += speed;
-				} else if (sprite.x > targetSprite.x) {
-					sprite.x -= speed;
+				if (entity.x < targetSprite.x) {
+					entity.x += speed;
+				} else if (entity.x > targetSprite.x) {
+					entity.x -= speed;
 				}
 				
-				if (sprite.y < targetSprite.y) {
-					sprite.y += speed;
-				} else if(sprite.y > targetSprite.y) {
-					sprite.y -= speed;
+				if (entity.y < targetSprite.y) {
+					entity.y += speed;
+				} else if(entity.y > targetSprite.y) {
+					entity.y -= speed;
 				}
 			}
 			// if we don't have a target, figure out what to do.  
