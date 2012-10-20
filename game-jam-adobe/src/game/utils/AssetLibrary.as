@@ -23,6 +23,14 @@ package game.utils
 		public static var roofTexture:Texture = Texture.fromBitmap(roofSpriteBmp);
 		
 		//========================================================
+		// city texture
+		//========================================================
+		[Embed(source="./assets/bg/city.png")]
+		private static var CitySprite:Class;
+		public static var citySpriteBmp:Bitmap = new CitySprite();		
+		public static var cityTexture:Texture = Texture.fromBitmap(citySpriteBmp);
+		
+		//========================================================
 		// scenery texture
 		//========================================================
 		[Embed(source="./assets/bg/scenery.png")]
