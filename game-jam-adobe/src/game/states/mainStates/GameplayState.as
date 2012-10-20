@@ -438,7 +438,7 @@ package game.states.mainStates
 			}
 
 			// spawn a new powerup
-			var powerupid = getRandomPowerup();
+			var powerupid:String = getRandomPowerup();
 			spawnPowerup(powerupid);
 			
 			switch (powerupid) {

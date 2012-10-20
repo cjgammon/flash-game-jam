@@ -6,6 +6,8 @@ package game.entities
 	import game.debug.ScreenPrint;
 	import game.utils.AssetLibrary;
 	
+	import starling.textures.Texture;
+
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.TextureSmoothing;
@@ -30,7 +32,8 @@ package game.entities
 			rect.height = 16;
 
 			// init game layer.
-			_bodyImage = new Image(AssetLibrary.enemyTextureIdle);
+			var texture:Texture = Math.round(Math.random()) > 0 ? AssetLibrary.enemyTextureIdle : AssetLibrary.enemy2TextureIdle;
+			_bodyImage = new Image(texture);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);	
 		}
