@@ -10,7 +10,7 @@ package game.entities
 	/**
 	*	base class for enemies.  if you want to make a new enemy, make a new class type for it.  we'll keep basic functionality in here for common AI and stuff
 	*/
-	public class Enemy extends Entity
+	public class Enemy extends LivingEntity
 	{
 		/**
 		*	@constructor

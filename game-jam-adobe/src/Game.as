@@ -9,6 +9,7 @@ package
 	import game.entities.Hero;
 	import game.utils.AssetLibrary;
 	import game.utils.FrameTime;
+	import game.utils.InputManager;
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.text.TextField;
@@ -20,6 +21,11 @@ package
 		private var _uiLayer:Sprite = new Sprite();
 		private var _debugLayer:Sprite = new Sprite();
 
+		/**
+		* should try to keep things more organized, but let's hit the gas for now.
+		*/
+		private var _hero:Hero;
+
 		public function Game()
 		{
 			addChild(_gameLayer);
@@ -27,8 +33,8 @@ package
 			addChild(_debugLayer);
 
 			// init game layer.
-			var hero:Hero = new Hero();
-			_gameLayer.addChild(hero.sprite);
+			_hero = new Hero();
+			_gameLayer.addChild(_hero.sprite);
 
 			var enemy:Enemy = new Enemy();
 			enemy.sprite.y = 50;
@@ -61,7 +67,32 @@ package
 
 		private function handleEnterFrame(evt:Event):void
 		{
-			// update the game
+			// check if they're running
+			if (InputManager.keyPressed(InputManager.INPUT_RUN))
+			{
+				_hero.isRunning = true;
+			}
+			else if (InputManager.keyReleased(InputManager.INPUT_RUN))
+			{
+				_hero.isRunning = false;
+			}
+
+			if (InputManager.isKeyDown(InputManager.INPUT_MOVE_LEFT))
+			{
+				_hero.sprite.x -= _hero.movementSpeed;
+			}
+			else if (InputManager.isKeyDown(InputManager.INPUT_MOVE_RIGHT))
+			{
+				_hero.sprite.x += _hero.movementSpeed;
+			}
+			if (InputManager.isKeyDown(InputManager.INPUT_MOVE_UP))
+			{
+				_hero.sprite.y -= _hero.movementSpeed;
+			}
+			else if (InputManager.isKeyDown(InputManager.INPUT_MOVE_DOWN))
+			{
+				_hero.sprite.y += _hero.movementSpeed;
+			}
 			updateGame();
 		}
 

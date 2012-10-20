@@ -5,6 +5,7 @@ package
 	import game.debug.Stats;
 	import game.debug.ScreenPrint;
 	import game.utils.FrameTime;
+	import game.utils.InputManager;
 	import starling.core.Starling;
 
 	
@@ -29,6 +30,7 @@ package
 			//_debugLayer.addChild(_stats);
 
 			ScreenPrint.init(_debugLayer);
+			InputManager.init(this.stage, InputManager.MANAGE_KEYBOARD, false);// 2nd param false == don't manage mouse
 
 			this.addEventListener(Event.ENTER_FRAME, handleEnterFrame);
 		}
@@ -43,6 +45,8 @@ package
 
 			// update various utils
 			ScreenPrint.update();
+
+			InputManager.update();
 		}
 	}
 }

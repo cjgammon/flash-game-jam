@@ -10,7 +10,7 @@ package game.entities
 	/**
 	*	things that need to live
 	*/
-	public class Hero extends Entity
+	public class Hero extends LivingEntity
 	{
 		/**
 		*	@constructor
