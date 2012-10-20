@@ -64,7 +64,6 @@ package game.entities.controllers
 			entity.lookAt(InputManager.mouseX, InputManager.mouseY);
 			if (InputManager.mousePressed())
 			{
-				trace('yes');
 				entity.shoot();
 			}
 		}

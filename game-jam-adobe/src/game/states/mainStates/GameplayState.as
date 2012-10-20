@@ -177,11 +177,7 @@ package game.states.mainStates
 		
 		public function spawnBullet(x:Number, y:Number, goalX:Number, goalY:Number):void
 		{			
-			var bullet:Bullet = new Bullet();
-			bullet.x = x;
-			bullet.y = y;
-			bullet.goalX = goalX;
-			bullet.goalY = goalY;
+			var bullet:Bullet = new Bullet(x, y, goalX, goalY);
 			_bullets[bullet] = bullet;
 			_game.gameLayer.addChild(bullet.sprite);	
 		}
