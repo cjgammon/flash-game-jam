@@ -31,9 +31,9 @@ package game.entities
 		override public function get movementSpeed():Number { return enemySpeed; }
 
 		/**
-		* 
+		* todo :: hook up a controller class that handles the turn for this thing.  we shouldn't actually care about how controls this thing, whether it's an enemy or whatever.  we really only care about it's stats and what whoever is controlling it thinks it should do.
 		*/
-		public function takeTurn():void
+		override public function takeTurn():void
 		{
 			// if they have a target, do something!
 			if (target != null)

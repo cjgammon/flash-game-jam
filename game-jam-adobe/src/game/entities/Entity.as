@@ -29,5 +29,9 @@ package game.entities
 			_sprite = new Sprite();
 		}
 		
+		public function takeTurn():void
+		{
+			
+		}
 	}
 }

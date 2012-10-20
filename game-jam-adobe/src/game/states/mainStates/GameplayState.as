@@ -4,9 +4,10 @@
 package game.states.mainStates
 {	
 	import Game;
-	import game.entities.Bullet;
-	import game.entities.Enemy;
-	import game.entities.Hero;
+	import game.data.GameData;
+	import game.data.Player;
+	import game.entities.*;
+	import game.entities.controllers.*;
 	import game.states.IState;
 	import game.states.mainStates.*;
 	import game.ui.Hud;
@@ -27,7 +28,8 @@ package game.states.mainStates
 
 		private var _hud:Hud;
 
-		private var _hero:Hero;
+		private var _activePlayerTotal:int = 0;
+		private var _activePlayers:Vector.<Player> = new Vector.<Player>();
 		private var _enemies:Vector.<Enemy> = new Vector.<Enemy>();
 
 		/**
@@ -42,28 +44,64 @@ package game.states.mainStates
 		{
 			super.enter();
 
-			// make the hero, but don't add him to the stage til after we've placed all the enemies so he appears on top
-			_hero = new Hero();
-			_hero.sprite.x = 100;
+			// build up a list of active players so we know who is playing the game.
+			var heroTotal:int = _game.gameData.players.length;
+			for (var heroIndex:int = 0; heroIndex < heroTotal; heroIndex++)
+			{
+				var playerData:Player = _game.gameData.players[heroIndex];
+				if (playerData.playerType != Player.TYPE_INVALID)
+				{
+					_activePlayers.push(playerData);
+				}
+			}
 
+			//========================================================
+			// set up all the active players' avatars
+			//========================================================
+			_activePlayerTotal = _activePlayers.length;
+			for (var activePlayerIndex:int = 0; activePlayerIndex < _activePlayerTotal; activePlayerIndex++)
+			{
+				var activePlayer:Player = _activePlayers[activePlayerIndex];
+
+				// TODO :: set up hero class based on character selection
+				//if (activePlayer.characterType == ANGRY_GORILLA) ctivePlayer.avatar = new Gorilla();
+				activePlayer.avatar = new Hero() as LivingEntity;
+				activePlayer.avatar.controller = EntityController.getControllerType(LocalPlayerController);
+				activePlayer.avatar.sprite.x = 100;
+				activePlayer.avatar.sprite.y = 100;
+
+			}
+			
+			//========================================================
 			// enemy test.  
 			// TODO :: refactor this so there's an add enemy function somewhere that's easy to access.
-			for (var enemyIndex:int = 0; enemyIndex < 500; enemyIndex++)
+			//========================================================
+			for (var enemyIndex:int = 0; enemyIndex < 10; enemyIndex++)
 			{
 				var enemy:Enemy = new Enemy();
-				enemy.target = _hero;
+				enemy.target = _activePlayers[0].avatar;
+				enemy.controller = EntityController.getControllerType(AIControllerBasic);
 				enemy.sprite.x = enemyIndex % 2 == 0 ? 200 : 0;  //left side or right side
 				enemy.sprite.y = Math.random() * 200;
 				_game.gameLayer.addChild(enemy.sprite);
 				_enemies.push(enemy);
 			}
-			_game.gameLayer.addChild(_hero.sprite);
 
+			//========================================================
+			// add the heroes to the stage, on top of the enemies for now.
+			//========================================================
+			for (activePlayerIndex = 0; activePlayerIndex < _activePlayerTotal; activePlayerIndex++)
+			{
+				_game.gameLayer.addChild(_activePlayers[activePlayerIndex].avatar.sprite);
+			}
+
+			/*
 			// bullet test.
 			var bullet:Bullet = new Bullet();
 			bullet.sprite.x = 50;
 			bullet.sprite.y = 50;
 			_game.gameLayer.addChild(bullet.sprite);
+			*/
 
 			var money:ParticleDesignerPS = new ParticleDesignerPS(XML(new AssetLibrary.MoneyParticleXML()), Texture.fromBitmap(new AssetLibrary.MoneyParticleTexture()));
 			money.x = _hero.sprite.x;
@@ -89,11 +127,16 @@ package game.states.mainStates
 			}
 			
 			// clean up hero
-			if (_hero && _hero.sprite.parent)
+			for (var activePlayerIndex:int = 0; activePlayerIndex < _activePlayerTotal; activePlayerIndex++)
+			while(_activePlayers.length > 0)
 			{
-				_hero.sprite.removeChild(_hero.sprite);
+				var player:Player = _activePlayers.pop();
+				if (player && player.avatar.sprite.parent)
+				{
+					player.avatar.sprite.removeChild(player.avatar.sprite);
+				}	
 			}
-
+			
 			// cleanup enemies
 			while(_enemies.length > 0)
 			{
@@ -113,31 +156,10 @@ package game.states.mainStates
 
 		private function heroTurn():void
 		{
-			// check if they're running
-			if (InputManager.keyPressed(InputManager.INPUT_RUN))
+			for (var activePlayerIndex:int = 0; activePlayerIndex < _activePlayerTotal; activePlayerIndex++)
 			{
-				_hero.isRunning = true;
-			}
-			else if (InputManager.keyReleased(InputManager.INPUT_RUN))
-			{
-				_hero.isRunning = false;
-			}
-
-			if (InputManager.isKeyDown(InputManager.INPUT_MOVE_LEFT))
-			{
-				_hero.sprite.x -= _hero.movementSpeed;
-			}
-			else if (InputManager.isKeyDown(InputManager.INPUT_MOVE_RIGHT))
-			{
-				_hero.sprite.x += _hero.movementSpeed;
-			}
-			if (InputManager.isKeyDown(InputManager.INPUT_MOVE_UP))
-			{
-				_hero.sprite.y -= _hero.movementSpeed;
-			}
-			else if (InputManager.isKeyDown(InputManager.INPUT_MOVE_DOWN))
-			{
-				_hero.sprite.y += _hero.movementSpeed;
+				var activePlayer:Player = _activePlayers[activePlayerIndex];
+				activePlayer.avatar.takeTurn();
 			}
 		}
 

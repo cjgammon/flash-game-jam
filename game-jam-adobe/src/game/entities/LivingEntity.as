@@ -4,19 +4,35 @@
 package game.entities
 {	
 	import starling.display.Sprite;
+	import game.entities.controllers.IEntityController;
 	
 	/**
-	*	things that need to live
+	*	things that need to live.  they can be controlled by an IEntityController as well.
 	*/
 	public class LivingEntity extends Entity
 	{
+		//========================================================
+		// health vars
+		//========================================================
 		public var health:int = 100;
 		public var maxHealth:int = 100;
+
+		//========================================================
+		// ai/controller stuff
+		//========================================================
 		/**
 		* target/focus.  in enemy's case, this is usually a hero, but maybe we want enemies that try to steal powerups..
 		*/
 		public var target:Entity;
+		/**
+		* 
+		*/
+		public var controller:IEntityController;
 
+
+		//========================================================
+		// movement vars
+		//========================================================
 		/**
 		* walk speed. set in your specific classes as needed
 		*/
@@ -37,6 +53,8 @@ package game.entities
 		{
 			_movementSpeed = running ? _runSpeed : _walkSpeed;
 		}
+
+
 		
 		/**
 		*	@constructor
@@ -46,6 +64,9 @@ package game.entities
 			
 		}
 		
-		
+		override public function takeTurn():void
+		{
+			controller.takeTurn(this);
+		}
 	}
 }
