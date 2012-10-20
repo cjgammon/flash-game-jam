@@ -190,9 +190,9 @@ package game.states.mainStates
 		//========================================================
 		// bullets
 		//========================================================
-		public function spawnBullet(shooter:Entity, x:Number, y:Number, goalX:Number, goalY:Number):void
+		public function spawnBullet(shooter:Entity, x:Number, y:Number, angle:Number):void
 		{			
-			var bullet:Bullet = new Bullet(shooter, x, y, goalX, goalY);
+			var bullet:Bullet = new Bullet(shooter, x, y, angle);
 			_bullets[bullet] = bullet;
 			_game.gameLayer.addChild(bullet.sprite);	
 		}

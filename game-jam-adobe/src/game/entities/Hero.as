@@ -45,8 +45,13 @@ package game.entities
 			var powerup:Powerup;
 			var spreadsize:Number;
 			var multiplebullets:Boolean = false;
+			var startX:Number = x + 10;
+			var startY:Number = y + 10;
 			var targetX:Number = InputManager.mouseX / GlobalData.SCENE_SCALE;
 			var targetY:Number = InputManager.mouseY / GlobalData.SCENE_SCALE;
+			var dx:Number;
+			var dy:Number;
+			var angle:Number;
 			
 			cooldown = default_cooldown; //default cooldown
 
@@ -54,7 +59,7 @@ package game.entities
 				powerup = powerups[i];
 				
 				if (powerup.id == "stream"){
-					cooldown = 0;
+					cooldown = 1;
 				}
 				
 				if (powerup.id == "spread"){
@@ -64,11 +69,19 @@ package game.entities
 			}
 
 			if (!multiplebullets) {
-				_gameState.spawnBullet(this, x + 10, y + 10, targetX, targetY);
+				dx = targetX - startX;
+				dy = targetY - startY;
+				angle = Math.atan2(dy, dx);
+				
+				_gameState.spawnBullet(this, startX, startY, angle);
 			} else {
-				_gameState.spawnBullet(this, x + 10, y + 10, targetX, targetY);
-				_gameState.spawnBullet(this, x + 10, y + 10, targetX + spreadsize, targetY + spreadsize);
-				_gameState.spawnBullet(this, x + 10, y + 10, targetX - spreadsize, targetY - spreadsize);
+				dx = targetX - startX;
+				dy = targetY - startY;
+				angle = Math.atan2(dy, dx);
+				_gameState.spawnBullet(this, startX, startY, angle + .2);
+				_gameState.spawnBullet(this, startX, startY, angle - .2);
+				_gameState.spawnBullet(this, startX, startY, angle);
+
 			}
 		}
 		

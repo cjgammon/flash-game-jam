@@ -29,7 +29,7 @@ package game.entities
 		/**
 		*	@constructor
 		*/
-		public function Bullet(shooter:Entity, startX:Number, startY:Number, goalX:Number, goalY:Number):void
+		public function Bullet(shooter:Entity, startX:Number, startY:Number, angle:Number):void
 		{
 			super();
 
@@ -46,9 +46,6 @@ package game.entities
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
 			
-			var dx:Number = goalX - startX;
-			var dy:Number = goalY - startY;
-			var angle:Number = Math.atan2(dy, dx);
 			_vx = Math.cos(angle);
 			_vy = Math.sin(angle);
 		}
