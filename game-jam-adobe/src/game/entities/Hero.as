@@ -6,7 +6,8 @@ package game.entities
 	import game.data.GlobalData;
 	import game.utils.AssetLibrary;
 	import game.utils.InputManager;
-	
+	import game.entities.MoneyEmitter;
+
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.TextureSmoothing;
@@ -16,6 +17,8 @@ package game.entities
 	*/
 	public class Hero extends LivingEntity
 	{
+		private var moneyEmitter:MoneyEmitter
+		
 		/**
 		*	@constructor
 		*/
@@ -30,14 +33,17 @@ package game.entities
 			_bodyImage = new Image(AssetLibrary.heroTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
-			
-			//TODO :: follow character
+		
 			// big money, big prizes.
-			var moneyEmitter:MoneyEmitter = new MoneyEmitter();
+			moneyEmitter = new MoneyEmitter();
 			moneyEmitter.sprite.x = 10;
 			moneyEmitter.sprite.y = 10;
-			moneyEmitter.start();
-			_sprite.addChild(moneyEmitter.sprite);
+			sprite.addChild(moneyEmitter.sprite);
+		}
+		
+		public function hit():void
+		{
+			moneyEmitter.start();	
 		}
 		
 		override public function shoot():void
@@ -57,7 +63,7 @@ package game.entities
 			
 			cooldown = default_cooldown; //default cooldown
 
-			bullet = new Bullet(this);
+			bullet = new Bullet(this, startX, startY);
 			
 			for (var i:int = 0; i < powerups.length; i++) {
 				powerup = powerups[i];
@@ -85,8 +91,6 @@ package game.entities
 			
 			if (bulletcount == 1) {
 				
-				bullet.x = startX;
-				bullet.y = startY;
 				bullet.angle = angle;
 				_gameState.spawnBullet(bullet);
 				

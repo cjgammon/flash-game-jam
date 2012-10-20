@@ -330,6 +330,8 @@ package game.states.mainStates
 		{
 			if (!player.avatar.invincible)
 			{
+				var hero:Hero = Hero(player.avatar);
+				hero.hit();
 				player.avatar.health -= attacker.meleeDamage;
 
 				// invuln period

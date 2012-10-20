@@ -18,7 +18,7 @@ package game.entities
 		//========================================================
 		public var health:int = 100;
 		public var maxHealth:int = 100;
-
+		
 		/**
 		* no health should be logged if they're invincible.
 		*/
@@ -102,7 +102,7 @@ package game.entities
 		*	@constructor
 		*/
 		public function LivingEntity():void
-		{
+		{	
 			super();
 		}
 		
