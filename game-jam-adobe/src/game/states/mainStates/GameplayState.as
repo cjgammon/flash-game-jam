@@ -438,7 +438,26 @@ package game.states.mainStates
 			}
 
 			// spawn a new powerup
-			spawnPowerup(getRandomPowerup());
+			var powerupid = getRandomPowerup();
+			spawnPowerup(powerupid);
+			
+			switch (powerupid) {
+				case Powerup.TYPE_STREAM: 
+					SoundManager.instance.vPlaySound(new (AssetLibrary.Powerup1)());
+					break;
+				case Powerup.TYPE_SPREAD:
+					SoundManager.instance.vPlaySound(new (AssetLibrary.Powerup3)());
+					break;
+				case Powerup.TYPE_QUICKBULLET:
+					SoundManager.instance.vPlaySound(new (AssetLibrary.Powerup2)());
+					break;
+				case Powerup.TYPE_SILVERBULLET:
+					SoundManager.instance.vPlaySound(new (AssetLibrary.Powerup4)());
+					break;
+				case Powerup.TYPE_SPHERE:
+					SoundManager.instance.vPlaySound(new (AssetLibrary.Powerup4)());
+					break;
+			}
 		}
 
 		private function getRandomPowerup():String

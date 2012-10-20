@@ -11,6 +11,7 @@ package game.ui
 	import starling.text.TextField;
 	import starling.textures.TextureSmoothing;
 	import game.utils.AssetLibrary;
+	import game.utils.sound.SoundManager;
 
 	/**
 	*	
@@ -57,7 +58,8 @@ package game.ui
 		{
 			// don't really care, just let someone know that we want to start.
 			if (InputManager.mouseReleased())
-			{
+			{ 
+				SoundManager.instance.vPlaySound(new (AssetLibrary.GameStart)());
 				dispatchEvent(new Event(MainMenu.START_GAME));
 			}
 		}

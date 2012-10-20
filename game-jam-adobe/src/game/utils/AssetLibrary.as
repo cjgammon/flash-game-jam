@@ -152,5 +152,20 @@ package game.utils
 		
 		[Embed(source="./assets/audio/LASER 4.mp3")]
 		public static var PlayerShoot4:Class;
+		
+		[Embed(source="./assets/audio/Start Sound.mp3")]
+		public static var GameStart:Class;
+		
+		[Embed(source="./assets/audio/Powerup1.mp3")]
+		public static var Powerup1:Class;
+		
+		[Embed(source="./assets/audio/Powerup2.mp3")]
+		public static var Powerup2:Class;
+		
+		[Embed(source="./assets/audio/Powerup3.mp3")]
+		public static var Powerup3:Class;
+		
+		[Embed(source="./assets/audio/Powerup4.mp3")]
+		public static var Powerup4:Class;
 	}
 }
