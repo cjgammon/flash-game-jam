@@ -7,6 +7,7 @@ package game.entities
 	import game.states.mainStates.GameplayState;
 	import game.utils.AssetLibrary;
 	import game.utils.GeomUtils;
+	
 	import starling.display.Image;
 	import starling.textures.TextureSmoothing;
 
@@ -15,6 +16,7 @@ package game.entities
 	*/
 	public class Powerup extends Entity
 	{
+		public var id:String;
 		
 		/**
 		*	@constructor

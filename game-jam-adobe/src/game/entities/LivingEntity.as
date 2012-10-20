@@ -55,7 +55,7 @@ package game.entities
 		public function addPowerup(powerup:Powerup):void
 		{
 			// todo : setup powerup here.
-
+			
 			powerups.push(powerup);
 		}
 

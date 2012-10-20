@@ -4,7 +4,7 @@
 package game.entities
 {	
 	import flash.geom.Rectangle;
-
+	
 	import game.data.Player;
 	import game.states.mainStates.GameplayState;
 	import game.utils.GeomUtils;
@@ -43,6 +43,7 @@ package game.entities
 		public var rect:Rectangle = new Rectangle();
 
 		public var cooldown:int = 0;
+		public var default_cooldown:int = 10;
 		
 		//========================================================
 		// rendering

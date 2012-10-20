@@ -3,9 +3,9 @@
 */
 package game.entities
 {	
+	import game.data.GlobalData;
 	import game.utils.AssetLibrary;
 	import game.utils.InputManager;
-	import game.data.GlobalData;
 	
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -42,7 +42,18 @@ package game.entities
 		
 		override public function shoot():void
 		{
-			cooldown = 5;
+			var powerup:Powerup;
+			cooldown = default_cooldown; //default cooldown
+
+			for (var i:int; i < powerups.length; i++) {
+				powerup = powerups[i];
+				if (powerup.id == "stream"){
+					cooldown = 0;
+				}
+				if (powerup.id == "spread"){
+					cooldown = 0;
+				}
+			}
 			_gameState.spawnBullet(x + 10, y + 10, InputManager.mouseX / GlobalData.SCENE_SCALE, InputManager.mouseY / GlobalData.SCENE_SCALE);
 		}
 		
