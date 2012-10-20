@@ -39,7 +39,7 @@ package
 
 			// enemy test.  
 			// TODO :: refactor this so there's an add enemy function somewhere that's easy to access.
-			for (var enemyIndex:int = 0; enemyIndex < 500; enemyIndex++)
+			for (var enemyIndex:int = 0; enemyIndex < 2000; enemyIndex++)
 			{
 				var enemy:Enemy = new Enemy();
 				enemy.target = _hero;

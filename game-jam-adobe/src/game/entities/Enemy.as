@@ -18,7 +18,7 @@ package game.entities
 		public function Enemy():void
 		{
 			// init game layer.
-			_bodyImage = new Image(AssetLibrary.heroTextureIdle);
+			_bodyImage = new Image(AssetLibrary.enemyTextureIdle);
 			_sprite.addChild(_bodyImage);
 		}
 		

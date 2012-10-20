@@ -20,7 +20,13 @@ package game.utils
 		public static var heroTextureIdle:Texture = Texture.fromBitmap(heroSpriteBmp);
 
 
-
+		//========================================================
+		// enemy texture
+		//========================================================
+		[Embed(source="./assets/enemy.png")]
+		private static var EnemySprite:Class;
+		public static var enemySpriteBmp:Bitmap = new EnemySprite();		
+		public static var enemyTextureIdle:Texture = Texture.fromBitmap(enemySpriteBmp);
 
 	}
 }
