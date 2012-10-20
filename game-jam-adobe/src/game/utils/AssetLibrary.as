@@ -36,7 +36,7 @@ package game.utils
 		//========================================================
 		[Embed(source="./assets/bullet.png")]
 		private static var BulletSprite:Class;
-		public static var bulletSpriteBmp:Bitmap = new EnemySprite();		
+		public static var bulletSpriteBmp:Bitmap = new BulletSprite();		
 		public static var bulletTexture:Texture = Texture.fromBitmap(bulletSpriteBmp);
 		
 		//========================================================

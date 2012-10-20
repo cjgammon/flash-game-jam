@@ -4,6 +4,7 @@
 package game.entities
 {	
 	import game.utils.AssetLibrary;
+	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.TextureSmoothing;
@@ -13,6 +14,7 @@ package game.entities
 	*/
 	public class Bullet extends Entity
 	{
+		private var _velocity:Number = 1;
 		
 		/**
 		*	@constructor
@@ -25,5 +27,9 @@ package game.entities
 			_sprite.addChild(_bodyImage);
 		}
 		
+		public function update():void
+		{
+			_sprite.x += _velocity;
+		}
 	}
 }

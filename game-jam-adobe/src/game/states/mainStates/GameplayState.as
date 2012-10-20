@@ -165,6 +165,7 @@ package game.states.mainStates
 		{
 			heroTurn();
 			enemyTurn();
+			bulletsUpdate();
 		}
 		
 		public function spawnBullet(x:Number, y:Number):void
@@ -173,6 +174,17 @@ package game.states.mainStates
 			bullet.sprite.x = x;
 			bullet.sprite.y = y;
 			_bullets.push(bullet);
+			_game.gameLayer.addChild(bullet.sprite);
+		}
+		
+		private function bulletsUpdate():void
+		{
+			var bulletTotal:int = _bullets.length;
+			for (var bulletIndex:int = 0; bulletIndex < bulletTotal; bulletIndex++)
+			{
+				var bullet:Bullet = _bullets[bulletIndex];
+				bullet.update();
+			}
 		}
 
 		private function heroTurn():void
