@@ -26,6 +26,8 @@ package game.states.mainStates
 	*/
 	public class GameplayState extends MainState implements IState 
 	{
+		public static var instance:GameplayState;
+
 		override public function get name():String{ return "GameState"; }
 
 		private var _hud:Hud;
@@ -39,6 +41,9 @@ package game.states.mainStates
 		*/
 		public function GameplayState(game:Game):void
 		{
+			// ghetto singleton setup, just get it going.
+			if (!instance) instance = this;
+
 			super(game);
 		}
 				
