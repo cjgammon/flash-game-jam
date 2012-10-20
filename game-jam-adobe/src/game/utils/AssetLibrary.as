@@ -69,5 +69,12 @@ package game.utils
 		[Embed(source="./assets/money_particle/particle.pex", mimeType="application/octet-stream")]
 		public static var MoneyParticleXML:Class;
 		
+		//========================================================
+		// placeholder powerup texture
+		//========================================================
+		[Embed(source="./assets/powerup.png")]
+		public static var PlaceholderPowerup:Class;
+		public static var placeholderPowerupBmp:Bitmap = new PlaceholderPowerup();		
+		public static var placeholderPowerupTexture:Texture = Texture.fromBitmap(placeholderPowerupBmp);
 	}
 }

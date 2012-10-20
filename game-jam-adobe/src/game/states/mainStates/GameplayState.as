@@ -6,6 +6,7 @@ package game.states.mainStates
 	import Game.*;
 	
 	import game.data.GameData;
+	import game.data.GlobalData;
 	import game.data.Player;
 	import game.entities.*;
 	import game.entities.controllers.*;
@@ -68,8 +69,8 @@ package game.states.mainStates
 				//if (activePlayer.characterType == ANGRY_GORILLA) activePlayer.avatar = new Gorilla();
 				activePlayer.avatar = new Hero() as LivingEntity;
 				activePlayer.avatar.controller = EntityController.getControllerType(LocalPlayerController);
-				activePlayer.avatar.sprite.x = 200;
-				activePlayer.avatar.sprite.y = 200;
+				activePlayer.avatar.x = GlobalData.HALF_SCENE_WIDTH;
+				activePlayer.avatar.y = GlobalData.HALF_SCENE_HEIGHT;
 			}
 			
 			//========================================================
@@ -82,8 +83,8 @@ package game.states.mainStates
 
 				enemy.target = _activePlayers[0].avatar;
 				enemy.controller = EntityController.getControllerType(AIControllerBasic);
-				enemy.sprite.x = enemyIndex % 2 == 0 ? 400 : 0;  //left side or right side
-				enemy.sprite.y = Math.random() * 200;
+				enemy.x = enemyIndex % 2 == 0 ? GlobalData.SCENE_WIDTH : 0;  //left side or right side
+				enemy.y = Math.random() * GlobalData.HALF_SCENE_HEIGHT;
 				_game.gameLayer.addChild(enemy.sprite);
 				_enemies.push(enemy);
 			}
@@ -94,6 +95,17 @@ package game.states.mainStates
 			for (activePlayerIndex = 0; activePlayerIndex < _activePlayerTotal; activePlayerIndex++)
 			{
 				_game.gameLayer.addChild(_activePlayers[activePlayerIndex].avatar.sprite);
+			}
+
+			//========================================================
+			// add some powerups
+			//========================================================
+			for (var powerupIndex:int = 0; powerupIndex < 2; powerupIndex++)
+			{
+				var powerup:Powerup = new Powerup();
+				powerup.x = int(Math.random() * GlobalData.SCENE_WIDTH);
+				powerup.y = int(Math.random() * GlobalData.SCENE_HEIGHT);
+				_game.gameLayer.addChild(powerup.sprite);
 			}
 
 			/*
