@@ -40,8 +40,14 @@ package game.states.mainStates
 		private var _activePlayerTotal:int = 0;
 		private var _activePlayers:Vector.<Player> = new Vector.<Player>();
 		public function get activePlayers():Vector.<Player> { return _activePlayers; }
+		/**
+		* this hash uses an entity as a key, and contains a reference to the corresponding Player object if it exists
+		*/
+		private var _playerDataForEntity:Dictionary = new Dictionary();
 		
 		private var _enemies:Dictionary = new Dictionary();
+		public function get enemies():Dictionary { return _enemies; }
+
 		private var _powerups:Dictionary = new Dictionary();
 		private var _bullets:Dictionary = new Dictionary();
 
@@ -85,6 +91,8 @@ package game.states.mainStates
 				activePlayer.avatar.controller = EntityController.getControllerType(LocalPlayerController);
 				activePlayer.avatar.x = GlobalData.HALF_SCENE_WIDTH;
 				activePlayer.avatar.y = GlobalData.HALF_SCENE_HEIGHT;
+
+				_playerDataForEntity[activePlayer.avatar] = activePlayer;
 			}
 			
 			//========================================================
@@ -175,11 +183,15 @@ package game.states.mainStates
 			enemyTurn();
 			bulletTurn();
 			powerupTurn();
+
 		}
 		
-		public function spawnBullet(x:Number, y:Number, goalX:Number, goalY:Number):void
+		//========================================================
+		// bullets
+		//========================================================
+		public function spawnBullet(shooter:Entity, x:Number, y:Number, goalX:Number, goalY:Number):void
 		{			
-			var bullet:Bullet = new Bullet(x, y, goalX, goalY);
+			var bullet:Bullet = new Bullet(shooter, x, y, goalX, goalY);
 			_bullets[bullet] = bullet;
 			_game.gameLayer.addChild(bullet.sprite);	
 		}
@@ -193,12 +205,54 @@ package game.states.mainStates
 			}
 		}
 
+		public function bulletHitEnemy(bullet:Bullet, enemy:Enemy):void
+		{
+			removeBullet(bullet);
+
+			if (!enemy.invincible)
+			{
+				enemy.health -= bullet.damage;
+
+				if (enemy.health <= 0)
+				{
+					removeEnemy(enemy);
+
+					// log kill in player data here!
+					if (_playerDataForEntity[bullet.shooter])
+					{
+						var shootingPlayer:Player = _playerDataForEntity[bullet.shooter];
+						shootingPlayer.kills++;
+					}
+				
+					// update hud?
+				}
+
+				// invuln period?
+				//enemy.invincible = true;// make invulnerable for a bit so they dont' take spam damage
+				//setTimeout(turnOffPlayerDamageInvincibility, GlobalData.PLAYER_DAMAGED_INVINCIBILITY_DURATION, player);
+			}
+		}
+
+		private function removeBullet(bullet:Bullet):void
+		{
+			if(_bullets[bullet])
+			{
+				bullet.cleanupForRemoval();
+				delete _bullets[bullet];
+			}
+		}
+
+		//========================================================
+		// hero
+		//========================================================
 		private function heroTurn():void
 		{
 			for (var activePlayerIndex:int = 0; activePlayerIndex < _activePlayerTotal; activePlayerIndex++)
 			{
 				var activePlayer:Player = _activePlayers[activePlayerIndex];
 				activePlayer.avatar.takeTurn();
+
+				ScreenPrint.show("Kills: " + activePlayer.kills);
 			}
 		}
 
@@ -215,12 +269,11 @@ package game.states.mainStates
 
 		public function attackPlayer(attacker:LivingEntity, player:Player):void
 		{
-
 			if (!player.avatar.invincible)
 			{
-				ScreenPrint.show("attack!");
-
 				player.avatar.health -= attacker.meleeDamage;
+
+				// invuln period
 				player.avatar.invincible = true;// make invulnerable for a bit so they dont' take spam damage
 				setTimeout(turnOffPlayerDamageInvincibility, GlobalData.PLAYER_DAMAGED_INVINCIBILITY_DURATION, player);
 
@@ -232,6 +285,15 @@ package game.states.mainStates
 		private function turnOffPlayerDamageInvincibility(player:Player):void
 		{
 			player.avatar.invincible = false;
+		}
+
+		private function removeEnemy(enemy:Enemy):void
+		{
+			if(_enemies[enemy])
+			{
+				enemy.cleanupForRemoval();
+				delete _enemies[enemy];
+			}
 		}
 
 		//========================================================

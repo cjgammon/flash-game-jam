@@ -3,6 +3,8 @@
 */
 package game.entities
 {	
+	import flash.utils.Dictionary;
+	
 	import game.utils.AssetLibrary;
 	
 	import starling.display.Image;
@@ -19,13 +21,19 @@ package game.entities
 
 		public var goalX:Number;
 		public var goalY:Number;
+
+		private var _shooter:Entity;
+		public function get shooter():Entity { return _shooter; }
+		public var damage:int = 100;
 		
 		/**
 		*	@constructor
 		*/
-		public function Bullet(startX:Number, startY:Number, goalX:Number, goalY:Number):void
+		public function Bullet(shooter:Entity, startX:Number, startY:Number, goalX:Number, goalY:Number):void
 		{
 			super();
+
+			_shooter = shooter;
 
 			x = startX;
 			y = startY;
@@ -49,6 +57,21 @@ package game.entities
 		{
 			_sprite.x += _vx;
 			_sprite.y += _vy;
+
+			// see if the bullet is hitting any enemies.  
+			// this is probably going to be pretty cpu intensive if we have lots of enemies, we may want to put bullets & enemies in a grid, so we only need to check against enemies in our current tile
+			// & if we want enemies to shoot things, we should also have some way of making that happen
+			var enemies:Dictionary = _gameState.enemies;
+			for each (var enemy:Enemy in _gameState.enemies)
+			{
+				if (touchingEntity(enemy))
+				{
+					if (_gameState.bulletHitEnemy(this, enemy))
+					{
+						break; 
+					}
+				}
+			}
 		}
 	}
 }
