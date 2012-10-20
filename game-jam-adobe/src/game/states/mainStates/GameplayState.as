@@ -9,6 +9,7 @@ package game.states.mainStates
 	import game.entities.Hero;
 	import game.states.IState;
 	import game.states.mainStates.*;
+	import game.ui.Hud;
 	import game.utils.InputManager;
 	import starling.text.TextField;
 
@@ -19,6 +20,7 @@ package game.states.mainStates
 	{
 		override public function get name():String{ return "GameState"; }
 
+		private var _hud:Hud;
 
 		private var _hero:Hero;
 		private var _enemies:Vector.<Enemy> = new Vector.<Enemy>();
@@ -58,14 +60,35 @@ package game.states.mainStates
 			_game.gameLayer.addChild(bullet.sprite);
 
 			// init ui layer.
-			var textField:TextField = new TextField(300, 100, "Score: 0");
-			_game.uiLayer.addChild(textField);
+			_hud = new Hud();
+			_game.uiLayer.addChild(_hud);
 		}
 
 		override public function exit():void
 		{
 			super.exit();
-			// todo :: clean up game
+
+			// clean up ui
+			if (_hud && _hud.parent)
+			{
+				_hud.parent.removeChild(_hud);
+			}
+			
+			// clean up hero
+			if (_hero && _hero.sprite.parent)
+			{
+				_hero.sprite.removeChild(_hero.sprite);
+			}
+
+			// cleanup enemies
+			while(_enemies.length > 0)
+			{
+				var enemy:Enemy = _enemies.pop();
+				if (enemy && enemy.sprite.parent)
+				{
+					enemy.sprite.removeChild(enemy.sprite);
+				}
+			}
 		}
 
 		override public function update(dt:Number):void

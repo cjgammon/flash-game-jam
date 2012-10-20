@@ -3,6 +3,7 @@ package
 	import starling.events.Event;
 	import game.states.StateMachine;
 	import game.states.mainStates.*;
+	import game.ui.Hud;
 	import game.utils.FrameTime;
 	import starling.display.Sprite;
 	
@@ -62,7 +63,7 @@ package
 			addChild(_gameLayer);
 			addChild(_uiLayer);
 			addChild(_debugLayer);
-			
+
 			// init game states
 			_frontEndState = new FrontEndState(this);
 			_gameplayState = new GameplayState(this);
