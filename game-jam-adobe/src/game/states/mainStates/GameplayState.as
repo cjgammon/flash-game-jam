@@ -173,11 +173,13 @@ package game.states.mainStates
 			powerupTurn();
 		}
 		
-		public function spawnBullet(x:Number, y:Number, angle:Number):void
+		public function spawnBullet(x:Number, y:Number, goalX:Number, goalY:Number):void
 		{
 			var bullet:Bullet = new Bullet();
-			bullet.sprite.x = x;
-			bullet.sprite.y = y;
+			bullet.x = x;
+			bullet.y = y;
+			bullet.goalX = goalX;
+			bullet.goalY = goalY;
 			_bullets.push(bullet);
 			_game.gameLayer.addChild(bullet.sprite);
 		}
@@ -201,6 +203,9 @@ package game.states.mainStates
 			}
 		}
 
+		//========================================================
+		// enemies
+		//========================================================
 		private function enemyTurn():void
 		{
 			var enemyTotal:int = _enemies.length;
@@ -211,6 +216,9 @@ package game.states.mainStates
 			}
 		}
 
+		//========================================================
+		// powerups
+		//========================================================
 		private function powerupTurn():void
 		{
 			var powerupTotal:int = _powerups.length;
@@ -219,6 +227,12 @@ package game.states.mainStates
 				var powerup:Powerup = _powerups[powerupIndex];
 				powerup.takeTurn();
 			}
+		}
+
+		public function acquirePowerup(livingEntity:LivingEntity, powerup:Powerup):void
+		{
+			trace("acquire powerup!");
+			livingEntity.addPowerup(powerup);
 		}
 	}
 }

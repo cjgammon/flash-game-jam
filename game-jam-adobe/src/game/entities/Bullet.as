@@ -17,11 +17,19 @@ package game.entities
 		private var _vx:Number = 1;
 		private var _vy:Number = 1;
 
+		public var goalX:Number;
+		public var goalY:Number;
+		
 		/**
 		*	@constructor
 		*/
 		public function Bullet():void
 		{
+			super();
+
+			rect.width = 2;
+			rect.height = 2;
+
 			// init game layer.
 			_bodyImage = new Image(AssetLibrary.bulletTexture);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
@@ -30,6 +38,13 @@ package game.entities
 		
 		public function update():void
 		{
+			var dy:Number = goalY - y;
+			var dx:Number = goalX - x;
+			var angle:Number = Math.abs(Math.atan2(dy, dx)) * (180 / Math.PI);
+			
+			_vx = 1 * Math.cos(angle);
+			_vy = 1 * Math.sin(angle);
+			
 			_sprite.x += _vx;
 			_sprite.y += _vy;
 		}

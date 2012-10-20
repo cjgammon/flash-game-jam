@@ -7,7 +7,7 @@ package game.entities
 	
 	import starling.core.Starling;
 	import starling.display.Sprite;
-	import starling.extensions.ParticleDesignerPS;
+	import starling.extensions.PDParticleSystem;
 	import starling.textures.Texture;
 
 	/**
@@ -15,9 +15,9 @@ package game.entities
 	 */
 	public class MoneyEmitter
 	{
-		private var money:ParticleDesignerPS;
-		private var money2:ParticleDesignerPS;
-		private var money3:ParticleDesignerPS;
+		private var money:PDParticleSystem;
+		private var money2:PDParticleSystem;
+		private var money3:PDParticleSystem;
 		
 		/**
 		 *	@constructor
@@ -26,15 +26,15 @@ package game.entities
 		{
 			_sprite = new Sprite();
 			
-			money = new ParticleDesignerPS(XML(new AssetLibrary.MoneyParticleXML()), Texture.fromBitmap(new AssetLibrary.MoneyParticleTexture()));
+			money = new PDParticleSystem(XML(new AssetLibrary.MoneyParticleXML()), Texture.fromBitmap(new AssetLibrary.MoneyParticleTexture()));
 			Starling.juggler.add(money);
 			_sprite.addChild(money);
 			
-			money2 = new ParticleDesignerPS(XML(new AssetLibrary.CoinParticleXML()), Texture.fromBitmap(new AssetLibrary.CoinParticleTexture()));
+			money2 = new PDParticleSystem(XML(new AssetLibrary.CoinParticleXML()), Texture.fromBitmap(new AssetLibrary.CoinParticleTexture()));
 			Starling.juggler.add(money2);
 			_sprite.addChild(money2);
 			
-			money3 = new ParticleDesignerPS(XML(new AssetLibrary.CoinParticleXML()), Texture.fromBitmap(new AssetLibrary.Coin2ParticleTexture()));
+			money3 = new PDParticleSystem(XML(new AssetLibrary.CoinParticleXML()), Texture.fromBitmap(new AssetLibrary.Coin2ParticleTexture()));
 			Starling.juggler.add(money3);
 			_sprite.addChild(money3);			
 		}

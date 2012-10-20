@@ -4,11 +4,11 @@
 package game.entities
 {	
 	import game.utils.AssetLibrary;
+	import game.utils.InputManager;
+	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.TextureSmoothing;
-	
-	import game.utils.InputManager;
 
 	/**
 	*	things that need to live
@@ -20,6 +20,11 @@ package game.entities
 		*/
 		public function Hero():void
 		{
+			super();
+
+			rect.width = 11;
+			rect.height = 16;
+
 			// init game layer.
 			_bodyImage = new Image(AssetLibrary.heroTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
@@ -36,15 +41,7 @@ package game.entities
 		
 		override public function shoot():void
 		{
-			var y1:Number = _sprite.y;
-			var y2:Number = InputManager.mouseY;
-			var x1:Number = _sprite.x;
-			var x2:Number = InputManager.mouseX;
-			var dy:Number = y2 - y1;
-			var dx:Number = x2 - x1;
-			
-			var angle:Number = Math.abs(Math.atan2((y1-y2),(x1-x2)))*(180/Math.PI)
-			gameState.spawnBullet(_sprite.x, _sprite.y, angle);
+			_gameState.spawnBullet(_sprite.x, _sprite.y, InputManager.mouseX, InputManager.mouseY);
 		}
 		
 	}

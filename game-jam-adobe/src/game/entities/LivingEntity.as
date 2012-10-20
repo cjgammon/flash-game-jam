@@ -18,7 +18,18 @@ package game.entities
 		//========================================================
 		public var health:int = 100;
 		public var maxHealth:int = 100;
+
+
+		//========================================================
+		// powerups
+		//========================================================
 		public var powerups:Vector.<Powerup> = new Vector.<Powerup>();
+		public function addPowerup(powerup:Powerup):void
+		{
+			// todo : setup powerup here.
+
+			powerups.push(powerup);
+		}
 
 		//========================================================
 		// ai/controller stuff
@@ -64,7 +75,7 @@ package game.entities
 		*/
 		public function LivingEntity():void
 		{
-			
+			super();
 		}
 		
 		override public function takeTurn():void
