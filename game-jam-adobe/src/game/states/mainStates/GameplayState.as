@@ -336,8 +336,8 @@ package game.states.mainStates
 	
 				// put them at the edge of the screen
 				enemy.x = Math.random() > 0.5 ? GlobalData.SCENE_WIDTH : 0;  //left side or right side
-				enemy.y = Math.random() * GlobalData.HALF_SCENE_HEIGHT;
-	
+				enemy.y = Math.random() * (GlobalData.SCENE_HEIGHT - GlobalData.STAGE_ROOF_EDGE) + GlobalData.STAGE_ROOF_EDGE;
+
 				// add em!
 				_game.gameLayer.addChild(enemy.sprite);
 				_enemies[enemy] = enemy;// it's a dictionary so we can pluck things out in constant time
@@ -404,7 +404,8 @@ package game.states.mainStates
 		{
 			var powerup:Powerup = new Powerup();
 			powerup.x = int(Math.random() * (GlobalData.SCENE_WIDTH - 50)) + 25;
-			powerup.y = int(Math.random() * (GlobalData.SCENE_HEIGHT-50)) + 25;
+
+			powerup.y = Math.random() * (GlobalData.SCENE_HEIGHT - GlobalData.STAGE_ROOF_EDGE - 70) + GlobalData.STAGE_ROOF_EDGE + 35;
 			powerup.id = type;
 			_game.gameLayer.addChild(powerup.sprite);
 			_powerups[powerup] = powerup; 	// it's a dictionary so we can pluck things out in constant time

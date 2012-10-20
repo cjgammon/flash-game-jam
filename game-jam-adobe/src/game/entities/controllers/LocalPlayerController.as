@@ -3,6 +3,7 @@
 */
 package game.entities.controllers
 {	
+	import game.data.GlobalData;
 	import game.entities.Bullet;
 	import game.entities.LivingEntity;
 	import game.utils.InputManager;
@@ -50,7 +51,7 @@ package game.entities.controllers
 			
 			if (InputManager.isKeyDown(InputManager.INPUT_MOVE_UP))
 			{
-				entity.y -= entity.movementSpeed;
+				entity.y = Math.max(entity.y - entity.movementSpeed, GlobalData.STAGE_ROOF_EDGE);
 			}
 			else if (InputManager.isKeyDown(InputManager.INPUT_MOVE_DOWN))
 			{

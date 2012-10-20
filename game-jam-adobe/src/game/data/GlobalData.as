@@ -19,6 +19,7 @@ package game.data
 		public static const SCENE_SCALE:Number = 2;
 		public static const HALF_SCENE_WIDTH:int = SCENE_WIDTH / 2;
 		public static const HALF_SCENE_HEIGHT:int = SCENE_HEIGHT / 2;
+		public static const STAGE_ROOF_EDGE:int = 78;
 
 		//========================================================
 		// game tweaks
