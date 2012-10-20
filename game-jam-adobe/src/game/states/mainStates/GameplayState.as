@@ -37,6 +37,7 @@ package game.states.mainStates
 
 			// init game.
 			_hero = new Hero();
+			_hero.sprite.x = 100;
 			_game.gameLayer.addChild(_hero.sprite);
 
 			// enemy test.  
@@ -45,8 +46,8 @@ package game.states.mainStates
 			{
 				var enemy:Enemy = new Enemy();
 				enemy.target = _hero;
-				enemy.sprite.x = 100;
-				enemy.sprite.y = 100;
+				enemy.sprite.x = enemyIndex % 2 == 0 ? 200 : 0;  //left side or right side
+				enemy.sprite.y = Math.random() * 200;
 				_game.gameLayer.addChild(enemy.sprite);
 				_enemies.push(enemy);
 			}
