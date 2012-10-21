@@ -23,6 +23,14 @@ package game.utils
 		public static var titleTexture:Texture = Texture.fromBitmap(titleSpriteBmp);
 		
 		//========================================================
+		// end screen
+		//========================================================
+		[Embed(source="./assets/screen_gameover.png")]
+		private static var EndSprite:Class;
+		public static var endSpriteBmp:Bitmap = new EndSprite();		
+		public static var endTexture:Texture = Texture.fromBitmap(endSpriteBmp);
+		
+		//========================================================
 		// cloudtop texture
 		//========================================================
 		[Embed(source="./assets/bg/clouds.png")]
