@@ -442,15 +442,16 @@ package game.states.mainStates
 		public function acquirePowerup(livingEntity:LivingEntity, powerup:Powerup):void
 		{
 			trace("acquire powerup!");
+			//livingEntity.powerups = new Vector.<Powerup>();  //remove all powerups
+
 			livingEntity.addPowerup(powerup);
 			removePowerup(powerup);
 			
 			_hud.powerupAcquired(powerup);
 
 			var player:Player = _playerDataForEntity[livingEntity]
-			trace(player.score);
 			
-			trace('start');
+			_removePowerupTimer.reset();
 			_removePowerupTimer.start();
 			
 			if (player)
