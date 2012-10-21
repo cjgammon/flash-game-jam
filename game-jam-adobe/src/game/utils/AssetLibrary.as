@@ -158,7 +158,22 @@ package game.utils
 		public static var splitTestBmp:Bitmap = new GUI_SplitTesting_still();		
 		public static var splitTestBmpTexture:Texture = Texture.fromBitmap(splitTestBmp);
 
+		//========================================================
+		// dau popup
+		//========================================================
+		[Embed(source="./assets/GUI_DailyActiveUsers.png")]
+		public static var GUI_DailyActiveUsers:Class;
+		public static var dauPopup:Bitmap = new GUI_DailyActiveUsers();		
+		public static var dauPopupTexture:Texture = Texture.fromBitmap(dauPopup);
 
+		//========================================================
+		// whale popup
+		//========================================================
+		[Embed(source="./assets/GUI_whale.png")]
+		public static var GUI_whale:Class;
+		public static var whalePopup:Bitmap = new GUI_whale();		
+		public static var whalePopupTexture:Texture = Texture.fromBitmap(whalePopup);
+		
 		//========================================================
 		// click through icon
 		//========================================================
@@ -183,6 +198,22 @@ package game.utils
 		public static var splitIcon:Bitmap = new PowerUp_SplitTesting_still();		
 		public static var splitTexture:Texture = Texture.fromBitmap(splitIcon);
 
+		//========================================================
+		// dau icon
+		//========================================================
+		[Embed(source="./assets/PowerUp_dailyActiveUsers_still.png")]
+		public static var PowerUp_dailyActiveUsers_still:Class;
+		public static var dauIcon:Bitmap = new PowerUp_dailyActiveUsers_still();		
+		public static var dauTexture:Texture = Texture.fromBitmap(dauIcon);
+
+		//========================================================
+		// whale icon
+		//========================================================
+		[Embed(source="./assets/PowerUp_whale_still.png")]
+		public static var PowerUp_whale_still:Class;
+		public static var whaleIcon:Bitmap = new PowerUp_whale_still();		
+		public static var whaleTexture:Texture = Texture.fromBitmap(whaleIcon);
+		
 		//========================================================
 		// 
 		//========================================================
