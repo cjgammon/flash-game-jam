@@ -26,15 +26,15 @@ package game.entities
 		public function get x():Number { return _sprite.x; }
 		public function set x(value:Number):void 
 		{ 
-			rect.x = value;
 			_sprite.x = value; 
+			rect.x = value - rect.width / 2;
 		}
 
 		public function get y():Number { return _sprite.y; }
 		public function set y(value:Number):void 
 		{ 
-			rect.y = value;
 			_sprite.y = value; 
+			rect.y = value - rect.height / 2;
 		}
 
 		/**

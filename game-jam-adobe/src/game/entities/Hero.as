@@ -37,13 +37,11 @@ package game.entities
 			_bodyImage = new Image(AssetLibrary.heroTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_bodyImage.x = -rect.width / 2;  //offset for center 
-			_bodyImage.x = -rect.height / 2;
+			_bodyImage.y = -rect.height / 2;
 			_sprite.addChild(_bodyImage);
 		
 			// big money, big prizes.
 			moneyEmitter = new MoneyEmitter();
-			moneyEmitter.sprite.x = 10;
-			moneyEmitter.sprite.y = 10;
 			sprite.addChild(moneyEmitter.sprite);
 		}
 		
@@ -61,8 +59,8 @@ package game.entities
 			var powerup:Powerup;
 			var spreadsize:Number;
 			var bulletcount:int = 1;
-			var startX:Number = x + 10;
-			var startY:Number = y + 10;
+			var startX:Number = x;
+			var startY:Number = y;
 			var targetX:Number = InputManager.mouseX / GlobalData.SCENE_SCALE;
 			var targetY:Number = InputManager.mouseY / GlobalData.SCENE_SCALE;
 			var dx:Number;
