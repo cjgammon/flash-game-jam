@@ -199,6 +199,7 @@ package game.states.mainStates
 			{
 				if (InputManager.mousePressed())
 				{
+					_activePlayers[0].reset();
 					_game.changeState(_game.gameplayState);
 				}
 			}
