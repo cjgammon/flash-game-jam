@@ -6,6 +6,7 @@ package game.utils
 	import flash.display.Bitmap;
 	
 	import starling.display.Image;
+	import starling.display.MovieClip;
 	import starling.textures.Texture;
 	import starling.textures.TextureSmoothing;
 
@@ -14,6 +15,7 @@ package game.utils
 	*/
 	public class AssetLibrary
 	{
+
 		//========================================================
 		// start screen
 		//========================================================
@@ -139,6 +141,55 @@ package game.utils
 		public static var PlaceholderPowerup:Class;
 		public static var placeholderPowerupBmp:Bitmap = new PlaceholderPowerup();		
 		public static var placeholderPowerupTexture:Texture = Texture.fromBitmap(placeholderPowerupBmp);
+
+		//========================================================
+		// click through popup
+		//========================================================
+		[Embed(source="./assets/GUI_ClickThroughRate_still.png")]
+		public static var GUI_ClickThroughRate_still:Class;
+		public static var clickThroughpopup:Bitmap = new GUI_ClickThroughRate_still();		
+		public static var clickThroughpopupTexture:Texture = Texture.fromBitmap(clickThroughpopup);
+
+		//========================================================
+		// metrics popup
+		//========================================================
+		[Embed(source="./assets/GUI_metrics_still.png")]
+		public static var GUI_metrics_still:Class;
+		public static var metricsPopup:Bitmap = new GUI_metrics_still();		
+		public static var metricsPopupTexture:Texture = Texture.fromBitmap(metricsPopup);
+
+		//========================================================
+		// split testing popup
+		//========================================================
+		[Embed(source="./assets/GUI_SplitTesting_still.png")]
+		public static var GUI_SplitTesting_still:Class;
+		public static var splitTestBmp:Bitmap = new GUI_SplitTesting_still();		
+		public static var splitTestBmpTexture:Texture = Texture.fromBitmap(splitTestBmp);
+
+
+		//========================================================
+		// click through icon
+		//========================================================
+		[Embed(source="./assets/PowerUp_ClickThrough_still.png")]
+		public static var PowerUp_ClickThrough_still:Class;
+		public static var clickThroughIcon:Bitmap = new PowerUp_ClickThrough_still();		
+		public static var clickThroughTexture:Texture = Texture.fromBitmap(clickThroughIcon);
+
+		//========================================================
+		// metrics icon
+		//========================================================
+		[Embed(source="./assets/PowerUp_metrics_still.png")]
+		public static var PowerUp_metrics_still:Class;
+		public static var metricsIcon:Bitmap = new PowerUp_metrics_still();		
+		public static var metricsTexture:Texture = Texture.fromBitmap(metricsIcon);
+
+		//========================================================
+		// split testing icon
+		//========================================================
+		[Embed(source="./assets/PowerUp_SplitTesting_still.png")]
+		public static var PowerUp_SplitTesting_still:Class;
+		public static var splitIcon:Bitmap = new PowerUp_SplitTesting_still();		
+		public static var splitTexture:Texture = Texture.fromBitmap(splitIcon);
 
 		//========================================================
 		// 

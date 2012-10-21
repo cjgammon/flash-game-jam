@@ -2,6 +2,7 @@ package
 {	
 	import starling.events.Event;
 	import game.data.GameData;
+	import game.entities.Powerup;
 	import game.states.StateMachine;
 	import game.states.IState;
 	import game.states.mainStates.*;
@@ -72,6 +73,9 @@ package
 			addChild(_gameLayer);
 			addChild(_uiLayer);
 			addChild(_debugLayer);
+
+			// init the powerup textures
+			Powerup.initGraphicRefs();
 
 			// init game states
 			_frontEndState = new FrontEndState(this);

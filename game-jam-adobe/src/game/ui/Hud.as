@@ -3,8 +3,10 @@
 */
 package game.ui
 {	
+	import com.greensock.TweenMax;
 	import game.data.GlobalData;
 	import game.data.Player;
+	import game.entities.Powerup;
 	import game.states.mainStates.GameplayState;
 	import starling.display.Sprite;
 	import starling.events.Event;
@@ -19,6 +21,9 @@ package game.ui
 		private var _score:TextField;
 		private var _healthIndicators:Array;
 		private var _gameOver:Sprite;
+
+		private var _popupLayer:Sprite;
+		private var _currentPopup:Sprite;
 
 
 		/**
@@ -66,6 +71,8 @@ package game.ui
 			continueText.y = scoreText.y + scoreText.height + 20;
 			*/
 
+			// 
+			
 		}
 
 		private function handleRemovedFromStage():void
@@ -90,5 +97,48 @@ package game.ui
 		{
 			//addChild(_gameOver);
 		}
+
+		public function powerupAcquired(powerup:Powerup):void
+		{
+			if (_popupLayer && _popupLayer.parent)
+			{
+				TweenMax.killTweensOf(_popupLayer);
+				_popupLayer.parent.removeChild(_popupLayer);
+				_popupLayer = null;
+				_currentPopup = null
+			}
+
+			_popupLayer = new Sprite();
+			_popupLayer.scaleX = _popupLayer.scaleY = 0.5;
+			_popupLayer.x = GlobalData.HALF_SCENE_WIDTH - (171*0.5);
+			_popupLayer.y = -102;
+			addChild(_popupLayer);
+
+			var t:Object = Powerup.typeGraphics[powerup.id];
+			if (t && t.popup)
+			{
+				_currentPopup = t.popup
+				_currentPopup.x = t.popup.width*-0.5;
+				_currentPopup.y = t.popup.height*-0.5;
+				_popupLayer.addChild(t.popup);
+				TweenMax.to(_popupLayer, 0.2, {y:0, onComplete:powerupOpened});
+			}
+		}
+
+		private function powerupOpened():void
+		{
+			if (_currentPopup) TweenMax.to(_currentPopup, 0.2, {delay: 3.0, y:-102, onComplete:powerupClosed});
+		}
+
+		private function powerupClosed():void
+		{
+			if (_popupLayer && _popupLayer.parent)
+			{
+				_popupLayer.parent.removeChild(_popupLayer);
+				_popupLayer = null;
+				_currentPopup = null
+			}
+		}
+
 	}
 }
