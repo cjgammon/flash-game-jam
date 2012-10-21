@@ -33,6 +33,8 @@ package game.entities
 			// init game layer.
 			var texture:Texture = Math.round(Math.random()) > 0 ? AssetLibrary.enemyTextureIdle : AssetLibrary.enemy2TextureIdle;
 			_bodyImage = new Image(texture);
+			_bodyImage.x = -rect.width / 2;
+			_bodyImage.y = -rect.height / 2;
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);	
 		}

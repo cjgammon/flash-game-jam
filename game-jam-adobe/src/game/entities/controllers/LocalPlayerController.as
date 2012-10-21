@@ -42,10 +42,12 @@ package game.entities.controllers
 
 			if (InputManager.isKeyDown(InputManager.INPUT_MOVE_LEFT))
 			{
+				entity.sprite.scaleX = -1;
 				entity.x -= entity.movementSpeed;
 			}
 			else if (InputManager.isKeyDown(InputManager.INPUT_MOVE_RIGHT))
 			{
+				entity.sprite.scaleX = 1;
 				entity.x += entity.movementSpeed;
 			}
 			

@@ -36,6 +36,8 @@ package game.entities
 			// init game layer.
 			_bodyImage = new Image(AssetLibrary.heroTextureIdle);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
+			_bodyImage.x = -rect.width / 2;  //offset for center 
+			_bodyImage.x = -rect.height / 2;
 			_sprite.addChild(_bodyImage);
 		
 			// big money, big prizes.

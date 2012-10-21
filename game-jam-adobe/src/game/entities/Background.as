@@ -55,7 +55,6 @@ package game.entities
 				sprite.addChild(_movingCloudImage);
 				_clouds.push(_movingCloudImage);
 			}
-			
 		}
 		
 		public function update():void {

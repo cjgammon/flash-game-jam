@@ -32,8 +32,10 @@ package game.entities.controllers
 				var speed:Number = entity.movementSpeed;
 
 				if (entity.x < targetSprite.x) {
+					entity.sprite.scaleX = 1;
 					entity.x += speed;
 				} else if (entity.x > targetSprite.x) {
+					entity.sprite.scaleX = -1;
 					entity.x -= speed;
 				}
 				
