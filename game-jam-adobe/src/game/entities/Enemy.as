@@ -7,7 +7,6 @@ package game.entities
 	import game.utils.AssetLibrary;
 	
 	import starling.textures.Texture;
-
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.TextureSmoothing;
