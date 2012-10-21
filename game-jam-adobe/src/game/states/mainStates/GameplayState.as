@@ -428,6 +428,8 @@ package game.states.mainStates
 			livingEntity.addPowerup(powerup);
 			removePowerup(powerup);
 
+			_hud.powerupAcquired(powerup);
+
 			// play cool effect
 
 			var player:Player = _playerDataForEntity[livingEntity]
