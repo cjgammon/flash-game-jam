@@ -166,8 +166,14 @@ package game.states.mainStates
 			{
 				bullet.cleanupForRemoval();
 				removeBullet(bullet);
-			}			
-
+			}	
+			
+			// cleanup powerups
+			for each (var powerup:Powerup in _powerups)
+			{
+				powerup.cleanupForRemoval();
+				removePowerup(powerup);
+			}		
 
 			SoundManager.instance.vSetMusic(	null	);// kill music
 		}
@@ -469,6 +475,10 @@ package game.states.mainStates
 			var startIndex:int = int(Math.random() * Powerup.TYPES.length);
 			var typeIndex:int = startIndex;
 
+			if (player.powerups.length > 2){
+				player.powerups.pop();
+			}
+				
 			while (true)
 			{
 				var type:String = Powerup.TYPES[typeIndex];
