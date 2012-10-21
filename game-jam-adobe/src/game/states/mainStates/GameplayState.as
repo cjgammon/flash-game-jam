@@ -5,7 +5,9 @@ package game.states.mainStates
 {	
 	import Game.*;
 	
+	import flash.events.TimerEvent;
 	import flash.utils.Dictionary;
+	import flash.utils.Timer;
 	import flash.utils.setTimeout;
 	
 	import game.data.GameData;
@@ -37,6 +39,7 @@ package game.states.mainStates
 
 		override public function get name():String{ return "GameState"; }
 		
+		private var _removePowerupTimer:Timer;
 		private var _hud:Hud;		
 		private var _bg:Background;
 
@@ -66,6 +69,10 @@ package game.states.mainStates
 
 			SoundManager.instance.vSetMusic(	new (AssetLibrary.BGLoop)()	); // start up the music
 
+			
+			_removePowerupTimer = new Timer(2500, 1);
+			_removePowerupTimer.addEventListener(TimerEvent.TIMER_COMPLETE, handle_removePowerup_TIMER);
+			
 			_bg = new Background();
 			_game.gameLayer.addChild(_bg.sprite);
 			
@@ -195,6 +202,12 @@ package game.states.mainStates
 				}
 			}
 
+		}
+		
+		private function handle_removePowerup_TIMER(e:TimerEvent):void {
+			var player:LivingEntity = _activePlayers[0].avatar;
+			player.powerups.pop();
+			trace('remove', player.powerups.length);
 		}
 
 		//========================================================
@@ -433,12 +446,15 @@ package game.states.mainStates
 			trace("acquire powerup!");
 			livingEntity.addPowerup(powerup);
 			removePowerup(powerup);
-
+			
 			_hud.powerupAcquired(powerup);
 
-			// play cool effect
-
 			var player:Player = _playerDataForEntity[livingEntity]
+			trace(player.score);
+			
+			trace('start');
+			_removePowerupTimer.start();
+			
 			if (player)
 			{
 				player.score++;
@@ -450,7 +466,7 @@ package game.states.mainStates
 			spawnPowerup(powerupid);
 			
 			switch (powerupid) {
-				case Powerup.TYPE_STREAM: 
+				case Powerup.TYPE_STREAM:
 					SoundManager.instance.vPlaySound(new (AssetLibrary.Powerup1)());
 					break;
 				case Powerup.TYPE_SPREAD:
@@ -475,7 +491,7 @@ package game.states.mainStates
 			var startIndex:int = int(Math.random() * Powerup.TYPES.length);
 			var typeIndex:int = startIndex;
 
-			if (player.powerups.length > 2){
+			if (player.powerups.length > 1){  //cap powerups at 2
 				player.powerups.pop();
 			}
 				
