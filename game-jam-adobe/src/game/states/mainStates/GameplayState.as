@@ -69,7 +69,6 @@ package game.states.mainStates
 
 			SoundManager.instance.vSetMusic(	new (AssetLibrary.BGLoop)()	); // start up the music
 
-			
 			_removePowerupTimer = new Timer(5000, 1);
 			_removePowerupTimer.addEventListener(TimerEvent.TIMER_COMPLETE, handle_removePowerup_TIMER);
 			

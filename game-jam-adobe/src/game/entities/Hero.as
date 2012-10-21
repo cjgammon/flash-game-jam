@@ -77,7 +77,7 @@ package game.entities
 				powerup = powerups[i];
 				
 				if (powerup.id == Powerup.TYPE_STREAM){
-					cooldown = 10;
+					cooldown = 3;
 				}
 				
 				if (powerup.id == Powerup.TYPE_SPREAD){
