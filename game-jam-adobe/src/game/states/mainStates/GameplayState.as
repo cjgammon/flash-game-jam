@@ -451,6 +451,7 @@ package game.states.mainStates
 			trace(player.score);
 			
 			trace('start');
+			_removePowerupTimer.reset();
 			_removePowerupTimer.start();
 			
 			if (player)
