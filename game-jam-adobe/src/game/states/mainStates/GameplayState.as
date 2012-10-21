@@ -194,6 +194,7 @@ package game.states.mainStates
 			bulletTurn();
 			powerupTurn();
 			enemyRespawnHandler();
+			_bg.update();
 
 			if (_gameOver)
 			{
@@ -451,11 +452,10 @@ package game.states.mainStates
 			removePowerup(powerup);
 			
 			_hud.powerupAcquired(powerup);
-
-			var player:Player = _playerDataForEntity[livingEntity]
-
 			_removePowerupTimer.reset();
 			_removePowerupTimer.start();
+			
+			var player:Player = _playerDataForEntity[livingEntity]
 			
 			if (player)
 			{

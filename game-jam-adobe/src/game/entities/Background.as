@@ -46,6 +46,26 @@ package game.entities
 			_groundImage.x = 0;
 			_groundImage.y = 85;
 			sprite.addChild(_groundImage);
+			
+			for (var i:int = 0; i < 3; i++) {
+				_movingCloudImage = new Image(AssetLibrary.movingCloudTexture);
+				_movingCloudImage.smoothing = TextureSmoothing.NONE;
+				_movingCloudImage.x = 200 * i;
+				_movingCloudImage.y = 20;
+				sprite.addChild(_movingCloudImage);
+				_clouds.push(_movingCloudImage);
+			}
+			
 		}
+		
+		public function update():void {
+			for (var i:int = 0; i < _clouds.length; i++) {
+				_clouds[i].x -= .2;
+				if (_clouds[i].x + _clouds[i].width < 0) {
+					_clouds[i].x = 450;
+				}
+			}
+		}
+		
 	}
 }

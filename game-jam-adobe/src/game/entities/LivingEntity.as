@@ -103,8 +103,6 @@ package game.entities
 			_movementSpeed = running ? _runSpeed : _walkSpeed;
 		}
 
-
-		
 		/**
 		*	@constructor
 		*/
