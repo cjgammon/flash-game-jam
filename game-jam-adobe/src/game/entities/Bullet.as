@@ -23,7 +23,7 @@ package game.entities
 		private var _shooter:Entity;
 		private var _angle:Number;
 
-		public var speed:Number = 1;
+		public var speed:Number = 2;
 		public var goalX:Number;
 		public var goalY:Number;
 		public var startX:Number;

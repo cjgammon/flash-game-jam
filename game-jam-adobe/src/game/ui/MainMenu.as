@@ -40,8 +40,6 @@ package game.ui
 			// set up our stuff
 			_bg = new Image(AssetLibrary.titleTexture);
 			_bg.smoothing = TextureSmoothing.NONE;
-			//_bg.x = 100;
-			//_bg.y = 100;
 			addChild(_bg);
 		}
 
