@@ -80,8 +80,10 @@ package game.states.mainStates
 			for (var heroIndex:int = 0; heroIndex < heroTotal; heroIndex++)
 			{
 				var playerData:Player = _game.gameData.players[heroIndex];
+
 				if (playerData.playerType != Player.TYPE_INVALID)
 				{
+					playerData.reset();
 					_activePlayers.push(playerData);
 				}
 			}
