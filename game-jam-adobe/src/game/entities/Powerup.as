@@ -84,6 +84,18 @@ package game.entities
 				_bodyImage.smoothing = TextureSmoothing.NONE;
 				_sprite.addChild(_bodyImage);
 			}
+
+			switch(_id)
+			{
+				case Powerup.TYPE_SPREAD: 		
+					rect.width = 32;
+					rect.height = 22;
+				break;
+				default: 	
+					rect.width = 22; 
+					rect.height = 32	
+				break;
+			}
 		}
 		
 		/**
@@ -100,8 +112,9 @@ package game.entities
 			//_bodyImage = new Image(AssetLibrary.placeholderPowerupTexture);
 			//_bodyImage.smoothing = TextureSmoothing.NONE;
 			//_sprite.addChild(_bodyImage);
-
-			TweenMax.to(_sprite, 0.2, {scaleX:1.1, scaleY:1.1, yoyo:true, repeat:-1});
+			_sprite.scaleX = 0.75;
+			_sprite.scaleY = 0.75;
+			TweenMax.to(_sprite, 0.2, {scaleX:0.9, scaleY:0.9, yoyo:true, repeat:-1});
 		}
 		
 		override public function takeTurn():void
