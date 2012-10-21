@@ -19,6 +19,7 @@ package game.ui
 	{
 		private var _gameState:GameplayState;
 		private var _score:TextField;
+		private var _kills:TextField;
 		private var _healthIndicators:Array;
 		private var _gameOver:Sprite;
 
@@ -47,6 +48,11 @@ package game.ui
 			_score.y = 0;
 			addChild(_score);
 
+			_kills = new TextField(100, 20, "Kills: 0");
+			_kills.x = 0;
+			_kills.y = _score.y + _score.height;
+			addChild(_kills);
+			
 			var activeHeroes:Vector.<Player> = _gameState.activePlayers;
 			var activeHeroTotal:int = activeHeroes.length;
 			_healthIndicators = new Array();
@@ -57,7 +63,7 @@ package game.ui
 				var tf:TextField = new TextField(100, 18, "Health: " + player.avatar.health);
 				tf.x = GlobalData.SCENE_WIDTH - 100;
 				tf.y = 0;
-				addChild(tf);
+				//addChild(tf);
 				_healthIndicators[player.playerIndex] = tf
 			}
 			/*
@@ -85,6 +91,14 @@ package game.ui
 		public function setScore(value:int):void
 		{
 			_score.text = "Score: " + value;
+		}
+
+		/**
+		* 
+		*/
+		public function setKills(playerIndex:int, kills:int):void
+		{
+			_kills.text = "Kills: " + kills;
 		}
 
 		public function setPlayerHealth(playerIndex:int, healthValue:int):void

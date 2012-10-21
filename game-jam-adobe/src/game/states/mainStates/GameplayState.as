@@ -263,9 +263,8 @@ package game.states.mainStates
 					{
 						var shootingPlayer:Player = _playerDataForEntity[bullet.shooter];
 						shootingPlayer.kills++;
-					}
-				
-					// update hud?
+						_hud.setKills(0, shootingPlayer.kills);
+					}				
 				}
 
 				// invuln period?
