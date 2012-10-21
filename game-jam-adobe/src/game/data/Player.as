@@ -47,5 +47,12 @@ package game.data
 			this.playerType = playerType;
 			this.characterType = characterType;
 		}
+
+		public function reset():void
+		{
+			score = 0;
+			kills = 0;
+			pickups = 0;
+		}
 	}
 }
