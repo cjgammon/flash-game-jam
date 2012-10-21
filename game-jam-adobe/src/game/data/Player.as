@@ -48,7 +48,7 @@ package game.data
 			this.characterType = characterType;
 		}
 
-		private function reset():void
+		public function reset():void
 		{
 			score = 0;
 			kills = 0;
