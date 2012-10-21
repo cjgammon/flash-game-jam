@@ -452,7 +452,6 @@ package game.states.mainStates
 			_hud.powerupAcquired(powerup);
 
 			var player:Player = _playerDataForEntity[livingEntity]
-			
 
 			_removePowerupTimer.reset();
 			_removePowerupTimer.start();
