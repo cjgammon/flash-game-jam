@@ -51,10 +51,10 @@ package game.entities
 					case Powerup.TYPE_STREAM: 			popupImage = new Image(AssetLibrary.clickThroughpopupTexture);	iconImage = new Image(AssetLibrary.clickThroughTexture);	break;
 					case Powerup.TYPE_SPHERE: 			popupImage = new Image(AssetLibrary.metricsPopupTexture);		iconImage = new Image(AssetLibrary.metricsTexture);	break;
 					case Powerup.TYPE_SPREAD: 			popupImage = new Image(AssetLibrary.splitTestBmpTexture);		iconImage = new Image(AssetLibrary.splitTexture);	break;
-					case Powerup.TYPE_QUICKBULLET: 		popupImage = new Image(AssetLibrary.clickThroughpopupTexture);		iconImage = new Image(AssetLibrary.clickThroughTexture);	break;
-					case Powerup.TYPE_SILVERBULLET: 	popupImage = new Image(AssetLibrary.clickThroughpopupTexture);		iconImage = new Image(AssetLibrary.clickThroughTexture);	break;
+					case Powerup.TYPE_QUICKBULLET: 		popupImage = new Image(AssetLibrary.dauPopupTexture);		iconImage = new Image(AssetLibrary.dauTexture);	break;
+					case Powerup.TYPE_SILVERBULLET: 	popupImage = new Image(AssetLibrary.whalePopupTexture);		iconImage = new Image(AssetLibrary.whaleTexture);	break;
 				}
-
+ 
 				if (popupImage && iconImage)
 				{
 					popupImage.x = 343/2;
