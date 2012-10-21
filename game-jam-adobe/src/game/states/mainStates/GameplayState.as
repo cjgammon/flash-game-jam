@@ -451,6 +451,7 @@ package game.states.mainStates
 
 			var player:Player = _playerDataForEntity[livingEntity]
 			
+
 			_removePowerupTimer.reset();
 			_removePowerupTimer.start();
 			
