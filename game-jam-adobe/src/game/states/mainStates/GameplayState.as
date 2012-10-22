@@ -248,6 +248,17 @@ package game.states.mainStates
 				bullet.update();
 			}
 		}
+		
+		private function checkToRemove(enemy:Enemy):void
+		{
+			if (enemy.x > GlobalData.SCENE_WIDTH + 10 || 
+				enemy.x < -10 ||
+				enemy.y > GlobalData.SCENE_HEIGHT + 10 ||
+				enemy.y < -10){	
+				trace('remove');
+				removeEnemy(enemy);
+			}
+		}
 
 		public function bulletHitEnemy(bullet:Bullet, enemy:Enemy):Boolean
 		{
@@ -259,7 +270,7 @@ package game.states.mainStates
 
 				if (enemy.health <= 0)
 				{
-					removeEnemy(enemy);
+					enemy.controller = EntityController.getControllerType(RunawayController);  //make him runaway
 
 					// log kill in player data here!
 					if (_playerDataForEntity[bullet.shooter])
@@ -378,6 +389,7 @@ package game.states.mainStates
 			for each (var enemy:Enemy in _enemies)
 			{
 				enemy.takeTurn();
+				checkToRemove(enemy);
 			}
 		}
 
