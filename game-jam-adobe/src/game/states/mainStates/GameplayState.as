@@ -209,7 +209,7 @@ package game.states.mainStates
 		
 		private function handle_removePowerup_TIMER(e:TimerEvent):void {
 			var player:LivingEntity = _activePlayers[0].avatar;
-			player.powerups.pop();
+			player.powerups.splice(1, 1);
 		}
 
 		//========================================================
@@ -459,7 +459,7 @@ package game.states.mainStates
 			removePowerup(powerup);
 			
 			_hud.powerupAcquired(powerup);
-			//_removePowerupTimer.reset();
+			//_removePowerupTimer.reset(); //timer to remove powerup
 			//_removePowerupTimer.start();
 			
 			var player:Player = _playerDataForEntity[livingEntity]
