@@ -54,7 +54,7 @@ package game.entities
 		public var powerups:Vector.<Powerup> = new Vector.<Powerup>();
 		public function addPowerup(powerup:Powerup):void
 		{
-			powerups = new Vector.<Powerup>();
+			//powerups = new Vector.<Powerup>();
 			powerups.push(powerup);
 		}
 		public function hasPowerupType(type:String):Boolean

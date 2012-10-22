@@ -70,30 +70,29 @@ package game.entities
 			var speed:Number;
 			
 			cooldown = default_cooldown; //default cooldown
-
 			bullet = new Bullet(this, startX, startY);
 			
 			for (var i:int = 0; i < powerups.length; i++) {
+
 				powerup = powerups[i];
+				trace('powerups', i, powerup.id);
 				
-				if (powerup.id == Powerup.TYPE_STREAM){
-					cooldown = 3;
-				}
-				
-				if (powerup.id == Powerup.TYPE_SPREAD){
-					bulletcount = 3;
-				}
-				
-				if (powerup.id == Powerup.TYPE_SPHERE){
-					bulletcount = 8;
-				}
-				
-				if (powerup.id == Powerup.TYPE_QUICKBULLET) {
-					bullet.speed = 4;
-				}
-				
-				if (powerup.id == Powerup.TYPE_SILVERBULLET) {
-					bullet.silver = true;
+				switch (powerup.id) {
+					case Powerup.TYPE_STREAM:
+						cooldown = 3;
+						break;
+					case Powerup.TYPE_SPREAD:
+						bulletcount = 3;
+						break;
+					case Powerup.TYPE_SPHERE:
+						bulletcount = 8;
+						break;
+					case Powerup.TYPE_QUICKBULLET:
+						bullet.speed = 4;
+						break;
+					case Powerup.TYPE_SILVERBULLET:
+						bullet.silver = true;		
+						break;
 				}
 			}
 

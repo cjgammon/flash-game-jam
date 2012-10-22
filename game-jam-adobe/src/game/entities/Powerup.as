@@ -33,8 +33,6 @@ package game.entities
 			TYPE_SILVERBULLET
 		];
 
-
-
 		public static var typeGraphics:Object = {};
 		public static function initGraphicRefs():void
 		{

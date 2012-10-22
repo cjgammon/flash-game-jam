@@ -210,7 +210,6 @@ package game.states.mainStates
 		private function handle_removePowerup_TIMER(e:TimerEvent):void {
 			var player:LivingEntity = _activePlayers[0].avatar;
 			player.powerups.pop();
-			trace('remove', player.powerups.length);
 		}
 
 		//========================================================
@@ -255,7 +254,6 @@ package game.states.mainStates
 				enemy.x < -10 ||
 				enemy.y > GlobalData.SCENE_HEIGHT + 10 ||
 				enemy.y < -10){	
-				trace('remove');
 				removeEnemy(enemy);
 			}
 		}
@@ -395,7 +393,7 @@ package game.states.mainStates
 
 		public function attackPlayer(attacker:LivingEntity, player:Player):void
 		{
-			if (!player.avatar.invincible)
+			if (!player.avatar.invincible && attacker.health > 0)
 			{
 				var hero:Hero = Hero(player.avatar);
 				hero.hit();
@@ -457,15 +455,12 @@ package game.states.mainStates
 
 		public function acquirePowerup(livingEntity:LivingEntity, powerup:Powerup):void
 		{
-			trace("acquire powerup!");
-			//livingEntity.powerups = new Vector.<Powerup>();  //remove all powerups
-
 			livingEntity.addPowerup(powerup);
 			removePowerup(powerup);
 			
 			_hud.powerupAcquired(powerup);
-			_removePowerupTimer.reset();
-			_removePowerupTimer.start();
+			//_removePowerupTimer.reset();
+			//_removePowerupTimer.start();
 			
 			var player:Player = _playerDataForEntity[livingEntity]
 			
@@ -473,6 +468,10 @@ package game.states.mainStates
 			{
 				player.score++;
 				_hud.setScore(player.score);
+				
+				if (player.avatar.powerups.length > 3){  //cap powerups at 2
+					player.avatar.powerups.splice(1, 1);
+				}
 			}
 
 			// spawn a new powerup
@@ -504,10 +503,6 @@ package game.states.mainStates
 			var player:LivingEntity = _activePlayers[0].avatar;
 			var startIndex:int = int(Math.random() * Powerup.TYPES.length);
 			var typeIndex:int = startIndex;
-
-			if (player.powerups.length > 1){  //cap powerups at 2
-				player.powerups.pop();
-			}
 				
 			while (true)
 			{

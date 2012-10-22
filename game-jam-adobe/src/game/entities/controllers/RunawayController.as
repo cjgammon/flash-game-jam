@@ -24,16 +24,10 @@ package game.entities.controllers
 				
 				if (entity.x < targetSprite.x) {
 					entity.sprite.scaleX = -1;
-					entity.x -= speed;
+					entity.x -= speed * 2;
 				} else if (entity.x > targetSprite.x) {
 					entity.sprite.scaleX = 1;
-					entity.x += speed;
-				}
-				
-				if (entity.y < targetSprite.y) {
-					entity.y -= speed;
-				} else if(entity.y > targetSprite.y) {
-					entity.y += speed;
+					entity.x += speed * 2;
 				}
 				
 			}
