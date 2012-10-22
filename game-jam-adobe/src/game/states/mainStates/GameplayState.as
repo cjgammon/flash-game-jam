@@ -209,7 +209,7 @@ package game.states.mainStates
 		
 		private function handle_removePowerup_TIMER(e:TimerEvent):void {
 			var player:LivingEntity = _activePlayers[0].avatar;
-			player.powerups.splice(1, 1);
+			player.powerups.splice(0, 1);
 		}
 
 		//========================================================
@@ -470,7 +470,7 @@ package game.states.mainStates
 				_hud.setScore(player.score);
 				
 				if (player.avatar.powerups.length > 3){  //cap powerups at 2
-					player.avatar.powerups.splice(1, 1);
+					player.avatar.powerups.splice(0, 1);
 				}
 			}
 
