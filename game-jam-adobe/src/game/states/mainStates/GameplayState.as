@@ -308,6 +308,60 @@ package game.states.mainStates
 			}
 		}
 
+		/**
+		* this function just gives the entity the go ahead to use a bomb.
+		* if it's a human player trying to use a bomb, it lets them buy a bomb for money.
+		*/
+		public function tryToUseBomb(livingEntity:LivingEntity):Boolean
+		{
+			var useBomb:Boolean = false;
+			if (livingEntity.bombs > 0)
+			{
+				useBomb = true;
+			}
+			// if they don't have enough bombs to use one, see what we can do for them.
+			else
+			{
+				// if this is a player, let them buy a bomb if they have the points.
+				var player:Player = _playerDataForEntity[livingEntity];
+				if (player && player.score >= livingEntity.bombCost)
+				{
+					player.score -= livingEntity.bombCost;
+					_hud.setScore(player.score);
+					useBomb = true;
+				}
+			}
+
+			if (useBomb)
+			{
+				livingEntity.bombs--;
+				return true;
+			}
+			return false;
+		}
+
+		public function bombHitEnemy(bomber:LivingEntity, target:LivingEntity):void
+		{
+			if (!target.invincible && target.canBeHit)
+			{
+				target.health = Math.max(0, target.health - bomber.bombDamage);
+
+				if (target.health <= 0)
+				{
+					target.canBeHit = false;// make sure he can't be hit anymore.
+					target.controller = EntityController.getControllerType(RunawayController);  //make him runaway
+
+					// log kill in player data here!
+					var player:Player = _playerDataForEntity[bomber];
+					if (player)
+					{
+						player.kills++;
+						_hud.setKills(0, player.kills);
+					}				
+				}
+			}
+		}
+
 		//========================================================
 		// enemies
 		//========================================================

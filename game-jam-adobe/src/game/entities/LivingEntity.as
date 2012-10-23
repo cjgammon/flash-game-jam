@@ -4,10 +4,12 @@
 package game.entities
 {	
 	import flash.geom.Point;
+	import flash.utils.Dictionary;
 	import game.entities.controllers.IEntityController;
 	import game.entities.Powerup;
 	import game.utils.AssetLibrary;
 	import game.utils.DebugDraw;
+	import game.utils.GeomUtils;
 	import game.utils.sound.SoundManager;
 	import starling.display.Sprite;
 	
@@ -21,7 +23,7 @@ package game.entities
 		//========================================================
 		public var health:int = 100;
 		public var maxHealth:int = 100;
-		
+
 		/**
 		* whether or not this thing can be hit by bullets & explosions.
 		* NOTE: this is different from being 'invincible'. if you're invincible, you can still absorb bullets, but they shouldn't harm you.
@@ -55,11 +57,6 @@ package game.entities
 		* how much damage something does when it touches it's target
 		*/
 		public var meleeDamage:int = 100;
-
-		/**
-		* bombs are an attack that kills anything within a radius around you.
-		*/
-		public var bombs:int = 0;
 
 		//========================================================
 		// powerups
@@ -251,9 +248,37 @@ package game.entities
 		//========================================================
 		// bombs
 		//========================================================
+		/**
+		* bombs are an attack that kills anything within a radius around you.
+		*/
+		public var bombs:int = 0;
+		public var bombRadius:Number = 50;
+		public var bombDamage:Number = 200;
+		/**
+		* how much it costs this guy to buy more bombs.
+		*/
+		public var bombCost:int = 3;
+
 		public function useBomb():void
 		{
-			
+			// ask gamestate if we can use a bomb, it'll figure out what to do.
+			if (_gameState.tryToUseBomb(this))
+			{
+				// mark down where our center is.
+				var centerPoint:Point = getCenterPoint();
+
+				var enemies:Dictionary = _gameState.enemies;
+				for each (var enemy:Enemy in _gameState.enemies)
+				{
+					if (enemy.canBeHit)
+					{
+						if (GeomUtils.rectangleOverlapsCircle(enemy.rect, centerPoint.x, centerPoint.y, bombRadius))
+						{
+							_gameState.bombHitEnemy(this, enemy);
+						}
+					}
+				}
+			}
 		}
 	}
 }

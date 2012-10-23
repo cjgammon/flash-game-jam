@@ -43,7 +43,7 @@ package game.ui
 			_gameState = GameplayState.instance;
 
 			// set up our stuff
-			_score = new TextField(100, 20, "Score: 0");
+			_score = new TextField(100, 20, "$0");
 			_score.x = 0;
 			_score.y = 0;
 			addChild(_score);
@@ -90,7 +90,7 @@ package game.ui
 
 		public function setScore(value:int):void
 		{
-			_score.text = "Score: " + value;
+			_score.text = "$" + value;
 		}
 
 		/**
