@@ -79,12 +79,15 @@ package game.entities
 			var enemies:Dictionary = _gameState.enemies;
 			for each (var enemy:Enemy in _gameState.enemies)
 			{
-				if (touchingEntity(enemy))
+				if (enemy.canBeHit)// make sure this bullet can even hit him.
 				{
-					if (_gameState.bulletHitEnemy(this, enemy))
+					if (touchingEntity(enemy))
 					{
-						// get out of here. if it's not silver.
-						if (!silver) return;
+						if (_gameState.bulletHitEnemy(this, enemy))
+						{
+							// get out of here. if it's not silver.
+							if (!silver) return;
+						}
 					}
 				}
 			}

@@ -254,6 +254,7 @@ package game.states.mainStates
 
 				if (enemy.health <= 0)
 				{
+					enemy.canBeHit = false;// make sure he can't be hit anymore.
 					enemy.controller = EntityController.getControllerType(RunawayController);  //make him runaway
 
 					// log kill in player data here!

@@ -23,6 +23,12 @@ package game.entities
 		public var maxHealth:int = 100;
 		
 		/**
+		* whether or not this thing can be hit by bullets & explosions.
+		* NOTE: this is different from being 'invincible'. if you're invincible, you can still absorb bullets, but they shouldn't harm you.
+		*/
+		public var canBeHit:Boolean = true;
+
+		/**
 		* no health should be logged if they're invincible.
 		*/
 		protected var _invincible:Boolean = false;
