@@ -3,10 +3,13 @@
 */
 package game.entities
 {	
-	import starling.display.Sprite;
+	import flash.geom.Point;
 	import game.entities.controllers.IEntityController;
 	import game.entities.Powerup;
+	import game.utils.AssetLibrary;
 	import game.utils.DebugDraw;
+	import game.utils.sound.SoundManager;
+	import starling.display.Sprite;
 	
 	/**
 	*	things that need to live.  they can be controlled by an IEntityController as well.
@@ -47,6 +50,10 @@ package game.entities
 		*/
 		public var meleeDamage:int = 100;
 
+		/**
+		* bombs are an attack that kills anything within a radius around you.
+		*/
+		public var bombs:int = 0;
 
 		//========================================================
 		// powerups
@@ -143,10 +150,108 @@ package game.entities
 			
 		}
 
-		public function shoot():void
+		public function shootAt(targetX:Number, targetY:Number):void
+		{
+			if (cooldown == 0)
+			{
+				var powerup:Powerup;
+				var spreadsize:Number;
+				var bulletcount:int = 1;
+				var startX:Number = x;
+				var startY:Number = y;
+				var targetX:Number = targetX;
+				var targetY:Number = targetY;
+				var dx:Number;
+				var dy:Number;
+				var angle:Number;
+				var bullet:Bullet;
+				var speed:Number;
+				
+				cooldown = default_cooldown; //default cooldown
+
+				bullet = new Bullet(this, startX, startY);
+				
+				var activePowerupCount:int = powerups.length;
+				for (var powerupIndex:int = 0; powerupIndex < activePowerupCount; powerupIndex++)
+				{
+					powerup = powerups[powerupIndex];
+					
+					if (powerup.id == Powerup.TYPE_STREAM){
+						cooldown = 3;
+					}
+					
+					if (powerup.id == Powerup.TYPE_SPREAD){
+						bulletcount = 3;
+					}
+					
+					if (powerup.id == Powerup.TYPE_SPHERE){
+						bulletcount = 8;
+					}
+					
+					if (powerup.id == Powerup.TYPE_QUICKBULLET) {
+						bullet.speed = 4;
+					}
+					
+					if (powerup.id == Powerup.TYPE_SILVERBULLET) {
+						bullet.silver = true;
+					}
+
+					if (powerup.id == Powerup.TYPE_RUBBER_BULLET) {
+						bullet.bounces = 10;// 10 bounces for now
+					}
+				}
+
+				dx = targetX - startX;
+				dy = targetY - startY;
+				angle = Math.atan2(dy, dx);
+				
+				if (bulletcount == 1) {
+					SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerShoot)());
+
+					bullet.angle = angle;
+					_gameState.spawnBullet(bullet);
+					
+				} else if (bulletcount == 3) {
+					SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerShoot2)());
+
+					bullet = new Bullet(this, startX, startY);
+					bullet.angle = angle + .2;
+					_gameState.spawnBullet(bullet);
+					
+					bullet = new Bullet(this, startX, startY);
+					bullet.angle = angle - .2;
+					_gameState.spawnBullet(bullet);
+					
+					bullet = new Bullet(this, startX, startY);
+					bullet.angle = angle;
+					_gameState.spawnBullet(bullet);
+					
+				} else if (bulletcount == 8) {
+					SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerShoot3)());
+
+					for (var j:int = 0; j < 8; j++) {
+						bullet = new Bullet(this, startX, startY);
+						bullet.angle = j * .8;
+						_gameState.spawnBullet(bullet);
+					}
+					
+				}
+			}
+		}
+
+		public function shootAtTarget(targetEntity:Entity):void
+		{
+			// todo :: lead shot?
+			var centerPoint:Point = targetEntity.getCenterPoint();
+			shootAt(centerPoint.x, centerPoint.y);
+		}
+
+		//========================================================
+		// bombs
+		//========================================================
+		public function useBomb():void
 		{
 			
 		}
-
 	}
 }

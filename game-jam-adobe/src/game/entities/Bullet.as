@@ -24,11 +24,11 @@ package game.entities
 		private var _angle:Number;
 
 		public var speed:Number = 2;
-		public var goalX:Number;
-		public var goalY:Number;
-		public var startX:Number;
-		public var startY:Number;
 		public var silver:Boolean = false;
+		/**
+		* how many bounces this bullet can still take along its trajectory
+		*/
+		public var bounces:uint = 0;
 		
 		public function get shooter():Entity { return _shooter; }
 		public var damage:int = 100;
@@ -61,7 +61,7 @@ package game.entities
 			_vy = Math.sin(_angle);
 		}
 		
-		public function update():void
+		override public function takeTurn():void
 		{
 			x += _vx * speed;
 			y += _vy * speed;

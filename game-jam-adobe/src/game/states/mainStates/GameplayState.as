@@ -103,25 +103,12 @@ package game.states.mainStates
 				activePlayer.avatar.x = GlobalData.HALF_SCENE_WIDTH;
 				activePlayer.avatar.y = GlobalData.HALF_SCENE_HEIGHT;
 
+				// start with 3 bombs
+				activePlayer.avatar.bombs = 3;
+
 				_playerDataForEntity[activePlayer.avatar] = activePlayer;
 			}
 			
-			//========================================================
-			// enemy test.  
-			// TODO :: refactor this so there's an add enemy function somewhere that's easy to access.
-			//========================================================
-			//for (var enemyIndex:int = 0; enemyIndex < 1; enemyIndex++)
-			//{
-			//	var enemy:Enemy = new Enemy();
-//
-			//	enemy.target = _activePlayers[0].avatar;
-			//	enemy.controller = EntityController.getControllerType(AIControllerBasic);
-			//	enemy.x = enemyIndex % 2 == 0 ? GlobalData.SCENE_WIDTH : 0;  //left side or right side
-			//	enemy.y = Math.random() * GlobalData.HALF_SCENE_HEIGHT;
-			//	_game.gameLayer.addChild(enemy.sprite);
-			//	_enemies[enemy] = enemy;// it's a dictionary so we can pluck things out in constant time
-			//}
-
 			//========================================================
 			// add the heroes to the stage, on top of the enemies for now.
 			//========================================================
@@ -242,10 +229,9 @@ package game.states.mainStates
 		
 		private function bulletTurn():void
 		{
-			for (var i:* in _bullets)
+			for each (var bullet:Bullet in _bullets)
 			{
-				var bullet:Bullet = _bullets[i];
-				bullet.update();
+				bullet.takeTurn();
 			}
 		}
 
