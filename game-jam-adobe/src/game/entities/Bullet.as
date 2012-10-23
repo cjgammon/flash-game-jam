@@ -29,7 +29,8 @@ package game.entities
 		public var startX:Number;
 		public var startY:Number;
 		public var silver:Boolean = false;
-		
+		public var explosive:Boolean = false;
+
 		public function get shooter():Entity { return _shooter; }
 		public var damage:int = 100;
 		
@@ -78,7 +79,7 @@ package game.entities
 			// & if we want enemies to shoot things, we should also have some way of making that happen
 			var enemies:Dictionary = _gameState.enemies;
 			for each (var enemy:Enemy in _gameState.enemies)
-			{
+			{				
 				if (touchingEntity(enemy))
 				{
 					if (_gameState.bulletHitEnemy(this, enemy))

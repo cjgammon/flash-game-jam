@@ -23,14 +23,16 @@ package game.entities
 		public static const TYPE_SPHERE:String = "sphere";
 		public static const TYPE_QUICKBULLET:String = "quickbullet";
 		public static const TYPE_SILVERBULLET:String = "silverbullet";
+		public static const TYPE_EXPLOSIVE:String = "explosive";
 
 		public static const TYPES:Array = 
 		[
-			TYPE_STREAM,
-			TYPE_SPREAD,
-			TYPE_SPHERE,
-			TYPE_QUICKBULLET,
-			TYPE_SILVERBULLET
+			//TYPE_STREAM,
+			//TYPE_SPREAD,
+			//TYPE_SPHERE,
+			//TYPE_QUICKBULLET,
+			//TYPE_SILVERBULLET,
+			TYPE_EXPLOSIVE
 		];
 
 		public static var typeGraphics:Object = {};
@@ -51,6 +53,7 @@ package game.entities
 					case Powerup.TYPE_SPREAD: 			popupImage = new Image(AssetLibrary.splitTestBmpTexture);		iconImage = new Image(AssetLibrary.splitTexture);	break;
 					case Powerup.TYPE_QUICKBULLET: 		popupImage = new Image(AssetLibrary.dauPopupTexture);		iconImage = new Image(AssetLibrary.dauTexture);	break;
 					case Powerup.TYPE_SILVERBULLET: 	popupImage = new Image(AssetLibrary.whalePopupTexture);		iconImage = new Image(AssetLibrary.whaleTexture);	break;
+					case Powerup.TYPE_EXPLOSIVE: 		popupImage = new Image(AssetLibrary.whalePopupTexture);		iconImage = new Image(AssetLibrary.whaleTexture);	break;
 				}
  
 				if (popupImage && iconImage)

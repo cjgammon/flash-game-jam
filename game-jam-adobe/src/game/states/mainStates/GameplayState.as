@@ -437,7 +437,6 @@ package game.states.mainStates
 		{
 			var powerup:Powerup = new Powerup();
 			powerup.x = int(Math.random() * (GlobalData.SCENE_WIDTH - 50)) + 25;
-
 			powerup.y = Math.random() * (GlobalData.SCENE_HEIGHT - GlobalData.STAGE_ROOF_EDGE - 70) + GlobalData.STAGE_ROOF_EDGE + 35;
 			powerup.id = type;
 			_game.gameLayer.addChild(powerup.sprite);
@@ -492,6 +491,9 @@ package game.states.mainStates
 					SoundManager.instance.vPlaySound(new (AssetLibrary.Powerup4)());
 					break;
 				case Powerup.TYPE_SPHERE:
+					SoundManager.instance.vPlaySound(new (AssetLibrary.Powerup4)());
+					break;
+				case Powerup.TYPE_EXPLOSIVE:
 					SoundManager.instance.vPlaySound(new (AssetLibrary.Powerup4)());
 					break;
 			}

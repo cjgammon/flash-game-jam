@@ -75,7 +75,6 @@ package game.entities
 			for (var i:int = 0; i < powerups.length; i++) {
 
 				powerup = powerups[i];
-				trace('powerups', i, powerup.id);
 				
 				switch (powerup.id) {
 					case Powerup.TYPE_STREAM:
@@ -92,6 +91,13 @@ package game.entities
 						break;
 					case Powerup.TYPE_SILVERBULLET:
 						bullet.silver = true;		
+						break;
+					case Powerup.TYPE_EXPLOSIVE:
+						bullet.explosive = true;  //TODO:: adjust rect
+						//bullet.rect.x = -20;
+						//bullet.rect.y = -20;
+						//bullet.rect.width = 40;
+						//bullet.rect.height = 40;
 						break;
 				}
 			}
