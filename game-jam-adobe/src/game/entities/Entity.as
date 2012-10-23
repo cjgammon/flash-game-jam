@@ -3,6 +3,7 @@
 */
 package game.entities
 {	
+	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	
 	import game.data.Player;
@@ -41,6 +42,14 @@ package game.entities
 		* bounding rect, for collisions.
 		*/
 		public var rect:Rectangle = new Rectangle();
+
+		/**
+		* center point. consider caching this so you're not making center points each time you call this method
+		*/
+		public function getCenterPoint():Point
+		{
+			return new Point(rect.x + rect.width*0.5, rect.y + rect.height*0.5);
+		}
 
 		public var cooldown:int = 0;
 		public var default_cooldown:int = 30;

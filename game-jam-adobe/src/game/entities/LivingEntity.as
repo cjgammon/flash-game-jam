@@ -3,10 +3,15 @@
 */
 package game.entities
 {	
-	import starling.display.Sprite;
+	import flash.geom.Point;
+	import flash.utils.Dictionary;
 	import game.entities.controllers.IEntityController;
 	import game.entities.Powerup;
+	import game.utils.AssetLibrary;
 	import game.utils.DebugDraw;
+	import game.utils.GeomUtils;
+	import game.utils.sound.SoundManager;
+	import starling.display.Sprite;
 	
 	/**
 	*	things that need to live.  they can be controlled by an IEntityController as well.
@@ -18,7 +23,13 @@ package game.entities
 		//========================================================
 		public var health:int = 100;
 		public var maxHealth:int = 100;
-		
+
+		/**
+		* whether or not this thing can be hit by bullets & explosions.
+		* NOTE: this is different from being 'invincible'. if you're invincible, you can still absorb bullets, but they shouldn't harm you.
+		*/
+		public var canBeHit:Boolean = true;
+
 		/**
 		* no health should be logged if they're invincible.
 		*/
@@ -46,7 +57,6 @@ package game.entities
 		* how much damage something does when it touches it's target
 		*/
 		public var meleeDamage:int = 100;
-
 
 		//========================================================
 		// powerups
@@ -139,10 +149,140 @@ package game.entities
 			
 		}
 
-		public function shoot():void
+		public function shootAt(targetX:Number, targetY:Number):void
 		{
-			
+			if (cooldown == 0)
+			{
+				var powerup:Powerup;
+				var spreadsize:Number;
+				var bulletcount:int = 1;
+				var startX:Number = x;
+				var startY:Number = y;
+				var targetX:Number = targetX;
+				var targetY:Number = targetY;
+				var dx:Number;
+				var dy:Number;
+				var angle:Number;
+				var bullet:Bullet;
+				var speed:Number;
+				
+				cooldown = default_cooldown; //default cooldown
+
+				bullet = new Bullet(this, startX, startY);
+				
+				var activePowerupCount:int = powerups.length;
+				for (var powerupIndex:int = 0; powerupIndex < activePowerupCount; powerupIndex++)
+				{
+					powerup = powerups[powerupIndex];
+					
+					if (powerup.id == Powerup.TYPE_STREAM){
+						cooldown = 3;
+					}
+					
+					if (powerup.id == Powerup.TYPE_SPREAD){
+						bulletcount = 3;
+					}
+					
+					if (powerup.id == Powerup.TYPE_SPHERE){
+						bulletcount = 8;
+					}
+					
+					if (powerup.id == Powerup.TYPE_QUICKBULLET) {
+						bullet.speed = 4;
+					}
+					
+					if (powerup.id == Powerup.TYPE_SILVERBULLET) {
+						bullet.silver = true;
+					}
+
+					if (powerup.id == Powerup.TYPE_RUBBER_BULLET) {
+						bullet.bounces = 10;// 10 bounces for now
+					}
+					
+					if (powerup.id == Powerup.TYPE_EXPLOSIVE) {
+						bullet.explosive = true;
+					}
+				}
+
+				dx = targetX - startX;
+				dy = targetY - startY;
+				angle = Math.atan2(dy, dx);
+				
+				if (bulletcount == 1) {
+					SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerShoot)());
+
+					bullet.angle = angle;
+					_gameState.spawnBullet(bullet);
+					
+				} else if (bulletcount == 3) {
+					SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerShoot2)());
+
+					bullet = new Bullet(this, startX, startY);
+					bullet.angle = angle + .2;
+					_gameState.spawnBullet(bullet);
+					
+					bullet = new Bullet(this, startX, startY);
+					bullet.angle = angle - .2;
+					_gameState.spawnBullet(bullet);
+					
+					bullet = new Bullet(this, startX, startY);
+					bullet.angle = angle;
+					_gameState.spawnBullet(bullet);
+					
+				} else if (bulletcount == 8) {
+					SoundManager.instance.vPlaySound(new (AssetLibrary.PlayerShoot3)());
+
+					for (var j:int = 0; j < 8; j++) {
+						bullet = new Bullet(this, startX, startY);
+						bullet.angle = j * .8;
+						_gameState.spawnBullet(bullet);
+					}
+					
+				}
+			}
 		}
 
+		public function shootAtTarget(targetEntity:Entity):void
+		{
+			// todo :: lead shot?
+			var centerPoint:Point = targetEntity.getCenterPoint();
+			shootAt(centerPoint.x, centerPoint.y);
+		}
+
+		//========================================================
+		// bombs
+		//========================================================
+		/**
+		* bombs are an attack that kills anything within a radius around you.
+		*/
+		public var bombs:int = 0;
+		public var bombRadius:Number = 50;
+		public var bombDamage:Number = 200;
+		/**
+		* how much it costs this guy to buy more bombs.
+		*/
+		public var bombCost:int = 3;
+
+		public function useBomb():void
+		{
+			// ask gamestate if we can use a bomb, it'll figure out what to do.
+			if (_gameState.tryToUseBomb(this))
+			{
+				// mark down where our center is.
+				var centerPoint:Point = getCenterPoint();
+
+				var enemies:Dictionary = _gameState.enemies;
+				for each (var enemy:Enemy in _gameState.enemies)
+				{
+					if (enemy.canBeHit)
+					{
+						if (GeomUtils.rectangleOverlapsCircle(enemy.rect, centerPoint.x, centerPoint.y, bombRadius))
+						{
+							_gameState.bombHitEnemy(this, enemy);
+						}
+					}
+				}
+			}
+		}
 	}
 }

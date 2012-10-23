@@ -103,25 +103,12 @@ package game.states.mainStates
 				activePlayer.avatar.x = GlobalData.HALF_SCENE_WIDTH;
 				activePlayer.avatar.y = GlobalData.HALF_SCENE_HEIGHT;
 
+				// start with 3 bombs
+				activePlayer.avatar.bombs = 3;
+
 				_playerDataForEntity[activePlayer.avatar] = activePlayer;
 			}
 			
-			//========================================================
-			// enemy test.  
-			// TODO :: refactor this so there's an add enemy function somewhere that's easy to access.
-			//========================================================
-			//for (var enemyIndex:int = 0; enemyIndex < 1; enemyIndex++)
-			//{
-			//	var enemy:Enemy = new Enemy();
-//
-			//	enemy.target = _activePlayers[0].avatar;
-			//	enemy.controller = EntityController.getControllerType(AIControllerBasic);
-			//	enemy.x = enemyIndex % 2 == 0 ? GlobalData.SCENE_WIDTH : 0;  //left side or right side
-			//	enemy.y = Math.random() * GlobalData.HALF_SCENE_HEIGHT;
-			//	_game.gameLayer.addChild(enemy.sprite);
-			//	_enemies[enemy] = enemy;// it's a dictionary so we can pluck things out in constant time
-			//}
-
 			//========================================================
 			// add the heroes to the stage, on top of the enemies for now.
 			//========================================================
@@ -241,10 +228,9 @@ package game.states.mainStates
 		
 		private function bulletTurn():void
 		{
-			for (var i:* in _bullets)
+			for each (var bullet:Bullet in _bullets)
 			{
-				var bullet:Bullet = _bullets[i];
-				bullet.update();
+				bullet.takeTurn();
 			}
 		}
 		
@@ -268,6 +254,7 @@ package game.states.mainStates
 
 				if (enemy.health <= 0)
 				{
+					enemy.canBeHit = false;// make sure he can't be hit anymore.
 					enemy.controller = EntityController.getControllerType(RunawayController);  //make him runaway
 
 					// log kill in player data here!
@@ -318,6 +305,60 @@ package game.states.mainStates
 				activePlayer.avatar.takeTurn();
 
 				//ScreenPrint.show("Kills: " + activePlayer.kills);
+			}
+		}
+
+		/**
+		* this function just gives the entity the go ahead to use a bomb.
+		* if it's a human player trying to use a bomb, it lets them buy a bomb for money.
+		*/
+		public function tryToUseBomb(livingEntity:LivingEntity):Boolean
+		{
+			var useBomb:Boolean = false;
+			if (livingEntity.bombs > 0)
+			{
+				useBomb = true;
+			}
+			// if they don't have enough bombs to use one, see what we can do for them.
+			else
+			{
+				// if this is a player, let them buy a bomb if they have the points.
+				var player:Player = _playerDataForEntity[livingEntity];
+				if (player && player.score >= livingEntity.bombCost)
+				{
+					player.score -= livingEntity.bombCost;
+					_hud.setScore(player.score);
+					useBomb = true;
+				}
+			}
+
+			if (useBomb)
+			{
+				livingEntity.bombs--;
+				return true;
+			}
+			return false;
+		}
+
+		public function bombHitEnemy(bomber:LivingEntity, target:LivingEntity):void
+		{
+			if (!target.invincible && target.canBeHit)
+			{
+				target.health = Math.max(0, target.health - bomber.bombDamage);
+
+				if (target.health <= 0)
+				{
+					target.canBeHit = false;// make sure he can't be hit anymore.
+					target.controller = EntityController.getControllerType(RunawayController);  //make him runaway
+
+					// log kill in player data here!
+					var player:Player = _playerDataForEntity[bomber];
+					if (player)
+					{
+						player.kills++;
+						_hud.setKills(0, player.kills);
+					}				
+				}
 			}
 		}
 

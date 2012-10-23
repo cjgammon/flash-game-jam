@@ -13,9 +13,6 @@ package game.entities.controllers
 	*/
 	public class LocalPlayerController extends EntityController implements IEntityController
 	{
-		private var _bullets:Vector.<Bullet> = new Vector.<Bullet>();
-
-		
 		/**
 		*	@constructor
 		*/
@@ -69,14 +66,17 @@ package game.entities.controllers
 			// aim
 			//========================================================
 			entity.lookAt(InputManager.mouseX, InputManager.mouseY);
-			/*
-			if (InputManager.mousePressed())
+			if (InputManager.mouseDown()) 
 			{
-				entity.shoot();
+				entity.shootAt(InputManager.mouseX / GlobalData.SCENE_SCALE, InputManager.mouseY / GlobalData.SCENE_SCALE);
 			}
-			*/
-			if (InputManager.mouseDown() && entity.cooldown == 0) {
-				entity.shoot();
+
+			//========================================================
+			// bomb controls
+			//========================================================
+			if (InputManager.keyPressed(InputManager.INPUT_BOMB))
+			{
+				entity.useBomb();
 			}
 		}
 		

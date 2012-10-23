@@ -18,12 +18,15 @@ package game.entities
 	*/
 	public class Powerup extends Entity
 	{
-		public static const TYPE_STREAM:String = "stream";
-		public static const TYPE_SPREAD:String = "spread";
-		public static const TYPE_SPHERE:String = "sphere";
-		public static const TYPE_QUICKBULLET:String = "quickbullet";
-		public static const TYPE_SILVERBULLET:String = "silverbullet";
-		public static const TYPE_EXPLOSIVE:String = "explosive";
+
+		public static const TYPE_STREAM:String = "TYPE_STREAM";
+		public static const TYPE_SPREAD:String = "TYPE_SPREAD";
+		public static const TYPE_SPHERE:String = "TYPE_SPHERE";
+		public static const TYPE_QUICKBULLET:String = "TYPE_QUICKBULLET";
+		public static const TYPE_SILVERBULLET:String = "TYPE_SILVERBULLET";
+		public static const TYPE_RUBBER_BULLET:String = "TYPE_RUBBER_BULLET";
+		public static const TYPE_BULLET_DISTANCE:String = "TYPE_BULLET_DISTANCE";
+		public static const TYPE_EXPLOSIVE:String = "TYPE_EXPLOSIVE";
 
 		public static const TYPES:Array = 
 		[
@@ -32,6 +35,8 @@ package game.entities
 			//TYPE_SPHERE,
 			//TYPE_QUICKBULLET,
 			//TYPE_SILVERBULLET,
+			//TYPE_RUBBER_BULLET,// not hooked up yet
+			//TYPE_BULLET_DISTANCE,// not hooked up yet
 			TYPE_EXPLOSIVE
 		];
 
@@ -54,6 +59,8 @@ package game.entities
 					case Powerup.TYPE_QUICKBULLET: 		popupImage = new Image(AssetLibrary.dauPopupTexture);		iconImage = new Image(AssetLibrary.dauTexture);	break;
 					case Powerup.TYPE_SILVERBULLET: 	popupImage = new Image(AssetLibrary.whalePopupTexture);		iconImage = new Image(AssetLibrary.whaleTexture);	break;
 					case Powerup.TYPE_EXPLOSIVE: 		popupImage = new Image(AssetLibrary.whalePopupTexture);		iconImage = new Image(AssetLibrary.whaleTexture);	break;
+					case Powerup.TYPE_RUBBER_BULLET: 	popupImage = new Image(AssetLibrary.whalePopupTexture);		iconImage = new Image(AssetLibrary.whaleTexture);	break;
+					case Powerup.TYPE_BULLET_DISTANCE: 	popupImage = new Image(AssetLibrary.whalePopupTexture);		iconImage = new Image(AssetLibrary.whaleTexture);	break;
 				}
  
 				if (popupImage && iconImage)
@@ -98,6 +105,8 @@ package game.entities
 				break;
 			}
 		}
+
+
 		
 		/**
 		*	@constructor

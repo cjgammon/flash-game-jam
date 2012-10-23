@@ -24,13 +24,14 @@ package game.entities
 		private var _angle:Number;
 
 		public var speed:Number = 2;
-		public var goalX:Number;
-		public var goalY:Number;
-		public var startX:Number;
-		public var startY:Number;
 		public var silver:Boolean = false;
 		public var explosive:Boolean = false;
 
+		/**
+		* how many bounces this bullet can still take along its trajectory
+		*/
+		public var bounces:uint = 0;
+		
 		public function get shooter():Entity { return _shooter; }
 		public var damage:int = 100;
 		
@@ -62,7 +63,7 @@ package game.entities
 			_vy = Math.sin(_angle);
 		}
 		
-		public function update():void
+		override public function takeTurn():void
 		{
 			x += _vx * speed;
 			y += _vy * speed;
@@ -79,13 +80,16 @@ package game.entities
 			// & if we want enemies to shoot things, we should also have some way of making that happen
 			var enemies:Dictionary = _gameState.enemies;
 			for each (var enemy:Enemy in _gameState.enemies)
-			{				
-				if (touchingEntity(enemy))
+			{
+				if (enemy.canBeHit)// make sure this bullet can even hit him.
 				{
-					if (_gameState.bulletHitEnemy(this, enemy))
+					if (touchingEntity(enemy))
 					{
-						// get out of here. if it's not silver.
-						if (!silver) return;
+						if (_gameState.bulletHitEnemy(this, enemy))
+						{
+							// get out of here. if it's not silver.
+							if (!silver) return;
+						}
 					}
 				}
 			}

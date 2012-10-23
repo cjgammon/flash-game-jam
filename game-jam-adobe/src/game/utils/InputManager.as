@@ -95,11 +95,13 @@ package game.utils
 		//========================================================
 		// game input mappings..make sure you add these to _keysToWatchForPress
 		//========================================================
-		public static const INPUT_MOVE_LEFT:int  = KEY_A;
-		public static const INPUT_MOVE_RIGHT:int = KEY_D;
-		public static const INPUT_MOVE_UP:int    = KEY_W;
-		public static const INPUT_MOVE_DOWN:int  = KEY_S;
-		public static const INPUT_RUN:int  		= KEY_SHIFT;
+		public static const INPUT_MOVE_LEFT:int   = KEY_A;
+		public static const INPUT_MOVE_RIGHT:int  = KEY_D;
+		public static const INPUT_MOVE_UP:int     = KEY_W;
+		public static const INPUT_MOVE_DOWN:int   = KEY_S;
+		public static const INPUT_RUN:int         = KEY_SHIFT;
+		public static const INPUT_BOMB:int      = KEY_SPACE;
+		public static const INPUT_BUY_BOMBS:int = KEY_R;
 
 		
 		//============================================
@@ -130,7 +132,9 @@ package game.utils
 				_keysToWatchForPress.push(InputManager.INPUT_MOVE_RIGHT);
 				_keysToWatchForPress.push(InputManager.INPUT_MOVE_UP);
 				_keysToWatchForPress.push(InputManager.INPUT_MOVE_DOWN);
-			
+				_keysToWatchForPress.push(InputManager.INPUT_BOMB);
+				_keysToWatchForPress.push(InputManager.INPUT_BUY_BOMBS);
+
 				// key init
 				for (var i:int = 0; i < _keyPressed.length; i++) 
 				{
