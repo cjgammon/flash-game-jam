@@ -32,9 +32,9 @@ package game.entities
 			TYPE_SPREAD,
 			TYPE_SPHERE,
 			TYPE_QUICKBULLET,
-			TYPE_SILVERBULLET,
-			TYPE_RUBBER_BULLET,
-			TYPE_BULLET_DISTANCE
+			TYPE_SILVERBULLET
+			//TYPE_RUBBER_BULLET,// not hooked up yet
+			//TYPE_BULLET_DISTANCE// not hooked up yet
 		];
 
 		public static var typeGraphics:Object = {};
