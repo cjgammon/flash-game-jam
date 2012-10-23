@@ -62,7 +62,7 @@ package game.entities
 		// powerups
 		//========================================================
 		public var powerups:Vector.<Powerup> = new Vector.<Powerup>();
-		public var powerupStackSize:uint = 1;
+		public var powerupStackSize:uint = 3;
 		public function addPowerup(powerup:Powerup):void
 		{
 			// remove old shit til there's enough room for new shit.
@@ -71,6 +71,11 @@ package game.entities
 				powerups.shift();
 			}
 			powerups.push(powerup);
+		}
+
+		public function removeOldestPowerup():void
+		{
+			if (powerups.length > 0) powerups.shift();
 		}
 
 		public function removePowerups():void

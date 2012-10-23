@@ -196,7 +196,7 @@ package game.states.mainStates
 		
 		private function handle_removePowerup_TIMER(e:TimerEvent):void {
 			var player:LivingEntity = _activePlayers[0].avatar;
-			player.removePowerups();
+			player.removeOldestPowerup();
 		}
 
 		//========================================================
