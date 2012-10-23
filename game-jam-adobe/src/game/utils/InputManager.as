@@ -164,7 +164,7 @@ package game.utils
 		
 		public static function update():void
 		{
-			var keyTotal:int = _keysToWatchForPress.lenth;
+			var keyTotal:int = _keysToWatchForPress.length;
 			for (var i:int = 0; i < keyTotal; i++)
 			{
 				//ScreenPrint.show("key :: " + _keysToWatchForPress[i] + ", _keyPressed[key] :: " + _keyPressed[_keysToWatchForPress[i]]);

@@ -62,11 +62,22 @@ package game.entities
 		// powerups
 		//========================================================
 		public var powerups:Vector.<Powerup> = new Vector.<Powerup>();
+		public var powerupStackSize:uint = 1;
 		public function addPowerup(powerup:Powerup):void
 		{
-			//powerups = new Vector.<Powerup>();
+			// remove old shit til there's enough room for new shit.
+			while(powerups.length >= powerupStackSize)
+			{
+				powerups.shift();
+			}
 			powerups.push(powerup);
 		}
+
+		public function removePowerups():void
+		{
+			while(powerups.length > 0) powerups.pop();
+		}
+
 		public function hasPowerupType(type:String):Boolean
 		{
 			for (var powerupIndex:int = 0; powerupIndex < powerups.length; powerupIndex++)
