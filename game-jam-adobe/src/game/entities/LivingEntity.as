@@ -61,7 +61,7 @@ package game.entities
 		public var powerups:Vector.<Powerup> = new Vector.<Powerup>();
 		public function addPowerup(powerup:Powerup):void
 		{
-			powerups = new Vector.<Powerup>();
+			//powerups = new Vector.<Powerup>();
 			powerups.push(powerup);
 		}
 		public function hasPowerupType(type:String):Boolean
@@ -120,12 +120,8 @@ package game.entities
 		
 		override public function takeTurn():void
 		{
-			// only let them go if their still alive.
-			if (health > 0)
-			{
-				cooldown = cooldown < 0 ? 0 : cooldown - 1;
-				controller.takeTurn(this);
-			}
+			cooldown = cooldown < 0 ? 0 : cooldown - 1;
+			controller.takeTurn(this);
 		}
 
 		//========================================================

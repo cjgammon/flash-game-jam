@@ -27,6 +27,11 @@ package game.entities.controllers
 			// movement
 			//========================================================
 			// check if they're running
+
+			
+			if (entity.health < 1) {
+				return;  // only let them go if their still alive.
+			}
 			
 			if (InputManager.keyPressed(InputManager.INPUT_RUN))
 			{

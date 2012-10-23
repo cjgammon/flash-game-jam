@@ -196,8 +196,7 @@ package game.states.mainStates
 		
 		private function handle_removePowerup_TIMER(e:TimerEvent):void {
 			var player:LivingEntity = _activePlayers[0].avatar;
-			player.powerups.pop();
-			trace('remove', player.powerups.length);
+			player.powerups.splice(0, 1);
 		}
 
 		//========================================================
@@ -234,6 +233,16 @@ package game.states.mainStates
 				bullet.takeTurn();
 			}
 		}
+		
+		private function checkToRemove(enemy:Enemy):void
+		{
+			if (enemy.x > GlobalData.SCENE_WIDTH + 10 || 
+				enemy.x < -10 ||
+				enemy.y > GlobalData.SCENE_HEIGHT + 10 ||
+				enemy.y < -10){	
+				removeEnemy(enemy);
+			}
+		}
 
 		public function bulletHitEnemy(bullet:Bullet, enemy:Enemy):Boolean
 		{
@@ -245,7 +254,7 @@ package game.states.mainStates
 
 				if (enemy.health <= 0)
 				{
-					removeEnemy(enemy);
+					enemy.controller = EntityController.getControllerType(RunawayController);  //make him runaway
 
 					// log kill in player data here!
 					if (_playerDataForEntity[bullet.shooter])
@@ -364,12 +373,13 @@ package game.states.mainStates
 			for each (var enemy:Enemy in _enemies)
 			{
 				enemy.takeTurn();
+				checkToRemove(enemy);
 			}
 		}
 
 		public function attackPlayer(attacker:LivingEntity, player:Player):void
 		{
-			if (!player.avatar.invincible)
+			if (!player.avatar.invincible && attacker.health > 0)
 			{
 				var hero:Hero = Hero(player.avatar);
 				hero.hit();
@@ -431,15 +441,12 @@ package game.states.mainStates
 
 		public function acquirePowerup(livingEntity:LivingEntity, powerup:Powerup):void
 		{
-			trace("acquire powerup!");
-			//livingEntity.powerups = new Vector.<Powerup>();  //remove all powerups
-
 			livingEntity.addPowerup(powerup);
 			removePowerup(powerup);
 			
 			_hud.powerupAcquired(powerup);
-			_removePowerupTimer.reset();
-			_removePowerupTimer.start();
+			//_removePowerupTimer.reset(); //timer to remove powerup
+			//_removePowerupTimer.start();
 			
 			var player:Player = _playerDataForEntity[livingEntity]
 			
@@ -447,6 +454,10 @@ package game.states.mainStates
 			{
 				player.score++;
 				_hud.setScore(player.score);
+				
+				if (player.avatar.powerups.length > 3){  //cap powerups at 2
+					player.avatar.powerups.splice(0, 1);
+				}
 			}
 
 			// spawn a new powerup
@@ -478,10 +489,6 @@ package game.states.mainStates
 			var player:LivingEntity = _activePlayers[0].avatar;
 			var startIndex:int = int(Math.random() * Powerup.TYPES.length);
 			var typeIndex:int = startIndex;
-
-			if (player.powerups.length > 1){  //cap powerups at 2
-				player.powerups.pop();
-			}
 				
 			while (true)
 			{

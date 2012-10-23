@@ -28,14 +28,14 @@ package game.entities
 		public function set x(value:Number):void 
 		{ 
 			_sprite.x = value; 
-			rect.x = value - rect.width / 2;
+			rect.x = value - rect.width / 2; //adjust hit area for center registration
 		}
 
 		public function get y():Number { return _sprite.y; }
 		public function set y(value:Number):void 
 		{ 
 			_sprite.y = value; 
-			rect.y = value - rect.height / 2;
+			rect.y = value - rect.height / 2; //adjust hit area for center registration
 		}
 
 		/**
