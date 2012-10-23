@@ -26,5 +26,6 @@ package game.data
 		//========================================================
 		public static const PLAYER_DAMAGED_INVINCIBILITY_DURATION:int = 1000;// milliseconds
 		public static const MAX_ENEMIES_ON_SCREEN:int = 100;
+		public static const POWERUP_STACK_SIZE:uint = 1;
 	}
 }
