@@ -134,6 +134,20 @@ package game.utils
 		[Embed(source="./assets/money_particle/particle.pex", mimeType="application/octet-stream")]
 		public static var MoneyParticleXML:Class;
 		
+		
+		//========================================================
+		// bullet texture
+		//========================================================
+		[Embed(source="./assets/bullet_particle/texture.png")]
+		public static var BulletParticleImage:Class;
+		
+		//========================================================
+		// bullet xml
+		//========================================================
+		[Embed(source="./assets/bullet_particle/particle.pex", mimeType="application/octet-stream")]
+		public static var BulletParticleXML:Class;
+		
+		
 		//========================================================
 		// placeholder powerup texture
 		//========================================================

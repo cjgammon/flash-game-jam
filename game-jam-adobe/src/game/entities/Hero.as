@@ -6,12 +6,13 @@ package game.entities
 	import game.data.GlobalData;
 	import game.utils.AssetLibrary;
 	import game.utils.InputManager;
-	import game.entities.MoneyEmitter;
+	import game.entities.emitters.MoneyEmitter;
 	import game.utils.sound.SoundManager;
 
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.TextureSmoothing;
+	import game.entities.emitters.MoneyEmitter;
 
 	/**
 	*	things that need to live

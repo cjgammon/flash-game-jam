@@ -7,9 +7,10 @@ package game.entities
 	
 	import game.data.GlobalData;
 	import game.debug.ScreenPrint;
+	import game.entities.emitters.BulletEmitter;
 	import game.utils.AssetLibrary;
 	import game.utils.GeomUtils;
-
+	
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.TextureSmoothing;
@@ -55,6 +56,10 @@ package game.entities
 			_bodyImage = new Image(AssetLibrary.bulletTexture);
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
+			
+			var emitter:BulletEmitter = new BulletEmitter();
+			_sprite.addChild(emitter.sprite);
+			emitter.start();
 		}
 		
 		public function set angle(newAngle:Number):void 
