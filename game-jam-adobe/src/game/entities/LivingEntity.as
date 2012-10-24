@@ -250,7 +250,7 @@ package game.entities
 
 					for (var j:int = 0; j < 8; j++) {
 						bullet = new Bullet(this, startX, startY);
-						bullet.angle = j * .8;
+						bullet.angle = angle + j * .8;
 						_gameState.spawnBullet(bullet);
 					}
 					

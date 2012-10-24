@@ -8,7 +8,8 @@ package game.entities
 	import game.data.GlobalData;
 	import game.debug.ScreenPrint;
 	import game.utils.AssetLibrary;
-	
+	import game.utils.GeomUtils;
+
 	import starling.display.Image;
 	import starling.display.Sprite;
 	import starling.textures.TextureSmoothing;
@@ -20,7 +21,7 @@ package game.entities
 	{
 		private var _vx:Number;
 		private var _vy:Number;
-		private var _shooter:Entity;
+		private var _shooter:LivingEntity;
 		private var _angle:Number;
 
 		public var speed:Number = 2;
@@ -32,13 +33,13 @@ package game.entities
 		*/
 		public var bounces:uint = 0;
 		
-		public function get shooter():Entity { return _shooter; }
+		public function get shooter():LivingEntity { return _shooter; }
 		public var damage:int = 100;
 		
 		/**
 		*	@constructor
 		*/
-		public function Bullet(shooter:Entity, startX:Number = 0, startY:Number = 0):void
+		public function Bullet(shooter:LivingEntity, startX:Number = 0, startY:Number = 0):void
 		{
 			super();
 
@@ -63,6 +64,8 @@ package game.entities
 			_vy = Math.sin(_angle);
 		}
 		
+		public var bombRadius:Number = 50;
+
 		override public function takeTurn():void
 		{
 			x += _vx * speed;
@@ -83,12 +86,19 @@ package game.entities
 			{
 				if (enemy.canBeHit)// make sure this bullet can even hit him.
 				{
-					if (touchingEntity(enemy))
-					{
-						if (_gameState.bulletHitEnemy(this, enemy))
+					if (!explosive) {
+						if (touchingEntity(enemy))
 						{
-							// get out of here. if it's not silver.
-							if (!silver) return;
+							if (_gameState.bulletHitEnemy(this, enemy))
+							{
+								// get out of here. if it's not silver.
+								if (!silver) return;
+							}
+						}
+					} else {
+						if (GeomUtils.rectangleOverlapsCircle(enemy.rect, x, y, bombRadius))
+						{
+							_gameState.bombHitEnemy(_shooter, enemy);
 						}
 					}
 				}

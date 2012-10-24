@@ -30,14 +30,14 @@ package game.entities
 
 		public static const TYPES:Array = 
 		[
-			//TYPE_STREAM,
-			//TYPE_SPREAD,
-			//TYPE_SPHERE,
-			//TYPE_QUICKBULLET,
-			//TYPE_SILVERBULLET,
+			TYPE_STREAM,
+			TYPE_SPREAD,
+			TYPE_SPHERE,
+			TYPE_QUICKBULLET,
+			TYPE_SILVERBULLET,
+			TYPE_EXPLOSIVE
 			//TYPE_RUBBER_BULLET,// not hooked up yet
 			//TYPE_BULLET_DISTANCE,// not hooked up yet
-			TYPE_EXPLOSIVE
 		];
 
 		public static var typeGraphics:Object = {};
