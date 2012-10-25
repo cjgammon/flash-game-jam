@@ -288,6 +288,9 @@ package game.entities
 				var centerPoint:Point = getCenterPoint();
 
 				var enemies:Dictionary = _gameState.enemies;
+				
+				_gameState.addExplosion(centerPoint.x, centerPoint.y); //show explosion
+				
 				for each (var enemy:Enemy in _gameState.enemies)
 				{
 					if (enemy.canBeHit)

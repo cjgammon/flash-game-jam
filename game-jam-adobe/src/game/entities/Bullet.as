@@ -3,6 +3,7 @@
 */
 package game.entities
 {	
+	import flash.geom.Point;
 	import flash.utils.Dictionary;
 	
 	import game.data.GlobalData;
@@ -40,6 +41,7 @@ package game.entities
 		public var damage:int = 100;
 		public var emitter:BulletEmitter;
 		public var explodeEmitter:ExplosionEmitter;
+		public var explosionCenter:Point;
 
 		/**
 		*	@constructor
@@ -105,16 +107,18 @@ package game.entities
 								// get out of here. if it's not silver.
 								if (!silver) return;
 							}
-						}
+						}						
+					} else if (!exploded){
+						//TODO:: These exploding bullets arent working, need to fix
+						_gameState.bombHitEnemy(_shooter, enemy);
+							
+						_gameState.addExplosion(enemy.x, enemy.y);
+						//AexplosionCenter = new Point(enemy.x, enemy.y);
+						exploded = true;
 					} else {
 						if (GeomUtils.rectangleOverlapsCircle(enemy.rect, x, y, bombRadius))
 						{
-							_gameState.bombHitEnemy(_shooter, enemy);
-							
-							if (!exploded) {
-								_gameState.addExplosion(enemy.x, enemy.y);
-								exploded = true;
-							}
+							_gameState.bombHitEnemy(_shooter, enemy);	
 						}
 					}
 				}

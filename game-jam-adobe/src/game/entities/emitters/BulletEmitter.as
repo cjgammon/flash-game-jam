@@ -33,9 +33,9 @@ package game.entities.emitters
 		{
 			emitter.start();
 			
-			var timer:Timer = new Timer(1000, 1);
-			timer.addEventListener(TimerEvent.TIMER, handle_TIMER);
-			timer.start();
+			//var timer:Timer = new Timer(1000, 1);
+			//timer.addEventListener(TimerEvent.TIMER, handle_TIMER);
+			//timer.start();
 		}
 		
 		public function stop():void{
