@@ -13,7 +13,7 @@ package game.entities.emitters
 		import starling.textures.Texture;
 		
 		
-		private var emitter:PDParticleSystem;
+		public var emitter:PDParticleSystem;
 		
 		public function BulletEmitter()
 		{
@@ -22,6 +22,11 @@ package game.entities.emitters
 			emitter = new PDParticleSystem(XML(new AssetLibrary.BulletParticleXML()), Texture.fromBitmap(new AssetLibrary.BulletParticleImage()));
 			Starling.juggler.add(emitter);
 			_sprite.addChild(emitter);
+		}
+		
+		public function set angle(newAngle:Number):void
+		{
+			emitter.emitAngle = newAngle;
 		}
 		
 		public function start():void

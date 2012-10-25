@@ -149,6 +149,18 @@ package game.utils
 		
 		
 		//========================================================
+		// bullet texture
+		//========================================================
+		[Embed(source="./assets/explosion_particle/texture.png")]
+		public static var ExplodeParticleImage:Class;
+		
+		//========================================================
+		// bullet xml
+		//========================================================
+		[Embed(source="./assets/explosion_particle/particle.pex", mimeType="application/octet-stream")]
+		public static var ExplodeParticleXML:Class;
+		
+		//========================================================
 		// placeholder powerup texture
 		//========================================================
 		[Embed(source="./assets/powerup.png")]

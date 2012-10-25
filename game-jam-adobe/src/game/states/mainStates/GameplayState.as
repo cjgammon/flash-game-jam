@@ -15,6 +15,7 @@ package game.states.mainStates
 	import game.data.Player;
 	import game.debug.ScreenPrint;
 	import game.entities.*;
+	import game.entities.emitters.ExplosionEmitter;
 	import game.entities.Bullet;
 	import game.entities.controllers.*;
 	import game.states.IState;
@@ -46,6 +47,8 @@ package game.states.mainStates
 		private var _powerups:Dictionary = new Dictionary();
 		private var _bullets:Dictionary = new Dictionary();
 
+		private var _explodeEmitter:ExplosionEmitter;
+		
 		/**
 		* track whether the game is over
 		*/
@@ -362,6 +365,16 @@ package game.states.mainStates
 			}
 		}
 
+		
+		public function addExplosion(x:Number, y:Number):void
+		{
+			_explodeEmitter = new ExplosionEmitter();
+			_explodeEmitter.sprite.x = x;
+			_explodeEmitter.sprite.y = y;
+			_game.gameLayer.addChild(_explodeEmitter.sprite);
+			_explodeEmitter.start();
+		}
+		
 		//========================================================
 		// enemies
 		//========================================================

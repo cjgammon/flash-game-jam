@@ -8,6 +8,7 @@ package game.entities
 	import game.data.GlobalData;
 	import game.debug.ScreenPrint;
 	import game.entities.emitters.BulletEmitter;
+	import game.entities.emitters.ExplosionEmitter;
 	import game.utils.AssetLibrary;
 	import game.utils.GeomUtils;
 	
@@ -28,6 +29,7 @@ package game.entities
 		public var speed:Number = 2;
 		public var silver:Boolean = false;
 		public var explosive:Boolean = false;
+		public var exploded:Boolean = false;
 
 		/**
 		* how many bounces this bullet can still take along its trajectory
@@ -36,7 +38,9 @@ package game.entities
 		
 		public function get shooter():LivingEntity { return _shooter; }
 		public var damage:int = 100;
-		
+		public var emitter:BulletEmitter;
+		public var explodeEmitter:ExplosionEmitter;
+
 		/**
 		*	@constructor
 		*/
@@ -57,7 +61,7 @@ package game.entities
 			_bodyImage.smoothing = TextureSmoothing.NONE;
 			_sprite.addChild(_bodyImage);
 			
-			var emitter:BulletEmitter = new BulletEmitter();
+			emitter = new BulletEmitter();
 			_sprite.addChild(emitter.sprite);
 			emitter.start();
 		}
@@ -67,6 +71,8 @@ package game.entities
 			_angle = newAngle;
 			_vx = Math.cos(_angle);
 			_vy = Math.sin(_angle);
+			
+			emitter.angle = _angle - Math.PI;
 		}
 		
 		public var bombRadius:Number = 50;
@@ -104,6 +110,11 @@ package game.entities
 						if (GeomUtils.rectangleOverlapsCircle(enemy.rect, x, y, bombRadius))
 						{
 							_gameState.bombHitEnemy(_shooter, enemy);
+							
+							if (!exploded) {
+								_gameState.addExplosion(enemy.x, enemy.y);
+								exploded = true;
+							}
 						}
 					}
 				}
